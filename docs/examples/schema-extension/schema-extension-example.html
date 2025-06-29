@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Schema Extension Example - Instruction Template Specification (ITS)</title>
+    <meta name="description" content="Example demonstrating schema extension and override mechanisms in ITS" />
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .header {
+        text-align: center;
+        padding: 2rem 0;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 2rem;
+      }
+
+      .header h1 {
+        color: #0366d6;
+        margin-bottom: 0.5rem;
+      }
+
+      .nav {
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 6px;
+        margin-bottom: 2rem;
+      }
+
+      .nav a {
+        color: #0366d6;
+        text-decoration: none;
+        margin-right: 1rem;
+      }
+
+      .example-section {
+        background: white;
+        border: 1px solid #e1e4e8;
+        border-radius: 6px;
+        padding: 1.5rem;
+        margin: 2rem 0;
+      }
+
+      .example-section h3 {
+        color: #0366d6;
+        margin-top: 0;
+      }
+
+      pre {
+        background: #f6f8fa;
+        border: 1px solid #e1e4e8;
+        border-radius: 3px;
+        padding: 1rem;
+        overflow-x: auto;
+        font-size: 0.9rem;
+      }
+
+      .override-chain {
+        background: #f6f8fa;
+        border: 1px solid #e1e4e8;
+        border-radius: 6px;
+        padding: 1rem;
+        margin: 1rem 0;
+      }
+
+      .type-resolution {
+        border: 1px solid #e1e4e8;
+        border-radius: 6px;
+        padding: 1rem;
+        margin: 1rem 0;
+        background: white;
+      }
+
+      .type-resolution h4 {
+        color: #0366d6;
+        margin-top: 0;
+      }
+
+      .resolution-step {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #f0f0f0;
+      }
+
+      .resolution-step:last-child {
+        border-bottom: none;
+      }
+
+      .final-resolution {
+        background: #d4edda;
+        border: 1px solid #c3e6cb;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        margin-top: 0.5rem;
+      }
+
+      .compiler-output {
+        background: #263238;
+        color: #aed581;
+        padding: 1rem;
+        border-radius: 4px;
+        font-family: monospace;
+        font-size: 0.9rem;
+        margin: 1rem 0;
+      }
+
+      code {
+        background: #f3f4f6;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-family: monospace;
+        font-size: 0.9em;
+      }
+
+      .file-list {
+        background: #f6f8fa;
+        border: 1px solid #e1e4e8;
+        border-radius: 6px;
+        padding: 1rem;
+        margin: 1rem 0;
+      }
+
+      .file-list ul {
+        margin: 0.5rem 0;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 6px 12px;
+        background: #0366d6;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        margin-right: 0.5rem;
+      }
+
+      .overridden {
+        text-decoration: line-through;
+        color: #999;
+      }
+
+      .arrow {
+        color: #0366d6;
+        font-weight: bold;
+        margin: 0 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Schema Extension Example</h1>
+      <p>Understanding instruction type overrides in ITS</p>
+    </div>
+
+    <div class="nav">
+      <a href="../index.html">← Back to Home</a>
+      <a href="../getting-started.html">Getting Started</a>
+      <a href="../specification.html">Specification</a>
+      <a href="../examples.html">Examples</a>
+    </div>
+
+    <h2>Overview</h2>
+    <p>
+      This example demonstrates how instruction types are resolved when using the <code>extends</code> mechanism in ITS. It shows how types can be overridden
+      through the schema chain and how custom types take precedence over all extended schemas.
+    </p>
+
+    <div class="file-list">
+      <h3>📁 Files in this Example</h3>
+      <ul>
+        <li><strong>schema-extension-example.json</strong> - The main template demonstrating overrides</li>
+        <li><strong>company-types.json</strong> - Company-specific instruction types</li>
+        <li><strong>marketing-types.json</strong> - Marketing-specific instruction types</li>
+      </ul>
+      <div style="margin-top: 1rem">
+        <a href="schema-extension-example.json" class="btn">View Main Template</a>
+        <a href="company-types.json" class="btn">View Company Types</a>
+        <a href="marketing-types.json" class="btn">View Marketing Types</a>
+      </div>
+    </div>
+
+    <div class="example-section">
+      <h3>Override Chain</h3>
+      <p>The template extends three schemas in this specific order:</p>
+
+      <pre><code>"extends": [
+    "https://.../its-standard-types-v1.json",  // 1. Standard library (lowest precedence)
+    "./company-types.json",                     // 2. Company overrides standard
+    "./marketing-types.json"                    // 3. Marketing overrides company (highest precedence)
+]</code></pre>
+
+      <p>Additionally, the template defines its own custom types:</p>
+      <pre><code>"customInstructionTypes": {
+    "summary": { ... }  // Overrides ALL extended definitions
+}</code></pre>
+    </div>
+
+    <div class="example-section">
+      <h3>How Types are Resolved</h3>
+
+      <div class="type-resolution">
+        <h4>1. <code>summary</code> Type - Multiple Overrides</h4>
+        <div class="resolution-step">
+          <span class="overridden">Standard library</span> <span class="arrow">→</span> Basic summary with brief/standard/detailed lengths
+        </div>
+        <div class="resolution-step">
+          <span class="overridden">company-types.json</span> <span class="arrow">→</span> Corporate executive summary focusing on achievements
+        </div>
+        <div class="resolution-step">
+          <span class="overridden">marketing-types.json</span> <span class="arrow">→</span> Marketing-focused summary with campaign metrics
+        </div>
+        <div class="resolution-step"><strong>customInstructionTypes</strong> <span class="arrow">→</span> ROI and business impact focused summary</div>
+        <div class="final-resolution">✅ <strong>Final Resolution:</strong> Uses the custom definition from the template itself</div>
+      </div>
+
+      <div class="type-resolution">
+        <h4>2. <code>testimonial</code> Type - Schema Override</h4>
+        <div class="resolution-step">Standard library <span class="arrow">→</span> <em>(not defined)</em></div>
+        <div class="resolution-step">
+          <span class="overridden">company-types.json</span> <span class="arrow">→</span> Professional testimonials with name and role
+        </div>
+        <div class="resolution-step">
+          <strong>marketing-types.json</strong> <span class="arrow">→</span> Marketing-optimized testimonials with style options
+        </div>
+        <div class="final-resolution">✅ <strong>Final Resolution:</strong> Uses marketing-types.json definition (last in extends array)</div>
+      </div>
+
+      <div class="type-resolution">
+        <h4>3. <code>company_intro</code> Type - No Override</h4>
+        <div class="resolution-step">Standard library <span class="arrow">→</span> <em>(not defined)</em></div>
+        <div class="resolution-step"><strong>company-types.json</strong> <span class="arrow">→</span> Company introduction with optional values</div>
+        <div class="resolution-step">marketing-types.json <span class="arrow">→</span> <em>(not defined)</em></div>
+        <div class="final-resolution">✅ <strong>Final Resolution:</strong> Uses company-types.json definition (no override)</div>
+      </div>
+
+      <div class="type-resolution">
+        <h4>4. <code>campaign_metrics</code> Type - Single Definition</h4>
+        <div class="resolution-step">Standard library <span class="arrow">→</span> <em>(not defined)</em></div>
+        <div class="resolution-step">company-types.json <span class="arrow">→</span> <em>(not defined)</em></div>
+        <div class="resolution-step"><strong>marketing-types.json</strong> <span class="arrow">→</span> Campaign metrics dashboard</div>
+        <div class="final-resolution">✅ <strong>Final Resolution:</strong> Uses marketing-types.json definition (only definition)</div>
+      </div>
+    </div>
+
+    <div class="example-section">
+      <h3>Key Principles Demonstrated</h3>
+
+      <h4>1. Complete Override</h4>
+      <p>
+        When marketing-types.json defines <code>summary</code>, it <strong>completely replaces</strong> the definition from company-types.json. No property
+        merging occurs - it's a full replacement.
+      </p>
+
+      <h4>2. Precedence Order</h4>
+      <p>From highest to lowest precedence:</p>
+      <ol>
+        <li><code>customInstructionTypes</code> in the template (always wins)</li>
+        <li><code>marketing-types.json</code> (last in extends array)</li>
+        <li><code>company-types.json</code> (middle of extends array)</li>
+        <li><code>its-standard-types-v1.json</code> (first in extends array)</li>
+      </ol>
+
+      <h4>3. No Partial Merging</h4>
+      <p>
+        The <code>testimonial</code> type in marketing-types.json doesn't inherit any properties from the company-types.json definition - it's a complete
+        replacement with its own configuration schema.
+      </p>
+    </div>
+
+    <div class="example-section">
+      <h3>Compiler Behavior</h3>
+      <p>When compiling this template, a compiler should:</p>
+
+      <ol>
+        <li>Load all schemas in the specified order</li>
+        <li>Build a type registry, applying overrides as schemas are loaded</li>
+        <li>Apply custom types from the template (highest precedence)</li>
+        <li>Report overrides to help developers understand type resolution</li>
+      </ol>
+
+      <h4>Example Compiler Output</h4>
+      <div class="compiler-output">
+        INFO: Loading extended schemas...<br />
+        INFO: Loaded https://.../its-standard-types-v1.json<br />
+        INFO: Loaded ./company-types.json<br />
+        INFO: Loaded ./marketing-types.json<br />
+        <br />
+        INFO: Instruction type overrides detected:<br />
+        - 'summary' overridden by company-types.json (from its-standard-types-v1.json)<br />
+        - 'summary' overridden by marketing-types.json (from company-types.json)<br />
+        - 'summary' overridden by customInstructionTypes (from marketing-types.json)<br />
+        - 'testimonial' overridden by marketing-types.json (from company-types.json)<br />
+        <br />
+        INFO: Compilation successful
+      </div>
+    </div>
+
+    <div class="example-section">
+      <h3>Use Cases</h3>
+
+      <h4>Organization Standards</h4>
+      <p><strong>company-types.json</strong> ensures consistent corporate voice across all templates in an organization.</p>
+
+      <h4>Department Customization</h4>
+      <p><strong>marketing-types.json</strong> adds department-specific instruction types while maintaining company standards.</p>
+
+      <h4>Template Flexibility</h4>
+      <p>Individual templates can still override any instruction type for specific use cases using <code>customInstructionTypes</code>.</p>
+
+      <h4>Type Sharing</h4>
+      <p>Common instruction types can be shared across multiple templates by referencing the same schema files.</p>
+    </div>
+
+    <div class="example-section">
+      <h3>Best Practices</h3>
+
+      <ul>
+        <li><strong>Order matters</strong> - Place more specific schemas later in the extends array</li>
+        <li><strong>Document overrides</strong> - Use descriptive names and comments to clarify override intentions</li>
+        <li><strong>Version compatibility</strong> - Ensure all extended schemas match the template's base version</li>
+        <li><strong>Test thoroughly</strong> - Verify that the correct instruction types are being used</li>
+      </ul>
+    </div>
+
+    <footer style="text-align: center; padding: 2rem; color: #666; border-top: 1px solid #eee; margin-top: 3rem">
+      <p>Instruction Template Specification (ITS) • <a href="https://github.com/alexanderparker/instruction-template-specification">GitHub</a> • MIT License</p>
+    </footer>
+  </body>
+</html>

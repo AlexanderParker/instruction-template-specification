@@ -33,7 +33,13 @@
                           "const": "string"
                         },
                         "enum": {
-                          "const": ["headline", "descriptive", "catchy", "formal", "creative"]
+                          "const": [
+                            "headline",
+                            "descriptive",
+                            "catchy",
+                            "formal",
+                            "creative"
+                          ]
                         },
                         "default": {
                           "const": "headline"
@@ -47,7 +53,11 @@
                           "const": "string"
                         },
                         "enum": {
-                          "const": ["short", "medium", "long"]
+                          "const": [
+                            "short",
+                            "medium",
+                            "long"
+                          ]
                         },
                         "default": {
                           "const": "short"
@@ -85,7 +95,12 @@
                           "const": "string"
                         },
                         "enum": {
-                          "const": ["bullet_points", "numbered", "dashes", "plain"]
+                          "const": [
+                            "bullet_points",
+                            "numbered",
+                            "dashes",
+                            "plain"
+                          ]
                         },
                         "default": {
                           "const": "bullet_points"
@@ -164,7 +179,13 @@
                           "const": "string"
                         },
                         "enum": {
-                          "const": ["formal", "casual", "enthusiastic", "professional", "friendly"]
+                          "const": [
+                            "formal",
+                            "casual",
+                            "enthusiastic",
+                            "professional",
+                            "friendly"
+                          ]
                         },
                         "default": {
                           "const": "professional"
@@ -178,7 +199,11 @@
                           "const": "string"
                         },
                         "enum": {
-                          "const": ["short", "medium", "long"]
+                          "const": [
+                            "short",
+                            "medium",
+                            "long"
+                          ]
                         },
                         "default": {
                           "const": "medium"
@@ -216,7 +241,11 @@
                           "const": "string"
                         },
                         "enum": {
-                          "const": ["markdown", "plain_text", "csv"]
+                          "const": [
+                            "markdown",
+                            "plain_text",
+                            "csv"
+                          ]
                         },
                         "default": {
                           "const": "markdown"
@@ -282,7 +311,16 @@
                           "const": "string"
                         },
                         "enum": {
-                          "const": ["javascript", "python", "java", "html", "css", "sql", "bash", "generic"]
+                          "const": [
+                            "javascript",
+                            "python",
+                            "java",
+                            "html",
+                            "css",
+                            "sql",
+                            "bash",
+                            "generic"
+                          ]
                         },
                         "default": {
                           "const": "generic"
@@ -320,7 +358,11 @@
                           "const": "string"
                         },
                         "enum": {
-                          "const": ["photorealistic", "artistic", "technical"]
+                          "const": [
+                            "photorealistic",
+                            "artistic",
+                            "technical"
+                          ]
                         },
                         "default": {
                           "const": "photorealistic"
@@ -375,7 +417,12 @@
                           "const": "string"
                         },
                         "enum": {
-                          "const": ["casual", "formal", "dramatic", "humorous"]
+                          "const": [
+                            "casual",
+                            "formal",
+                            "dramatic",
+                            "humorous"
+                          ]
                         },
                         "default": {
                           "const": "casual"
@@ -448,7 +495,11 @@
                           "const": "string"
                         },
                         "enum": {
-                          "const": ["brief", "standard", "detailed"]
+                          "const": [
+                            "brief",
+                            "standard",
+                            "detailed"
+                          ]
                         },
                         "default": {
                           "const": "standard"

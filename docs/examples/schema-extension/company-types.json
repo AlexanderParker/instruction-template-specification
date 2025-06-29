@@ -1,0 +1,54 @@
+{
+    "$schema": "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-type-extension-schema-v1.json",
+    "$id": "https://example.com/schemas/company-types.json",
+    "title": "Company-Specific Instruction Types",
+    "description": "Standard instruction types for corporate communications and documentation",
+    "version": "1.0.0",
+    "instructionTypes": {
+        "company_intro": {
+            "template": "<<Write a company introduction using this prompt: ([{<{description}>}]). Requirements: Use {tone} tone. {includeValues, select, true{Include company mission, vision, and values.} false{Focus on company overview only.}}>>",
+            "description": "Generates standardized company introductions with optional mission/vision/values",
+            "configSchema": {
+                "type": "object",
+                "properties": {
+                    "tone": {
+                        "type": "string",
+                        "enum": [
+                            "professional",
+                            "friendly",
+                            "innovative"
+                        ],
+                        "default": "professional"
+                    },
+                    "includeValues": {
+                        "type": "boolean",
+                        "default": false
+                    }
+                }
+            }
+        },
+        "summary": {
+            "template": "<<Create a business summary using this prompt: ([{<{description}>}]). Style: Corporate executive summary focusing on key achievements and metrics.>>",
+            "description": "Company-specific summary type that focuses on business achievements",
+            "configSchema": {
+                "type": "object",
+                "properties": {}
+            }
+        },
+        "testimonial": {
+            "template": "<<Generate {count} testimonials using this prompt: ([{<{description}>}]). Format each as a quote with attribution including name and company role.>>",
+            "description": "Creates customer testimonials with professional attribution",
+            "configSchema": {
+                "type": "object",
+                "properties": {
+                    "count": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 5,
+                        "default": 2
+                    }
+                }
+            }
+        }
+    }
+}

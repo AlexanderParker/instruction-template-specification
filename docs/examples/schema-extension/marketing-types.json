@@ -1,0 +1,78 @@
+{
+    "$schema": "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-type-extension-schema-v1.json",
+    "$id": "https://example.com/schemas/marketing-types.json",
+    "title": "Marketing-Specific Instruction Types",
+    "description": "Specialized instruction types for marketing campaigns and customer engagement",
+    "version": "1.0.0",
+    "instructionTypes": {
+        "campaign_metrics": {
+            "template": "<<Create a {format} view of campaign metrics using this prompt: ([{<{description}>}]). Requirements: {includeROI, select, true{Include ROI calculations.} false{}} {includeConversion, select, true{Include conversion rates.} false{}} Use data visualization best practices.>>",
+            "description": "Generates marketing campaign performance metrics in various formats",
+            "configSchema": {
+                "type": "object",
+                "properties": {
+                    "format": {
+                        "type": "string",
+                        "enum": [
+                            "dashboard",
+                            "table",
+                            "narrative"
+                        ],
+                        "default": "table"
+                    },
+                    "includeROI": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "includeConversion": {
+                        "type": "boolean",
+                        "default": true
+                    }
+                }
+            }
+        },
+        "summary": {
+            "template": "<<Write a marketing-focused summary using this prompt: ([{<{description}>}]). Emphasize campaign performance, audience engagement, and growth metrics. Length: {length}>>",
+            "description": "Marketing-specific summary that highlights campaign results and engagement",
+            "configSchema": {
+                "type": "object",
+                "properties": {
+                    "length": {
+                        "type": "string",
+                        "enum": [
+                            "brief",
+                            "standard",
+                            "comprehensive"
+                        ],
+                        "default": "standard"
+                    }
+                }
+            }
+        },
+        "testimonial": {
+            "template": "<<Create {count} customer testimonials using this prompt: ([{<{description}>}]). Style: {style}. Include social proof elements and specific benefits mentioned.>>",
+            "description": "Marketing-optimized testimonials with social proof elements",
+            "configSchema": {
+                "type": "object",
+                "properties": {
+                    "count": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 10,
+                        "default": 3
+                    },
+                    "style": {
+                        "type": "string",
+                        "enum": [
+                            "casual",
+                            "professional",
+                            "executive",
+                            "peer-to-peer"
+                        ],
+                        "default": "professional"
+                    }
+                }
+            }
+        }
+    }
+}

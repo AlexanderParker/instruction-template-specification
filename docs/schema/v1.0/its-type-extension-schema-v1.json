@@ -1,0 +1,112 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-type-extension-schema-v1.json",
+    "title": "Instruction Template Specification - Type Extension Schema v1.0",
+    "description": "Schema for validating ITS instruction type extension files",
+    "type": "object",
+    "required": [
+        "instructionTypes"
+    ],
+    "properties": {
+        "$schema": {
+            "type": "string",
+            "description": "JSON Schema reference"
+        },
+        "$id": {
+            "type": "string",
+            "format": "uri",
+            "description": "Unique identifier for this type extension"
+        },
+        "title": {
+            "type": "string",
+            "description": "Human-readable title for this type collection"
+        },
+        "description": {
+            "type": "string",
+            "description": "Description of what these instruction types are for"
+        },
+        "version": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+(\\.\\d+)?$",
+            "description": "Version of this type extension (should match ITS version)"
+        },
+        "instructionTypes": {
+            "type": "object",
+            "description": "Collection of instruction type definitions",
+            "patternProperties": {
+                "^[a-zA-Z][a-zA-Z0-9_-]*$": {
+                    "$ref": "#/$defs/instructionTypeDefinition"
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false,
+    "$defs": {
+        "instructionTypeDefinition": {
+            "type": "object",
+            "description": "Definition of a single instruction type",
+            "required": [
+                "template"
+            ],
+            "properties": {
+                "template": {
+                    "type": "string",
+                    "description": "Template string with placeholders for generating the instruction",
+                    "pattern": "<<.*>>",
+                    "examples": [
+                        "<<Replace this placeholder with a list using this user prompt: ([{<{description}>}]). Format requirements: Use {format} formatting.>>"
+                    ]
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Human-readable description of what this instruction type does"
+                },
+                "configSchema": {
+                    "type": "object",
+                    "description": "JSON Schema defining the configuration options for this type",
+                    "properties": {
+                        "type": {
+                            "const": "object"
+                        },
+                        "properties": {
+                            "type": "object"
+                        },
+                        "required": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "examples": {
+                    "type": "array",
+                    "description": "Example configurations and their expected output",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "config",
+                            "output"
+                        ],
+                        "properties": {
+                            "config": {
+                                "type": "object",
+                                "description": "Example configuration object"
+                            },
+                            "output": {
+                                "type": "string",
+                                "description": "Expected instruction output for this configuration"
+                            },
+                            "description": {
+                                "type": "string",
+                                "description": "Optional description of this example"
+                            }
+                        }
+                    }
+                }
+            },
+            "additionalProperties": false
+        }
+    }
+}

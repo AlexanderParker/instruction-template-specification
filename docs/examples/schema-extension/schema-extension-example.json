@@ -1,0 +1,112 @@
+{
+    "$schema": "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-base-schema-v1.json",
+    "version": "1.0.0",
+    "extends": [
+        "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-standard-types-v1.json",
+        "./company-types.json",
+        "./marketing-types.json"
+    ],
+    "metadata": {
+        "name": "Schema Extension Override Example",
+        "description": "Demonstrates how instruction types are overridden through the extends mechanism",
+        "author": "Alexander Parker",
+        "tags": [
+            "example",
+            "extends",
+            "override",
+            "advanced"
+        ],
+        "created": "2025-06-29T00:00:00Z"
+    },
+    "customInstructionTypes": {
+        "summary": {
+            "template": "<<Generate a company-specific executive summary using this prompt: ([{<{description}>}]). Requirements: Focus on ROI and business impact. Length: {length}. Include metrics where possible.>>",
+            "description": "Custom summary type that overrides all extended definitions to focus on business metrics",
+            "configSchema": {
+                "type": "object",
+                "properties": {
+                    "length": {
+                        "type": "string",
+                        "enum": [
+                            "brief",
+                            "standard",
+                            "detailed"
+                        ],
+                        "default": "standard"
+                    }
+                }
+            }
+        }
+    },
+    "variables": {
+        "productName": "DataSync Pro",
+        "companyName": "TechCorp Industries",
+        "quarter": "Q4 2025"
+    },
+    "content": [
+        {
+            "type": "text",
+            "text": "# ${productName} Performance Report - ${quarter}\n\n"
+        },
+        {
+            "type": "text",
+            "text": "## Executive Summary\n\n"
+        },
+        {
+            "type": "placeholder",
+            "id": "exec_summary",
+            "instructionType": "summary",
+            "config": {
+                "description": "Summarize ${productName} performance for ${quarter} including revenue growth, customer acquisition, and market expansion",
+                "displayName": "Executive Summary",
+                "length": "detailed"
+            }
+        },
+        {
+            "type": "text",
+            "text": "\n\n## Company Overview\n\n"
+        },
+        {
+            "type": "placeholder",
+            "id": "company_intro",
+            "instructionType": "company_intro",
+            "config": {
+                "description": "Write an introduction for ${companyName}",
+                "displayName": "Company Introduction",
+                "tone": "professional",
+                "includeValues": true
+            }
+        },
+        {
+            "type": "text",
+            "text": "\n\n## Marketing Campaign Results\n\n"
+        },
+        {
+            "type": "placeholder",
+            "id": "campaign_results",
+            "instructionType": "campaign_metrics",
+            "config": {
+                "description": "Present ${quarter} marketing campaign metrics for ${productName}",
+                "displayName": "Campaign Metrics",
+                "format": "dashboard",
+                "includeROI": true,
+                "includeConversion": true
+            }
+        },
+        {
+            "type": "text",
+            "text": "\n\n## Customer Testimonials\n\n"
+        },
+        {
+            "type": "placeholder",
+            "id": "testimonials",
+            "instructionType": "testimonial",
+            "config": {
+                "description": "Generate customer testimonials for ${productName}",
+                "displayName": "Customer Testimonials",
+                "count": 3,
+                "style": "executive"
+            }
+        }
+    ]
+}
