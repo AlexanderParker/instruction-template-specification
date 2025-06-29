@@ -28,6 +28,9 @@ ITS:         Template → AI Prompt → AI-Generated Content
     "name": "Product Review Template",
     "description": "Template for generating product reviews"
   },
+  "variables": {
+    "includeSpecs": true
+  },
   "content": [
     {
       "type": "text",
@@ -56,6 +59,26 @@ ITS:         Template → AI Prompt → AI-Generated Content
       }
     },
     {
+      "type": "conditional",
+      "condition": "includeSpecs == true",
+      "content": [
+        {
+          "type": "text",
+          "text": "\n\n## Technical Specifications\n\n"
+        },
+        {
+          "type": "placeholder",
+          "instructionType": "table",
+          "config": {
+            "description": "Create a specs table for a gaming headset with frequency response, impedance, and connectivity",
+            "format": "markdown",
+            "columns": 2,
+            "rows": 3
+          }
+        }
+      ]
+    },
+    {
       "type": "text",
       "text": "\n\n## Verdict\n\n"
     },
@@ -74,6 +97,11 @@ ITS:         Template → AI Prompt → AI-Generated Content
 **Compiles to AI Prompt:**
 
 ```
+System Configuration:
+- Instruction Wrapper: <<{instruction}>>
+- User Content Wrapper: ([{<{content}>}])
+- Preserve Formatting: true
+
 You are an AI designed to convert content templates into actual content.
 
 # Product Review: <<Replace this placeholder with text using this user prompt: ([{<Create a catchy product name for a wireless gaming headset>}]). Format requirements: Use enthusiastic tone and short length (1-2 sentences).>>
@@ -81,6 +109,10 @@ You are an AI designed to convert content templates into actual content.
 ## Key Features
 
 <<Replace this placeholder with a list using this user prompt: ([{<List 4 standout features of a premium gaming headset>}]). Format requirements: Use bullet_points formatting with each item on a new line. Create exactly 4 items.>>
+
+## Technical Specifications
+
+<<Replace this placeholder with a table using this user prompt: ([{<Create a specs table for a gaming headset with frequency response, impedance, and connectivity>}]). Format requirements: Use markdown format. Include 2 columns. Include 3 rows.>>
 
 ## Verdict
 

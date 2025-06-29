@@ -263,7 +263,7 @@
   }
 }</code></pre>
       <p><strong>Compiles to:</strong></p>
-      <pre><code>&lt;&lt;Replace this placeholder with a list using this user prompt: "list 5 different citrus fruits". Format requirements: Use bullet_points formatting with each item on a new line. Create exactly 5 items.&gt;&gt;</code></pre>
+      <pre><code>&lt;&lt;Replace this placeholder with a list using this user prompt: ([{&lt;list 5 different citrus fruits&gt;}]). Format requirements: Use bullet_points formatting with each item on a new line. Create exactly 5 items.&gt;&gt;</code></pre>
     </div>
 
     <div class="instruction-type">
@@ -278,7 +278,7 @@
   }
 }</code></pre>
       <p><strong>Compiles to:</strong></p>
-      <pre><code>&lt;&lt;Replace this placeholder with text using this user prompt: "Write about sustainable technology". Format requirements: Use professional tone and medium length (2-4 sentences).&gt;&gt;</code></pre>
+      <pre><code>&lt;&lt;Replace this placeholder with text using this user prompt: ([{&lt;Write about sustainable technology&gt;}]). Format requirements: Use professional tone and medium length (2-4 sentences).&gt;&gt;</code></pre>
     </div>
 
     <div class="instruction-type">
@@ -294,7 +294,7 @@
   }
 }</code></pre>
       <p><strong>Compiles to:</strong></p>
-      <pre><code>&lt;&lt;Replace this placeholder with a table using this user prompt: "Compare technology features". Format requirements: Use markdown format. Include 3 columns. Include 4 rows.&gt;&gt;</code></pre>
+      <pre><code>&lt;&lt;Replace this placeholder with a table using this user prompt: ([{&lt;Compare technology features&gt;}]). Format requirements: Use markdown format. Include 3 columns. Include 4 rows.&gt;&gt;</code></pre>
     </div>
 
     <div class="instruction-type">
@@ -308,7 +308,7 @@
   }
 }</code></pre>
       <p><strong>Compiles to:</strong></p>
-      <pre><code>&lt;&lt;Replace this placeholder with a code block using this user prompt: "Create a Python function that sorts a list". Format requirements: Use python language with proper syntax highlighting formatting.&gt;&gt;</code></pre>
+      <pre><code>&lt;&lt;Replace this placeholder with a code block using this user prompt: ([{&lt;Create a Python function that sorts a list&gt;}]). Format requirements: Use python language with proper syntax highlighting formatting.&gt;&gt;</code></pre>
     </div>
 
     <div class="instruction-type">
@@ -323,7 +323,7 @@
   }
 }</code></pre>
       <p><strong>Compiles to:</strong></p>
-      <pre><code>&lt;&lt;Replace this placeholder with a dialogue using this user prompt: "Conversation about project planning". Format requirements: Create a conversation between 2 people using casual style. Format each line as: Person Name: "Dialogue"&gt;&gt;</code></pre>
+      <pre><code>&lt;&lt;Replace this placeholder with a dialogue using this user prompt: ([{&lt;Conversation about project planning&gt;}]). Format requirements: Create a conversation between 2 people using casual style. Format each line as: Person Name: "Dialogue"&gt;&gt;</code></pre>
     </div>
 
     <div class="instruction-type">
@@ -337,7 +337,7 @@
   }
 }</code></pre>
       <p><strong>Compiles to:</strong></p>
-      <pre><code>&lt;&lt;Replace this placeholder with a quote using this user prompt: "Quote about innovation and creativity". Format requirements: Include attribution with the quote.&gt;&gt;</code></pre>
+      <pre><code>&lt;&lt;Replace this placeholder with a quote using this user prompt: ([{&lt;Quote about innovation and creativity&gt;}]). Format requirements: Include attribution with the quote.&gt;&gt;</code></pre>
     </div>
 
     <div class="instruction-type">
@@ -351,7 +351,7 @@
   }
 }</code></pre>
       <p><strong>Compiles to:</strong></p>
-      <pre><code>&lt;&lt;Replace this placeholder with a summary using this user prompt: "Summarize the key benefits of renewable energy". Format requirements: Use standard length (3-5 sentences).&gt;&gt;</code></pre>
+      <pre><code>&lt;&lt;Replace this placeholder with a summary using this user prompt: ([{&lt;Summarize the key benefits of renewable energy&gt;}]). Format requirements: Use standard length (3-5 sentences).&gt;&gt;</code></pre>
     </div>
 
     <div class="instruction-type">
@@ -365,7 +365,7 @@
   }
 }</code></pre>
       <p><strong>Compiles to:</strong></p>
-      <pre><code>&lt;&lt;Replace this placeholder with an image description using this user prompt: "Describe a futuristic city skyline". Format requirements: Use photorealistic style (detailed realistic description).&gt;&gt;</code></pre>
+      <pre><code>&lt;&lt;Replace this placeholder with an image description using this user prompt: ([{&lt;Describe a futuristic city skyline&gt;}]). Format requirements: Use photorealistic style (detailed realistic description).&gt;&gt;</code></pre>
     </div>
 
     <h2>Custom Instruction Types</h2>
@@ -396,8 +396,31 @@
       <li><strong>Load schemas</strong>: Base schema + extended type schemas</li>
       <li><strong>Validate template</strong>: Check structure and type definitions</li>
       <li><strong>Process content</strong>: Convert elements to text + instructions</li>
+      <li><strong>Apply escaping</strong>: Wrap user content with safe delimiters</li>
       <li><strong>Generate prompt</strong>: Combine system prompt with processed content</li>
     </ol>
+
+    <h3>User Content Escaping</h3>
+    <p>To prevent parsing conflicts when user descriptions contain quotes, brackets, or other special characters, ITS uses a robust escaping system:</p>
+
+    <div class="schema-section">
+      <h4>Escaping Format</h4>
+      <p><strong>User content wrapper:</strong> <code>([{&lt;USER_CONTENT&gt;}])</code></p>
+
+      <p><strong>Why this pattern:</strong></p>
+      <ul>
+        <li>Extremely rare for users to type this exact sequence</li>
+        <li>Multiple nested bracket types prevent accidental termination</li>
+        <li>Visually distinct from regular content</li>
+        <li>AI models can easily identify content boundaries</li>
+      </ul>
+
+      <p><strong>Handles edge cases like:</strong></p>
+      <pre><code>"description": "Create code like {\"key\": \"value\"} with \"quotes\" and &lt;&lt;brackets&gt;&gt;"</code></pre>
+
+      <p><strong>Safely compiles to:</strong></p>
+      <pre><code>([{&lt;Create code like {"key": "value"} with "quotes" and &lt;&lt;brackets&gt;&gt;&gt;}])</code></pre>
+    </div>
 
     <div class="schema-section">
       <h3>Example Compilation</h3>
