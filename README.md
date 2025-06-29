@@ -19,6 +19,7 @@ ITS:         Template → AI Prompt → AI-Generated Content
 ## Quick Example
 
 **Template:**
+
 ```json
 {
   "$schema": "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-base-schema-v1.json",
@@ -41,6 +42,7 @@ ITS:         Template → AI Prompt → AI-Generated Content
 ```
 
 **Compiles to:**
+
 ```
 You are an AI designed to convert content templates into actual content.
 
@@ -67,7 +69,7 @@ Here are some popular citrus fruits:
 ## Built-in Instruction Types
 
 - **`list`** - Generate formatted lists with customizable styling
-- **`paragraph`** - Create paragraphs with specified tone and length  
+- **`paragraph`** - Create paragraphs with specified tone and length
 - **`table`** - Generate tables with configurable format and dimensions
 - **`code_block`** - Create code snippets with syntax highlighting
 - **`dialogue`** - Generate conversations between multiple participants
@@ -78,8 +80,8 @@ Here are some popular citrus fruits:
 ## Getting Started
 
 1. **[Read the specification](https://alexanderparker.github.io/instruction-template-specification/)** to understand the schema
-2. **[Try the examples](https://alexanderparker.github.io/instruction-template-specification/examples/)** to see templates in action
-3. **[Build your own templates](https://alexanderparker.github.io/instruction-template-specification/getting-started/)** using the schema
+2. **[Try the examples](https://alexanderparker.github.io/instruction-template-specification/examples/citrus-fruits.json)** to see templates in action
+3. **[Build your own templates](#schema-reference)** using the schema reference below
 
 ## Use Cases
 
@@ -92,13 +94,12 @@ Here are some popular citrus fruits:
 ## Schema Reference
 
 ### Base Schema
+
 ```json
 {
   "$schema": "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-base-schema-v1.json",
   "version": "1.0.0",
-  "extends": [
-    "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-standard-types-v1.json"
-  ],
+  "extends": ["https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-standard-types-v1.json"],
   "content": [
     // Your template content here
   ]
@@ -106,6 +107,7 @@ Here are some popular citrus fruits:
 ```
 
 ### Example Templates
+
 - **[Citrus Fruits](https://alexanderparker.github.io/instruction-template-specification/examples/citrus-fruits.json)** - Simple list example
 - **[Blog Post](https://alexanderparker.github.io/instruction-template-specification/examples/blog-post-template.json)** - Complete blog structure
 - **[Product Launch Email](https://alexanderparker.github.io/instruction-template-specification/examples/product-launch-email.json)** - Marketing email template
@@ -133,8 +135,9 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 ## Versioning
 
 ITS follows semantic versioning:
+
 - **Major** versions introduce breaking changes to the schema
-- **Minor** versions add new features while maintaining compatibility  
+- **Minor** versions add new features while maintaining compatibility
 - **Patch** versions fix issues without changing functionality
 
 Current version: **v1.0**
@@ -146,6 +149,7 @@ This specification is released under the [MIT License](LICENSE).
 ---
 
 **Schema URLs:**
+
 - Base Schema: `https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-base-schema-v1.json`
 - Standard Types: `https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-standard-types-v1.json`
 - Documentation: `https://alexanderparker.github.io/instruction-template-specification/`

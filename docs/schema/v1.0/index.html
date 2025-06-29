@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Schema v1.0 - Instruction Template Specification (ITS)</title>
+    <meta name="description" content="ITS Schema files and documentation for version 1.0" />
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .header {
+        text-align: center;
+        padding: 2rem 0;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 2rem;
+      }
+
+      .header h1 {
+        color: #0366d6;
+        margin-bottom: 0.5rem;
+      }
+
+      .nav {
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 6px;
+        margin-bottom: 2rem;
+      }
+
+      .nav a {
+        color: #0366d6;
+        text-decoration: none;
+        margin-right: 1rem;
+      }
+
+      .schema-file {
+        background: white;
+        border: 1px solid #e1e4e8;
+        border-radius: 6px;
+        padding: 1.5rem;
+        margin: 1rem 0;
+      }
+
+      .schema-file h3 {
+        color: #0366d6;
+        margin-top: 0;
+      }
+
+      .url-box {
+        background: #f6f8fa;
+        border: 1px solid #e1e4e8;
+        border-radius: 3px;
+        padding: 0.5rem;
+        font-family: monospace;
+        word-break: break-all;
+        margin: 0.5rem 0;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 8px 16px;
+        background: #0366d6;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        margin-right: 0.5rem;
+      }
+
+      .btn-secondary {
+        background: #6c757d;
+      }
+
+      .info-box {
+        background: #e1f5fe;
+        border: 1px solid #0288d1;
+        border-radius: 6px;
+        padding: 1rem;
+        margin: 1rem 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>ITS Schema v1.0</h1>
+      <p>JSON Schema files for Instruction Template Specification</p>
+    </div>
+
+    <div class="nav">
+      <a href="../../index.html">← Back to Home</a>
+      <a href="../../getting-started.html">Getting Started</a>
+      <a href="../../specification.html">Specification</a>
+      <a href="../../examples.html">Examples</a>
+    </div>
+
+    <div class="info-box">
+      <strong>Current Version:</strong> 1.0<br />
+      <strong>Status:</strong> Stable<br />
+      <strong>Last Updated:</strong> June 29, 2025
+    </div>
+
+    <div class="schema-file">
+      <h3>📋 Base Schema</h3>
+      <p>Core template structure defining the fundamental elements of ITS templates.</p>
+
+      <div class="url-box">https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-base-schema-v1.json</div>
+
+      <p><strong>Defines:</strong></p>
+      <ul>
+        <li>Template structure and metadata</li>
+        <li>Content element types (text, placeholder, conditional)</li>
+        <li>Compiler configuration options</li>
+        <li>Custom instruction type definitions</li>
+      </ul>
+
+      <a href="its-base-schema-v1.json" class="btn">View Schema</a>
+      <a href="../../specification.html#schema-structure" class="btn btn-secondary">Documentation</a>
+    </div>
+
+    <div class="schema-file">
+      <h3>📦 Standard Types</h3>
+      <p>Library of built-in instruction types for common content generation needs.</p>
+
+      <div class="url-box">https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-standard-types-v1.json</div>
+
+      <p><strong>Includes:</strong></p>
+      <ul>
+        <li><code>list</code> - Formatted lists with customizable styling</li>
+        <li><code>paragraph</code> - Text with tone and length control</li>
+        <li><code>table</code> - Structured data tables</li>
+        <li><code>code_block</code> - Code snippets with syntax highlighting</li>
+        <li><code>dialogue</code> - Multi-participant conversations</li>
+        <li><code>quote</code> - Quotes with optional attribution</li>
+        <li><code>summary</code> - Summaries of varying detail</li>
+        <li><code>image_description</code> - Descriptive image text</li>
+      </ul>
+
+      <a href="its-standard-types-v1.json" class="btn">View Schema</a>
+      <a href="../../specification.html#standard-instruction-types" class="btn btn-secondary">Documentation</a>
+    </div>
+
+    <h2>Usage</h2>
+
+    <h3>In Your Templates</h3>
+    <p>Reference these schemas in your ITS templates:</p>
+
+    <pre style="background: #f6f8fa; border: 1px solid #e1e4e8; border-radius: 3px; padding: 1rem; overflow-x: auto"><code>{
+  "$schema": "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-base-schema-v1.json",
+  "version": "1.0.0",
+  "extends": [
+    "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-standard-types-v1.json"
+  ],
+  "content": [
+    // Your template content
+  ]
+}</code></pre>
+
+    <h3>Validation</h3>
+    <p>Use these URLs with JSON Schema validators:</p>
+    <ul>
+      <li><strong>Online:</strong> <a href="https://jsonschemavalidator.net/" target="_blank">JSON Schema Validator</a></li>
+      <li><strong>CLI:</strong> <code>ajv validate -s &lt;schema-url&gt; -d &lt;template.json&gt;</code></li>
+      <li><strong>Editors:</strong> Most modern code editors support JSON Schema validation automatically</li>
+    </ul>
+
+    <h2>Version History</h2>
+
+    <h3>v1.0 (Current)</h3>
+    <ul>
+      <li>Initial stable release</li>
+      <li>8 standard instruction types</li>
+      <li>Complete base schema with validation</li>
+      <li>Extensible type system</li>
+    </ul>
+
+    <footer style="text-align: center; padding: 2rem; color: #666; border-top: 1px solid #eee; margin-top: 3rem">
+      <p>Instruction Template Specification (ITS) • <a href="https://github.com/alexanderparker/instruction-template-specification">GitHub</a> • MIT License</p>
+    </footer>
+  </body>
+</html>
