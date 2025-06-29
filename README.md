@@ -76,15 +76,15 @@ ITS:         Template → AI Prompt → AI-Generated Content
 ```
 You are an AI designed to convert content templates into actual content.
 
-# Product Review: <<Replace this placeholder with text using this user prompt: "Create a catchy product name for a wireless gaming headset". Format requirements: Use enthusiastic tone and short length (1-2 sentences).>>
+# Product Review: <<Replace this placeholder with text using this user prompt: ([{<Create a catchy product name for a wireless gaming headset>}]). Format requirements: Use enthusiastic tone and short length (1-2 sentences).>>
 
 ## Key Features
 
-<<Replace this placeholder with a list using this user prompt: "List 4 standout features of a premium gaming headset". Format requirements: Use bullet_points formatting with each item on a new line. Create exactly 4 items.>>
+<<Replace this placeholder with a list using this user prompt: ([{<List 4 standout features of a premium gaming headset>}]). Format requirements: Use bullet_points formatting with each item on a new line. Create exactly 4 items.>>
 
 ## Verdict
 
-<<Replace this placeholder with a summary using this user prompt: "Summarize why this headset is worth buying". Format requirements: Use brief length (1-2 sentences).>>
+<<Replace this placeholder with a summary using this user prompt: ([{<Summarize why this headset is worth buying>}]). Format requirements: Use brief length (1-2 sentences).>>
 ```
 
 ## Getting Started
@@ -139,14 +139,14 @@ This specification is designed to enable a rich ecosystem of tools:
 
 ## Contributing
 
-We welcome contributions to the specification:
+We welcome contributions! You can help by:
 
-1. **Schema improvements** - Propose enhancements to the core schema
-2. **New instruction types** - Suggest additions to the standard types library
-3. **Documentation** - Help improve clarity and examples
-4. **Use cases** - Share interesting applications of the specification
+- **Proposing schema improvements** via GitHub issues
+- **Suggesting new instruction types** for the standard library
+- **Improving documentation** with clearer examples
+- **Sharing interesting use cases** and template examples
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+Open an issue or pull request on [GitHub](https://github.com/alexanderparker/instruction-template-specification) to get started.
 
 ## Versioning
 

@@ -104,6 +104,11 @@
                     "description": "Format for wrapping instruction placeholders",
                     "default": "<<{instruction}>>"
                 },
+                "userContentWrapper": {
+                    "type": "string",
+                    "description": "Format for wrapping user content within instructions to prevent parsing conflicts",
+                    "default": "([{<{content}>}])"
+                },
                 "preserveFormatting": {
                     "type": "boolean",
                     "description": "Whether to preserve line breaks and spacing",
