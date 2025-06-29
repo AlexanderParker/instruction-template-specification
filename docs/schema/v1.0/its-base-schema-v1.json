@@ -66,6 +66,7 @@
         "content": {
             "type": "array",
             "description": "Array of content elements forming the template",
+            "minItems": 1,
             "items": {
                 "oneOf": [
                     {
@@ -77,7 +78,21 @@
                     {
                         "$ref": "#/$defs/conditionalElement"
                     }
-                ]
+                ],
+                "type": "object",
+                "required": [
+                    "type"
+                ],
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "text",
+                            "placeholder",
+                            "conditional"
+                        ]
+                    }
+                }
             }
         },
         "customInstructionTypes": {
