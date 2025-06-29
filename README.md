@@ -29,6 +29,7 @@ ITS:         Template → AI Prompt → AI-Generated Content
     "description": "Template for generating product reviews"
   },
   "variables": {
+    "productType": "wireless gaming headset",
     "includeSpecs": true
   },
   "content": [
@@ -38,10 +39,10 @@ ITS:         Template → AI Prompt → AI-Generated Content
     },
     {
       "type": "placeholder",
-      "instructionType": "paragraph",
+      "instructionType": "title",
       "config": {
-        "description": "Create a catchy product name for a wireless gaming headset",
-        "tone": "enthusiastic",
+        "description": "Create a catchy product name for a ${productType}",
+        "style": "catchy",
         "length": "short"
       }
     },
@@ -53,7 +54,7 @@ ITS:         Template → AI Prompt → AI-Generated Content
       "type": "placeholder",
       "instructionType": "list",
       "config": {
-        "description": "List 4 standout features of a premium gaming headset",
+        "description": "List 4 standout features of a premium ${productType}",
         "format": "bullet_points",
         "itemCount": 4
       }
@@ -70,7 +71,7 @@ ITS:         Template → AI Prompt → AI-Generated Content
           "type": "placeholder",
           "instructionType": "table",
           "config": {
-            "description": "Create a specs table for a gaming headset with frequency response, impedance, and connectivity",
+            "description": "Create a specs table for a ${productType} with frequency response, impedance, and connectivity",
             "format": "markdown",
             "columns": 2,
             "rows": 3
@@ -86,7 +87,7 @@ ITS:         Template → AI Prompt → AI-Generated Content
       "type": "placeholder",
       "instructionType": "summary",
       "config": {
-        "description": "Summarize why this headset is worth buying",
+        "description": "Summarize why this ${productType} is worth buying",
         "length": "brief"
       }
     }
@@ -97,27 +98,70 @@ ITS:         Template → AI Prompt → AI-Generated Content
 **Compiles to AI Prompt:**
 
 ```
-System Configuration:
-- Instruction Wrapper: <<{instruction}>>
-- User Content Wrapper: ([{<{content}>}])
-- Preserve Formatting: true
+INTRODUCTION
 
-You are an AI designed to convert content templates into actual content.
+You are an AI designed to convert content templates into actual content. Respond only with the transformed content.
 
-# Product Review: Product Review: <<Replace this placeholder with text using this user prompt: ([{<Create a catchy product name for a wireless gaming headset>}]). Format requirements: Use enthusiastic tone and short length (1-2 sentences).>>
+INSTRUCTIONS
+
+1. Replace each placeholder marked with << >> with generated content
+2. The user's content request is wrapped in ([{< >}]) to distinguish it from instructions
+3. Follow the format requirements specified after each user prompt
+4. Maintain the existing structure and formatting of the template
+5. Only replace the placeholders - do not modify any other text
+6. Generate content that matches the tone and style requested
+
+TEMPLATE
+
+# Product Review: <<Replace this placeholder with a title using this user prompt: ([{<Create a catchy product name for a wireless gaming headset>}]). Format requirements: Create a catchy title that is short in length.>>
 
 ## Key Features
 
-<<Replace this placeholder with a list using this user prompt: ([{<List 4 standout features of a premium gaming headset>}]). Format requirements: Use bullet_points formatting with each item on a new line. Create exactly 4 items.>>
+<<Replace this placeholder with a list using this user prompt: ([{<List 4 standout features of a premium wireless gaming headset>}]). Format requirements: Use bullet_points formatting with each item on a new line.>>
 
 ## Technical Specifications
 
-<<Replace this placeholder with a table using this user prompt: ([{<Create a specs table for a gaming headset with frequency response, impedance, and connectivity>}]). Format requirements: Use markdown format. Include 2 columns. Include 3 rows.>>
+<<Replace this placeholder with a table using this user prompt: ([{<Create a specs table for a wireless gaming headset with frequency response, impedance, and connectivity>}]). Format requirements: Use markdown format.>>
 
 ## Verdict
 
-<<Replace this placeholder with a summary using this user prompt: ([{<Summarize why this headset is worth buying>}]). Format requirements: Use brief length (1-2 sentences).>>
+<<Replace this placeholder with a summary using this user prompt: ([{<Summarize why this wireless gaming headset is worth buying>}]). Format requirements: Use brief length (1-2 sentences).>>
 ```
+
+## Key Features
+
+### 🎯 **Variables & Conditionals**
+
+- Define reusable variables with `${variableName}` syntax
+- Use conditionals to include/exclude sections dynamically
+- Support for strings, numbers, booleans, objects, and arrays
+- JavaScript-like expressions in conditions
+
+### 📚 **Rich Instruction Types**
+
+Built-in types include:
+
+- `title` - Headlines with style control
+- `list` - Formatted lists (bullets, numbers, etc.)
+- `paragraph` - Text with tone and length control
+- `table` - Structured data tables
+- `code_block` - Code snippets with syntax highlighting
+- `dialogue` - Multi-person conversations
+- `quote` - Quotes with attribution
+- `summary` - Summaries of varying detail
+- `image_description` - Descriptive image text
+
+### 🔧 **Extensible Type System**
+
+- Create custom instruction types for your domain
+- Share types across templates with schema extension
+- Override standard types with your own implementations
+
+### ✅ **Schema Validation**
+
+- Full JSON Schema validation
+- Type extension validation
+- Rich tooling support in modern editors
 
 ## Getting Started
 
@@ -125,67 +169,56 @@ You are an AI designed to convert content templates into actual content.
 2. **[Try the examples](https://alexanderparker.github.io/instruction-template-specification/examples.html)** to see templates in action
 3. **[Build your own templates](https://alexanderparker.github.io/instruction-template-specification/getting-started.html)** using the schema
 
-## Features
+## Documentation
 
-- 🎯 **Instruction-generative** - Placeholders become AI instructions, not data substitutions
-- 📝 **Content-first authoring** - Write natural content with embedded placeholders
-- 🔧 **Extensible type system** - Standard types plus custom instruction types
-- ✅ **JSON Schema validation** - Full validation and tooling support
-- 🌐 **Framework agnostic** - Works with any implementation
-- 📚 **Rich instruction types** - Lists, paragraphs, tables, code blocks, and more
+- **[Complete Specification](https://alexanderparker.github.io/instruction-template-specification/specification.html)** - Technical documentation with all features
+- **[Getting Started Guide](https://alexanderparker.github.io/instruction-template-specification/getting-started.html)** - Step-by-step tutorial
+- **[Example Templates](https://alexanderparker.github.io/instruction-template-specification/examples.html)** - Real-world examples
+- **[Schema Extension Example](https://alexanderparker.github.io/instruction-template-specification/examples/schema-extension/)** - How to extend and override types
+- **[Schema Files](https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/)** - JSON Schema definitions
 
-## Built-in Instruction Types
+## Schema Files
 
-- **`list`** - Generate formatted lists with customizable styling
-- **`paragraph`** - Create paragraphs with specified tone and length
-- **`table`** - Generate tables with configurable format and dimensions
-- **`code_block`** - Create code snippets with syntax highlighting
-- **`dialogue`** - Generate conversations between multiple participants
-- **`quote`** - Create relevant quotes with optional attribution
-- **`summary`** - Generate summaries of varying detail levels
-- **`image_description`** - Create descriptive text for images
+### Core Schemas
+
+- **[Base Schema](https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-base-schema-v1.json)** - Defines template structure
+- **[Type Extension Schema](https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-type-extension-schema-v1.json)** - Validates type extension files
+- **[Standard Types](https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-standard-types-v1.json)** - Built-in instruction types
 
 ## Use Cases
 
-- **Content Marketing** - Email templates, blog post structures, social media content
-- **Documentation** - Technical writing templates with dynamic sections
-- **Education** - Lesson plan templates, assignment generators
-- **Creative Writing** - Story structures, character development templates
-- **Business** - Report templates, proposal frameworks
-
-## Documentation
-
-- **[Complete Specification](https://alexanderparker.github.io/instruction-template-specification/specification.html)** - Technical documentation with all instruction types
-- **[Getting Started Guide](https://alexanderparker.github.io/instruction-template-specification/getting-started.html)** - Step-by-step tutorial for beginners
-- **[Example Templates](https://alexanderparker.github.io/instruction-template-specification/examples.html)** - Template library with detailed breakdowns
-- **[Schema Documentation](https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/)** - Schema files and validation guide
+- **Content Marketing** - Email templates, blog structures, social media posts
+- **Documentation** - API docs, user guides, FAQs with dynamic content
+- **Education** - Lesson plans, assignment generators, course outlines
+- **Creative Writing** - Story structures, character profiles, dialogue scenes
+- **Business** - Reports, proposals, presentations with AI-generated sections
 
 ## Community & Ecosystem
 
-This specification is designed to enable a rich ecosystem of tools:
+This specification is designed to enable:
 
 - **Visual Editors** - WYSIWYG template builders
-- **Compilers** - Libraries that convert templates to prompts
-- **Validators** - Tools that verify template correctness
-- **Template Libraries** - Collections of reusable templates
+- **Compilers** - Tools that convert templates to prompts
+- **Type Libraries** - Reusable instruction type collections
+- **Template Marketplaces** - Share and discover templates
 
 ## Contributing
 
 We welcome contributions! You can help by:
 
-- **Proposing schema improvements** via GitHub issues
-- **Suggesting new instruction types** for the standard library
-- **Improving documentation** with clearer examples
-- **Sharing interesting use cases** and template examples
+- **Proposing improvements** via GitHub issues
+- **Creating new instruction types** for specific domains
+- **Building tools** that implement the specification
+- **Sharing templates** and use cases
 
-Open an issue or pull request on [GitHub](https://github.com/alexanderparker/instruction-template-specification) to get started.
+See our [GitHub repository](https://github.com/alexanderparker/instruction-template-specification) to get started.
 
 ## Versioning
 
 ITS follows semantic versioning:
 
-- **Major** versions introduce breaking changes to the schema
-- **Minor** versions add new features while maintaining compatibility
+- **Major** versions introduce breaking changes
+- **Minor** versions add new features backward-compatibly
 - **Patch** versions fix issues without changing functionality
 
 Current version: **v1.0**
@@ -193,3 +226,7 @@ Current version: **v1.0**
 ## License
 
 This specification is released under the [MIT License](LICENSE).
+
+---
+
+Built with ❤️ for the AI content generation community

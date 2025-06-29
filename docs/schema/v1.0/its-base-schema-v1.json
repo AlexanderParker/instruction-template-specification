@@ -96,7 +96,7 @@
                 "systemPrompt": {
                     "type": "string",
                     "description": "Base system prompt for the AI",
-                    "default": "You are an AI designed to convert content templates into actual content. Respond only with the transformed content."
+                    "default": "You are an AI assistant that fills in content templates. Follow the instructions exactly and replace each placeholder with appropriate content based on the user prompts provided."
                 },
                 "instructionWrapper": {
                     "type": "string",
@@ -108,10 +108,20 @@
                     "description": "Format for wrapping user content within instructions to prevent parsing conflicts",
                     "default": "([{<{content}>}])"
                 },
-                "preserveFormatting": {
-                    "type": "boolean",
-                    "description": "Whether to preserve line breaks and spacing",
-                    "default": true
+                "processingInstructions": {
+                    "type": "array",
+                    "description": "Detailed instructions for how the AI should process the template",
+                    "items": {
+                        "type": "string"
+                    },
+                    "default": [
+                        "Replace each placeholder marked with << >> with generated content",
+                        "The user's content request is wrapped in ([{< >}]) to distinguish it from instructions",
+                        "Follow the format requirements specified after each user prompt",
+                        "Maintain the existing structure and formatting of the template",
+                        "Only replace the placeholders - do not modify any other text",
+                        "Generate content that matches the tone and style requested"
+                    ]
                 },
                 "targetModel": {
                     "type": "string",
@@ -143,6 +153,9 @@
                         },
                         {
                             "type": "object"
+                        },
+                        {
+                            "type": "array"
                         }
                     ]
                 }
@@ -239,6 +252,9 @@
                             },
                             {
                                 "$ref": "#/$defs/instructionPlaceholder"
+                            },
+                            {
+                                "$ref": "#/$defs/conditionalElement"
                             }
                         ]
                     }
@@ -253,6 +269,9 @@
                             },
                             {
                                 "$ref": "#/$defs/instructionPlaceholder"
+                            },
+                            {
+                                "$ref": "#/$defs/conditionalElement"
                             }
                         ]
                     }
