@@ -99,19 +99,73 @@ Here are some popular citrus fruits:
 
 ### Quick Template Structure
 
+**Template Example:**
+
 ```json
 {
   "$schema": "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-base-schema-v1.json",
   "version": "1.0.0",
+  "metadata": {
+    "name": "Product Review Template",
+    "description": "Template for generating product reviews"
+  },
   "content": [
-    { "type": "text", "text": "Static content" },
+    {
+      "type": "text",
+      "text": "# Product Review: "
+    },
+    {
+      "type": "placeholder",
+      "instructionType": "paragraph",
+      "config": {
+        "description": "Create a catchy product name for a wireless gaming headset",
+        "tone": "enthusiastic",
+        "length": "short"
+      }
+    },
+    {
+      "type": "text",
+      "text": "\n\n## Key Features\n\n"
+    },
     {
       "type": "placeholder",
       "instructionType": "list",
-      "config": { "description": "Generate content here" }
+      "config": {
+        "description": "List 4 standout features of a premium gaming headset",
+        "format": "bullet_points",
+        "itemCount": 4
+      }
+    },
+    {
+      "type": "text",
+      "text": "\n\n## Verdict\n\n"
+    },
+    {
+      "type": "placeholder",
+      "instructionType": "summary",
+      "config": {
+        "description": "Summarize why this headset is worth buying",
+        "length": "brief"
+      }
     }
   ]
 }
+```
+
+**Compiles to AI Prompt:**
+
+```
+You are an AI designed to convert content templates into actual content.
+
+# Product Review: <<Replace this paragraph with: Create a catchy product name for a wireless gaming headset. Tone: enthusiastic. Length: short (1-2 sentences).>>
+
+## Key Features
+
+<<Replace this section with a list. List 4 standout features of a premium gaming headset. Each list item goes on its own line. Use bullet_points to separate each item. Create exactly 4 items.>>
+
+## Verdict
+
+<<Replace this section with a summary. Summarize why this headset is worth buying. Length: brief (1-2 sentences).>>
 ```
 
 ## Community & Ecosystem
