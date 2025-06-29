@@ -74,7 +74,7 @@
                 "description": "Write an introduction for ${companyName}",
                 "displayName": "Company Introduction",
                 "tone": "professional",
-                "includeValues": true
+                "style": "comprehensive"
             }
         },
         {
@@ -88,9 +88,7 @@
             "config": {
                 "description": "Present ${quarter} marketing campaign metrics for ${productName}",
                 "displayName": "Campaign Metrics",
-                "format": "dashboard",
-                "includeROI": true,
-                "includeConversion": true
+                "format": "dashboard"
             }
         },
         {

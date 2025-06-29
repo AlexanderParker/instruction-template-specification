@@ -6,7 +6,7 @@
     "version": "1.0.0",
     "instructionTypes": {
         "campaign_metrics": {
-            "template": "<<Create a {format} view of campaign metrics using this prompt: ([{<{description}>}]). Requirements: {includeROI, select, true{Include ROI calculations.} false{}} {includeConversion, select, true{Include conversion rates.} false{}} Use data visualization best practices.>>",
+            "template": "<<Create a {format} view of campaign metrics using this prompt: ([{<{description}>}]). Requirements: Include all relevant metrics and KPIs. Use data visualization best practices.>>",
             "description": "Generates marketing campaign performance metrics in various formats",
             "configSchema": {
                 "type": "object",
@@ -19,14 +19,6 @@
                             "narrative"
                         ],
                         "default": "table"
-                    },
-                    "includeROI": {
-                        "type": "boolean",
-                        "default": true
-                    },
-                    "includeConversion": {
-                        "type": "boolean",
-                        "default": true
                     }
                 }
             }

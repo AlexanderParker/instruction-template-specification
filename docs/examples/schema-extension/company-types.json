@@ -6,8 +6,8 @@
     "version": "1.0.0",
     "instructionTypes": {
         "company_intro": {
-            "template": "<<Write a company introduction using this prompt: ([{<{description}>}]). Requirements: Use {tone} tone. {includeValues, select, true{Include company mission, vision, and values.} false{Focus on company overview only.}}>>",
-            "description": "Generates standardized company introductions with optional mission/vision/values",
+            "template": "<<Write a company introduction using this prompt: ([{<{description}>}]). Requirements: Use {tone} tone. Style: {style}.>>",
+            "description": "Generates standardized company introductions",
             "configSchema": {
                 "type": "object",
                 "properties": {
@@ -20,9 +20,15 @@
                         ],
                         "default": "professional"
                     },
-                    "includeValues": {
-                        "type": "boolean",
-                        "default": false
+                    "style": {
+                        "type": "string",
+                        "enum": [
+                            "comprehensive",
+                            "brief",
+                            "executive"
+                        ],
+                        "default": "brief",
+                        "description": "comprehensive includes history and values, brief focuses on core business, executive is high-level overview"
                     }
                 }
             }

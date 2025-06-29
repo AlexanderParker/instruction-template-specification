@@ -22,8 +22,7 @@
             "type": "array",
             "description": "Schema references for instruction type definitions",
             "items": {
-                "type": "string",
-                "format": "uri"
+                "type": "string"
             },
             "default": [
                 "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-standard-types-v1.json"
