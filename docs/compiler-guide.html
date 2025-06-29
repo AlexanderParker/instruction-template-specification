@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Compiler Implementation Guide - Instruction Template Specification (ITS)</title>
+    <meta name="description" content="Guidelines and requirements for implementing ITS compilers" />
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .header {
+        text-align: center;
+        padding: 2rem 0;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 2rem;
+      }
+
+      .header h1 {
+        color: #0366d6;
+        margin-bottom: 0.5rem;
+      }
+
+      .nav {
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 6px;
+        margin-bottom: 2rem;
+      }
+
+      .nav a {
+        color: #0366d6;
+        text-decoration: none;
+        margin-right: 1rem;
+      }
+
+      .requirement-section {
+        background: white;
+        border: 1px solid #e1e4e8;
+        border-radius: 6px;
+        padding: 1.5rem;
+        margin: 2rem 0;
+      }
+
+      .requirement-section h3 {
+        color: #0366d6;
+        margin-top: 0;
+      }
+
+      .requirement {
+        background: #f6f8fa;
+        border-left: 4px solid #0366d6;
+        padding: 1rem;
+        margin: 1rem 0;
+      }
+
+      .requirement.must {
+        border-left-color: #d73a49;
+      }
+
+      .requirement.should {
+        border-left-color: #28a745;
+      }
+
+      .requirement.may {
+        border-left-color: #6f42c1;
+      }
+
+      .requirement h4 {
+        margin-top: 0;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .requirement-level {
+        background: #0366d6;
+        color: white;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        font-weight: bold;
+      }
+
+      .requirement-level.must {
+        background: #d73a49;
+      }
+
+      .requirement-level.should {
+        background: #28a745;
+      }
+
+      .requirement-level.may {
+        background: #6f42c1;
+      }
+
+      pre {
+        background: #f6f8fa;
+        border: 1px solid #e1e4e8;
+        border-radius: 3px;
+        padding: 1rem;
+        overflow-x: auto;
+        font-size: 0.9rem;
+      }
+
+      code {
+        background: #f3f4f6;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-family: monospace;
+        font-size: 0.9em;
+      }
+
+      .process-flow {
+        background: #f6f8fa;
+        border: 1px solid #e1e4e8;
+        border-radius: 6px;
+        padding: 1.5rem;
+        margin: 1rem 0;
+      }
+
+      .process-step {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #e1e4e8;
+      }
+
+      .process-step:last-child {
+        border-bottom: none;
+      }
+
+      .error-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1rem 0;
+      }
+
+      .error-table th,
+      .error-table td {
+        border: 1px solid #e1e4e8;
+        padding: 8px 12px;
+        text-align: left;
+      }
+
+      .error-table th {
+        background: #f6f8fa;
+        font-weight: bold;
+      }
+
+      .example-box {
+        background: #f6f8fa;
+        border: 1px solid #e1e4e8;
+        border-radius: 6px;
+        padding: 1rem;
+        margin: 1rem 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Compiler Implementation Guide</h1>
+      <p>Requirements and best practices for building ITS compilers</p>
+    </div>
+
+    <div class="nav">
+      <a href="index.html">← Back to Home</a>
+      <a href="specification.html">Specification</a>
+      <a href="getting-started.html">Getting Started</a>
+      <a href="examples.html">Examples</a>
+    </div>
+
+    <h2>Overview</h2>
+    <p>This guide defines the requirements for implementing a compliant ITS compiler. Requirements are categorized using RFC 2119 keywords:</p>
+    <ul>
+      <li><strong>MUST</strong> - Absolute requirements for compliance</li>
+      <li><strong>SHOULD</strong> - Strongly recommended practices</li>
+      <li><strong>MAY</strong> - Optional features</li>
+    </ul>
+
+    <h2>Compilation Process</h2>
+
+    <div class="process-flow">
+      <h3>Standard Compilation Flow</h3>
+      <div class="process-step">1. <strong>Load Template</strong> - Parse JSON and validate against base schema</div>
+      <div class="process-step">2. <strong>Load Extended Schemas</strong> - Fetch and validate type extensions</div>
+      <div class="process-step">3. <strong>Build Type Registry</strong> - Merge types with precedence rules</div>
+      <div class="process-step">4. <strong>Process Variables</strong> - Replace ${variable} references</div>
+      <div class="process-step">5. <strong>Evaluate Conditionals</strong> - Include/exclude conditional content</div>
+      <div class="process-step">6. <strong>Generate Instructions</strong> - Convert placeholders to AI instructions</div>
+      <div class="process-step">7. <strong>Assemble Prompt</strong> - Combine introduction, instructions, and template</div>
+    </div>
+
+    <div class="requirement-section">
+      <h3>1. Schema Validation</h3>
+
+      <div class="requirement must">
+        <h4><span class="requirement-level must">MUST</span> Validate Template Structure</h4>
+        <p>Compilers MUST validate templates against the base schema before processing:</p>
+        <ul>
+          <li>Verify required properties (<code>version</code>, <code>content</code>)</li>
+          <li>Validate content element types</li>
+          <li>Check property constraints and patterns</li>
+        </ul>
+      </div>
+
+      <div class="requirement must">
+        <h4><span class="requirement-level must">MUST</span> Validate Extended Schemas</h4>
+        <p>When loading schemas from the <code>extends</code> array:</p>
+        <ul>
+          <li>Validate against the type extension schema</li>
+          <li>Verify version compatibility with the template</li>
+          <li>Ensure instruction types have required <code>template</code> field</li>
+        </ul>
+      </div>
+
+      <div class="requirement must">
+        <h4><span class="requirement-level must">MUST</span> Fail on Invalid Schemas</h4>
+        <p>Compilation MUST fail if:</p>
+        <ul>
+          <li>Template doesn't validate against base schema</li>
+          <li>Extended schemas don't validate against type extension schema</li>
+          <li>Any schema fails to load (network error, file not found)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="requirement-section">
+      <h3>2. Schema Loading</h3>
+
+      <div class="requirement must">
+        <h4><span class="requirement-level must">MUST</span> Support URL and Relative Paths</h4>
+        <p>The <code>extends</code> array can contain:</p>
+        <ul>
+          <li>Full URLs: <code>https://example.com/schema.json</code></li>
+          <li>Relative paths: <code>./local-schema.json</code></li>
+        </ul>
+      </div>
+
+      <div class="requirement should">
+        <h4><span class="requirement-level should">SHOULD</span> Report Loading Progress</h4>
+        <p>For better user experience, report which schemas are being loaded.</p>
+      </div>
+
+      <div class="requirement may">
+        <h4><span class="requirement-level may">MAY</span> Implement Caching</h4>
+        <p>Compilers may cache remote schemas to improve performance.</p>
+      </div>
+
+      <div class="requirement may">
+        <h4><span class="requirement-level may">MAY</span> Implement Security Controls</h4>
+        <p>Optional security features include:</p>
+        <ul>
+          <li>Domain allowlists/blocklists</li>
+          <li>HTTPS-only requirements</li>
+          <li>Schema size limits</li>
+          <li>Request timeouts</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="requirement-section">
+      <h3>3. Type Resolution</h3>
+
+      <div class="requirement must">
+        <h4><span class="requirement-level must">MUST</span> Follow Precedence Rules</h4>
+        <p>Instruction types are resolved in this order (highest to lowest):</p>
+        <ol>
+          <li><code>customInstructionTypes</code> in the template</li>
+          <li>Last schema in <code>extends</code> array</li>
+          <li>Previous schemas in reverse order</li>
+          <li>First schema in <code>extends</code> array</li>
+        </ol>
+      </div>
+
+      <div class="requirement must">
+        <h4><span class="requirement-level must">MUST</span> Apply Complete Override</h4>
+        <p>When a type is defined in multiple schemas, the entire definition is replaced. No property merging occurs.</p>
+      </div>
+
+      <div class="requirement should">
+        <h4><span class="requirement-level should">SHOULD</span> Report Overrides</h4>
+        <p>Compilers should inform users when types are overridden:</p>
+        <pre><code>INFO: Instruction type overrides detected:
+- 'summary' overridden by marketing-types.json (from company-types.json)
+- 'list' overridden by customInstructionTypes (from its-standard-types-v1.json)</code></pre>
+      </div>
+    </div>
+
+    <div class="requirement-section">
+      <h3>4. Variable Processing</h3>
+
+      <div class="requirement must">
+        <h4><span class="requirement-level must">MUST</span> Support Variable Syntax</h4>
+        <p>Replace <code>${variableName}</code> references with variable values in:</p>
+        <ul>
+          <li>Text element content</li>
+          <li>Placeholder descriptions</li>
+          <li>Config property values</li>
+        </ul>
+      </div>
+
+      <div class="requirement must">
+        <h4><span class="requirement-level must">MUST</span> Support Variable Types</h4>
+        <p>Handle all JSON-compatible types:</p>
+        <ul>
+          <li>Strings: <code>${name}</code></li>
+          <li>Numbers: <code>${count}</code></li>
+          <li>Booleans: <code>${enabled}</code></li>
+          <li>Object properties: <code>${user.name}</code></li>
+          <li>Array elements: <code>${items[0]}</code></li>
+        </ul>
+      </div>
+
+      <div class="requirement must">
+        <h4><span class="requirement-level must">MUST</span> Handle Undefined Variables</h4>
+        <p>If a variable reference is undefined, compilers MUST either:</p>
+        <ul>
+          <li>Fail with a clear error message</li>
+          <li>Leave the reference unchanged (e.g., <code>${undefined}</code>)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="requirement-section">
+      <h3>5. Conditional Evaluation</h3>
+
+      <div class="requirement must">
+        <h4><span class="requirement-level must">MUST</span> Support Expression Operators</h4>
+        <table class="error-table">
+          <thead>
+            <tr>
+              <th>Operator Type</th>
+              <th>Operators</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Equality</td>
+              <td><code>==</code>, <code>!=</code></td>
+              <td><code>tone == 'professional'</code></td>
+            </tr>
+            <tr>
+              <td>Comparison</td>
+              <td><code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code></td>
+              <td><code>count &gt; 5</code></td>
+            </tr>
+            <tr>
+              <td>Logical</td>
+              <td><code>&amp;&amp;</code>, <code>||</code>, <code>!</code></td>
+              <td><code>includeA &amp;&amp; !includeB</code></td>
+            </tr>
+            <tr>
+              <td>Membership</td>
+              <td><code>in</code></td>
+              <td><code>type in ['A', 'B', 'C']</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="requirement must">
+        <h4><span class="requirement-level must">MUST</span> Support Nested Conditionals</h4>
+        <p>Conditionals can contain other conditionals in their content arrays.</p>
+      </div>
+
+      <div class="requirement should">
+        <h4><span class="requirement-level should">SHOULD</span> Provide Clear Expression Errors</h4>
+        <p>Invalid expressions should produce helpful error messages.</p>
+      </div>
+    </div>
+
+    <div class="requirement-section">
+      <h3>6. Instruction Generation</h3>
+
+      <div class="requirement must">
+        <h4><span class="requirement-level must">MUST</span> Process Placeholder Templates</h4>
+        <p>For each placeholder:</p>
+        <ol>
+          <li>Look up the instruction type definition</li>
+          <li>Apply config values to the template</li>
+          <li>Wrap user description in the content wrapper</li>
+          <li>Generate the complete instruction</li>
+        </ol>
+      </div>
+
+      <div class="requirement must">
+        <h4><span class="requirement-level must">MUST</span> Handle Missing Config Properties</h4>
+        <p>If a template references <code>{property}</code> but it's not in config:</p>
+        <ul>
+          <li>Use the default value from configSchema if available</li>
+          <li>Otherwise, fail with an error</li>
+        </ul>
+      </div>
+
+      <div class="example-box">
+        <h4>Example Instruction Generation</h4>
+        <p><strong>Type Definition:</strong></p>
+        <pre><code>{
+  "instructionTypes": {
+    "list": {
+      "template": "&lt;&lt;Replace this placeholder with a list using this user prompt: ([{&lt;{description}&gt;}]). Format requirements: Use {format} formatting with each item on a new line.&gt;&gt;",
+      "configSchema": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "type": "string",
+            "enum": ["bullet_points", "numbered"],
+            "default": "bullet_points"
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+
+        <p><strong>Placeholder in Template:</strong></p>
+        <pre><code>{
+  "type": "placeholder",
+  "instructionType": "list",
+  "config": {
+    "description": "List 5 fruits",
+    "format": "bullet_points"
+  }
+}</code></pre>
+
+        <p><strong>Processing Steps:</strong></p>
+        <ol>
+          <li>Replace <code>{description}</code> with "List 5 fruits"</li>
+          <li>Replace <code>{format}</code> with "bullet_points"</li>
+          <li>Wrap the description in content wrapper: <code>([{&lt;List 5 fruits&gt;}])</code></li>
+        </ol>
+
+        <p><strong>Generated Instruction:</strong></p>
+        <pre><code>&lt;&lt;Replace this placeholder with a list using this user prompt: ([{&lt;List 5 fruits&gt;}]). Format requirements: Use bullet_points formatting with each item on a new line.&gt;&gt;</code></pre>
+      </div>
+    </div>
+
+    <div class="requirement-section">
+      <h3>7. Output Format</h3>
+
+      <div class="requirement must">
+        <h4><span class="requirement-level must">MUST</span> Generate Three-Section Output</h4>
+        <p>The compiled output must have these sections:</p>
+        <pre><code>INTRODUCTION
+
+[System prompt from compilerConfig]
+
+INSTRUCTIONS
+
+[Processing instructions from compilerConfig]
+
+TEMPLATE
+
+[Processed template content with instructions]</code></pre>
+      </div>
+
+      <div class="requirement should">
+        <h4><span class="requirement-level should">SHOULD</span> Preserve Template Formatting</h4>
+        <p>Maintain line breaks, spacing, and structure from the original template.</p>
+      </div>
+    </div>
+
+    <div class="requirement-section">
+      <h3>8. Error Handling</h3>
+
+      <table class="error-table">
+        <thead>
+          <tr>
+            <th>Error Type</th>
+            <th>Required Behavior</th>
+            <th>Example Message</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Schema Validation</td>
+            <td>MUST fail compilation</td>
+            <td>"Template validation failed: Missing required property 'content'"</td>
+          </tr>
+          <tr>
+            <td>Schema Loading</td>
+            <td>MUST fail compilation</td>
+            <td>"Failed to load schema: https://example.com/types.json (404 Not Found)"</td>
+          </tr>
+          <tr>
+            <td>Version Mismatch</td>
+            <td>MUST fail compilation</td>
+            <td>"Schema version 2.0 incompatible with template version 1.0"</td>
+          </tr>
+          <tr>
+            <td>Undefined Variable</td>
+            <td>MUST fail or preserve</td>
+            <td>"Undefined variable: ${productName}"</td>
+          </tr>
+          <tr>
+            <td>Invalid Expression</td>
+            <td>MUST fail compilation</td>
+            <td>"Invalid conditional expression: 'count >> 5'"</td>
+          </tr>
+          <tr>
+            <td>Missing Type</td>
+            <td>MUST fail compilation</td>
+            <td>"Unknown instruction type: 'custom_type'"</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="requirement-section">
+      <h3>9. Optional Features</h3>
+
+      <div class="requirement may">
+        <h4><span class="requirement-level may">MAY</span> Support Watch Mode</h4>
+        <p>Recompile templates when source files change.</p>
+      </div>
+
+      <div class="requirement may">
+        <h4><span class="requirement-level may">MAY</span> Generate Multiple Output Formats</h4>
+        <p>Besides the standard prompt format, compilers may generate:</p>
+        <ul>
+          <li>API-ready JSON payloads</li>
+          <li>Model-specific formats</li>
+          <li>Debug outputs with metadata</li>
+        </ul>
+      </div>
+
+      <div class="requirement may">
+        <h4><span class="requirement-level may">MAY</span> Provide IDE Integration</h4>
+        <p>Language server protocol support for real-time validation.</p>
+      </div>
+    </div>
+
+    <h2>Reference Implementation</h2>
+
+    <div class="example-box">
+      <h3>Pseudo-code Compilation Flow</h3>
+      <pre><code>function compileTemplate(templatePath) {
+  // 1. Load and validate template
+  const template = loadJSON(templatePath)
+  validateSchema(template, BASE_SCHEMA)
+  
+  // 2. Load extended schemas
+  const types = {}
+  for (const schemaUrl of template.extends || []) {
+    const schema = loadSchema(schemaUrl)
+    validateSchema(schema, TYPE_EXTENSION_SCHEMA)
+    
+    // Apply overrides
+    Object.assign(types, schema.instructionTypes)
+  }
+  
+  // 3. Apply custom types (highest precedence)
+  Object.assign(types, template.customInstructionTypes || {})
+  
+  // 4. Process variables
+  const processedContent = processVariables(template.content, template.variables)
+  
+  // 5. Evaluate conditionals
+  const finalContent = evaluateConditionals(processedContent, template.variables)
+  
+  // 6. Generate instructions
+  const compiledTemplate = generateInstructions(finalContent, types)
+  
+  // 7. Assemble final output
+  return assembleOutput(template.compilerConfig, compiledTemplate)
+}</code></pre>
+    </div>
+
+    <h2>Testing Compliance</h2>
+
+    <p>A compliant compiler should:</p>
+    <ul>
+      <li>Pass all test cases in the ITS test suite</li>
+      <li>Handle all example templates correctly</li>
+      <li>Produce consistent output across runs</li>
+      <li>Provide clear error messages for invalid inputs</li>
+    </ul>
+
+    <footer style="text-align: center; padding: 2rem; color: #666; border-top: 1px solid #eee; margin-top: 3rem">
+      <p>Instruction Template Specification (ITS) • <a href="https://github.com/alexanderparker/instruction-template-specification">GitHub</a> • MIT License</p>
+    </footer>
+  </body>
+</html>
