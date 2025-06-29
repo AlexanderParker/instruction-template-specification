@@ -80,8 +80,8 @@ Here are some popular citrus fruits:
 ## Getting Started
 
 1. **[Read the specification](https://alexanderparker.github.io/instruction-template-specification/)** to understand the schema
-2. **[Try the examples](https://alexanderparker.github.io/instruction-template-specification/examples/citrus-fruits.json)** to see templates in action
-3. **[Build your own templates](#schema-reference)** using the schema reference below
+2. **[Try the examples](https://alexanderparker.github.io/instruction-template-specification/examples/)** to see templates in action
+3. **[Build your own templates](https://alexanderparker.github.io/instruction-template-specification/getting-started/)** using the schema
 
 ## Use Cases
 
@@ -91,26 +91,28 @@ Here are some popular citrus fruits:
 - **Creative Writing** - Story structures, character development templates
 - **Business** - Report templates, proposal frameworks
 
-## Schema Reference
+## Schema Documentation
 
-### Base Schema
+- **[Schema v1.0 Overview](https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/)** - Schema files and validation guide
+- **[Complete Specification](https://alexanderparker.github.io/instruction-template-specification/specification.html)** - Technical documentation with all instruction types
+- **[Example Templates](https://alexanderparker.github.io/instruction-template-specification/examples.html)** - Template library with detailed breakdowns
+
+### Quick Template Structure
 
 ```json
 {
   "$schema": "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-base-schema-v1.json",
   "version": "1.0.0",
-  "extends": ["https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-standard-types-v1.json"],
   "content": [
-    // Your template content here
+    { "type": "text", "text": "Static content" },
+    {
+      "type": "placeholder",
+      "instructionType": "list",
+      "config": { "description": "Generate content here" }
+    }
   ]
 }
 ```
-
-### Example Templates
-
-- **[Citrus Fruits](https://alexanderparker.github.io/instruction-template-specification/examples/citrus-fruits.json)** - Simple list example
-- **[Blog Post](https://alexanderparker.github.io/instruction-template-specification/examples/blog-post-template.json)** - Complete blog structure
-- **[Product Launch Email](https://alexanderparker.github.io/instruction-template-specification/examples/product-launch-email.json)** - Marketing email template
 
 ## Community & Ecosystem
 
