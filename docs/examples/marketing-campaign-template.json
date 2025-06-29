@@ -1,0 +1,231 @@
+{
+    "$schema": "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-base-schema-v1.json",
+    "version": "1.0.0",
+    "extends": [
+        "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-standard-types-v1.json"
+    ],
+    "metadata": {
+        "name": "Marketing Campaign Template",
+        "description": "Flexible marketing campaign template with variable-driven content sections",
+        "author": "Alexander Parker",
+        "tags": [
+            "marketing",
+            "campaign",
+            "variables",
+            "conditional"
+        ],
+        "created": "2025-06-29T00:00:00Z"
+    },
+    "variables": {
+        "campaignName": "Summer Tech Sale 2025",
+        "companyName": "TechVault",
+        "targetAudience": "tech enthusiasts and early adopters",
+        "campaignTone": "enthusiastic",
+        "productCount": 3,
+        "includeTestimonials": true,
+        "includeSocialProof": true,
+        "discountPercentage": 25,
+        "campaignDuration": "48 hours",
+        "channels": {
+            "email": true,
+            "social": true,
+            "blog": false
+        },
+        "products": [
+            "smart home devices",
+            "wearable tech",
+            "gaming accessories"
+        ]
+    },
+    "content": [
+        {
+            "type": "text",
+            "text": "# ${campaignName}\n\n"
+        },
+        {
+            "type": "conditional",
+            "condition": "channels.email == true",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "## Email Campaign\n\n### Subject Line\n\n"
+                },
+                {
+                    "type": "placeholder",
+                    "id": "email_subject",
+                    "instructionType": "title",
+                    "config": {
+                        "description": "Create an email subject line for ${companyName}'s ${campaignName} offering ${discountPercentage}% off for ${targetAudience}",
+                        "displayName": "Email Subject",
+                        "style": "catchy",
+                        "length": "short"
+                    }
+                },
+                {
+                    "type": "text",
+                    "text": "\n\n### Email Body\n\n"
+                },
+                {
+                    "type": "placeholder",
+                    "id": "email_intro",
+                    "instructionType": "paragraph",
+                    "config": {
+                        "description": "Write an exciting email introduction for the ${campaignName} at ${companyName}, highlighting ${discountPercentage}% savings for ${campaignDuration}",
+                        "displayName": "Email Introduction",
+                        "tone": "${campaignTone}",
+                        "length": "medium"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "conditional",
+            "condition": "channels.social == true",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "\n\n## Social Media Campaign\n\n### Twitter/X Thread\n\n"
+                },
+                {
+                    "type": "placeholder",
+                    "id": "social_thread",
+                    "instructionType": "list",
+                    "config": {
+                        "description": "Create a Twitter/X thread (5 tweets) announcing ${companyName}'s ${campaignName} with ${discountPercentage}% off ${products[0]}, ${products[1]}, and ${products[2]}",
+                        "displayName": "Social Thread",
+                        "format": "numbered",
+                        "itemCount": 5
+                    }
+                }
+            ]
+        },
+        {
+            "type": "text",
+            "text": "\n\n## Featured Products\n\n"
+        },
+        {
+            "type": "placeholder",
+            "id": "product_highlights",
+            "instructionType": "table",
+            "config": {
+                "description": "Create a product comparison table for ${productCount} best-selling items from categories: ${products[0]}, ${products[1]}, and ${products[2]}. Include product name, original price, sale price (${discountPercentage}% off), and key feature",
+                "displayName": "Product Table",
+                "format": "markdown",
+                "columns": 4,
+                "rows": "${productCount}"
+            }
+        },
+        {
+            "type": "conditional",
+            "condition": "includeTestimonials == true && includeSocialProof == true",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "\n\n## Customer Success Stories\n\n"
+                },
+                {
+                    "type": "placeholder",
+                    "id": "customer_testimonials",
+                    "instructionType": "dialogue",
+                    "config": {
+                        "description": "Create a conversation between two ${targetAudience} discussing their positive experiences with ${companyName} products during previous sales",
+                        "displayName": "Customer Testimonials",
+                        "participantCount": 2,
+                        "style": "casual"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "conditional",
+            "condition": "includeSocialProof == true && includeTestimonials == false",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "\n\n## Why Customers Love ${companyName}\n\n"
+                },
+                {
+                    "type": "placeholder",
+                    "id": "social_proof",
+                    "instructionType": "list",
+                    "config": {
+                        "description": "List social proof points for ${companyName} (awards, customer stats, media mentions, certifications)",
+                        "displayName": "Social Proof",
+                        "format": "bullet_points",
+                        "itemCount": 4
+                    }
+                }
+            ]
+        },
+        {
+            "type": "text",
+            "text": "\n\n## Limited Time Offer\n\n"
+        },
+        {
+            "type": "placeholder",
+            "id": "urgency_message",
+            "instructionType": "paragraph",
+            "config": {
+                "description": "Write a compelling urgency message emphasizing the ${campaignDuration} duration of the ${discountPercentage}% discount for ${campaignName}",
+                "displayName": "Urgency Message",
+                "tone": "enthusiastic",
+                "length": "short"
+            }
+        },
+        {
+            "type": "conditional",
+            "condition": "discountPercentage >= 20",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "\n\n### 🎉 MEGA SAVINGS ALERT 🎉\n\n"
+                },
+                {
+                    "type": "placeholder",
+                    "id": "savings_highlight",
+                    "instructionType": "quote",
+                    "config": {
+                        "description": "Create an impactful quote about the value of saving ${discountPercentage}% on premium tech products",
+                        "displayName": "Savings Quote",
+                        "includeAttribution": false
+                    }
+                }
+            ]
+        },
+        {
+            "type": "text",
+            "text": "\n\n## How to Shop\n\n"
+        },
+        {
+            "type": "placeholder",
+            "id": "cta_instructions",
+            "instructionType": "list",
+            "config": {
+                "description": "Create step-by-step instructions for shopping the ${campaignName} at ${companyName}",
+                "displayName": "Shopping Instructions",
+                "format": "numbered",
+                "itemCount": 4
+            }
+        },
+        {
+            "type": "conditional",
+            "condition": "channels.blog == true",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "\n\n## Blog Post Summary\n\n"
+                },
+                {
+                    "type": "placeholder",
+                    "id": "blog_summary",
+                    "instructionType": "summary",
+                    "config": {
+                        "description": "Summarize the ${campaignName} campaign details, featured ${productCount} products, and ${discountPercentage}% savings opportunity at ${companyName}",
+                        "displayName": "Blog Summary",
+                        "length": "detailed"
+                    }
+                }
+            ]
+        }
+    ]
+}

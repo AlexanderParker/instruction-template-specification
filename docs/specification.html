@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Specification - Instruction Template Specification (ITS)</title>
-    <meta name="description" content="Complete technical specification for ITS schema and instruction types" />
+    <title>Getting Started - Instruction Template Specification (ITS)</title>
+    <meta name="description" content="Learn how to create your first instruction template in minutes" />
     <style>
       body {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
@@ -40,17 +40,26 @@
         margin-right: 1rem;
       }
 
-      .schema-section {
-        background: #f6f8fa;
+      .step {
+        background: white;
         border: 1px solid #e1e4e8;
         border-radius: 6px;
         padding: 1.5rem;
         margin: 2rem 0;
+        border-left: 4px solid #0366d6;
       }
 
-      .schema-section h3 {
+      .step h3 {
         color: #0366d6;
         margin-top: 0;
+      }
+
+      .example {
+        background: #f6f8fa;
+        border: 1px solid #e1e4e8;
+        border-radius: 6px;
+        padding: 1.5rem;
+        margin: 1rem 0;
       }
 
       pre {
@@ -62,392 +71,383 @@
         font-size: 0.9rem;
       }
 
-      .instruction-type {
-        border: 1px solid #e1e4e8;
+      .tip {
+        background: #fff3cd;
+        border: 1px solid #ffeaa7;
         border-radius: 6px;
         padding: 1rem;
         margin: 1rem 0;
-        background: white;
       }
 
-      .instruction-type h4 {
-        color: #0366d6;
+      .tip::before {
+        content: "💡 ";
+        font-size: 1.2rem;
+      }
+
+      .next-steps {
+        background: #d4edda;
+        border: 1px solid #c3e6cb;
+        border-radius: 6px;
+        padding: 1.5rem;
+        margin: 2rem 0;
+      }
+
+      .next-steps h3 {
+        color: #155724;
         margin-top: 0;
       }
 
-      .properties table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 1rem 0;
-      }
-
-      .properties th,
-      .properties td {
-        border: 1px solid #e1e4e8;
-        padding: 8px 12px;
-        text-align: left;
-      }
-
-      .properties th {
-        background: #f6f8fa;
-        font-weight: bold;
-      }
-
-      .back-to-top {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background: #0366d6;
-        color: white;
-        padding: 10px 15px;
-        border-radius: 50px;
-        text-decoration: none;
+      code {
+        background: #f3f4f6;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-family: monospace;
+        font-size: 0.9em;
       }
     </style>
   </head>
   <body>
     <div class="header">
-      <h1>ITS Specification</h1>
-      <p>Complete technical specification for Instruction Template Specification v1.0</p>
+      <h1>Getting Started with ITS</h1>
+      <p>Create your first instruction template in 5 minutes</p>
     </div>
 
     <div class="nav">
       <a href="index.html">← Back to Home</a>
-      <a href="getting-started.html">Getting Started</a>
+      <a href="specification.html">Specification</a>
       <a href="examples.html">Examples</a>
       <a href="https://github.com/alexanderparker/instruction-template-specification">GitHub</a>
     </div>
 
-    <h2>Overview</h2>
-    <p>
-      The Instruction Template Specification (ITS) defines a JSON-based format for creating templates that compile into AI instructions rather than static
-      content. This enables content creators to build reusable templates with placeholders that generate dynamic, AI-powered content.
-    </p>
+    <div class="step">
+      <h3>Step 1: Understand the Basics</h3>
+      <p>
+        ITS templates are JSON files that define content with placeholders. These placeholders become instructions for AI systems to generate specific types of
+        content.
+      </p>
 
-    <div class="schema-section">
-      <h3>Core Concepts</h3>
-      <ul>
-        <li><strong>Instruction-Generative</strong>: Placeholders become AI instructions, not data substitutions</li>
-        <li><strong>Content-First</strong>: Natural language content with embedded placeholders</li>
-        <li><strong>Type System</strong>: Extensible instruction types with validation</li>
-        <li><strong>Compilation</strong>: Templates compile to structured AI prompts</li>
-      </ul>
-    </div>
+      <p><strong>Key difference:</strong> Traditional templates substitute data, ITS templates generate instructions.</p>
 
-    <h2>Schema Structure</h2>
-
-    <div class="schema-section">
-      <h3>Base Schema URL</h3>
-      <p><code>https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-base-schema-v1.json</code></p>
-
-      <h4>Required Properties</h4>
-      <div class="properties">
-        <table>
-          <thead>
-            <tr>
-              <th>Property</th>
-              <th>Type</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>version</code></td>
-              <td>string</td>
-              <td>Template format version (semantic versioning)</td>
-            </tr>
-            <tr>
-              <td><code>content</code></td>
-              <td>array</td>
-              <td>Array of content elements (text, placeholders, conditionals)</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h4>Optional Properties</h4>
-      <div class="properties">
-        <table>
-          <thead>
-            <tr>
-              <th>Property</th>
-              <th>Type</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>extends</code></td>
-              <td>array</td>
-              <td>Schema references for instruction type definitions</td>
-            </tr>
-            <tr>
-              <td><code>metadata</code></td>
-              <td>object</td>
-              <td>Template metadata (name, author, tags, etc.)</td>
-            </tr>
-            <tr>
-              <td><code>customInstructionTypes</code></td>
-              <td>object</td>
-              <td>Template-specific instruction type definitions</td>
-            </tr>
-            <tr>
-              <td><code>compilerConfig</code></td>
-              <td>object</td>
-              <td>Configuration for template compilation</td>
-            </tr>
-            <tr>
-              <td><code>variables</code></td>
-              <td>object</td>
-              <td>Template-level variables for reuse</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="example">
+        <strong>Traditional:</strong> <code>Hello {{name}}</code> + data → <code>Hello John</code><br />
+        <strong>ITS:</strong> <code>Hello [name placeholder]</code> → AI instruction → AI-generated content
       </div>
     </div>
 
-    <h2>Content Elements</h2>
+    <div class="step">
+      <h3>Step 2: Basic Template Structure</h3>
+      <p>Every ITS template has this basic structure:</p>
 
-    <div class="instruction-type">
-      <h4>Text Element</h4>
-      <p>Static text content that appears as-is in the compiled template.</p>
+      <pre><code>{
+  "$schema": "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-base-schema-v1.json",
+  "version": "1.0.0",
+  "extends": [
+    "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-standard-types-v1.json"
+  ],
+  "content": [
+    // Your content elements here
+  ]
+}</code></pre>
+
+      <div class="tip">The <code>$schema</code> reference enables validation and autocompletion in many editors!</div>
+    </div>
+
+    <div class="step">
+      <h3>Step 3: Add Content Elements</h3>
+      <p>Content is an array of elements. There are three types:</p>
+
+      <h4>Text Elements (Static Content)</h4>
       <pre><code>{
   "type": "text",
-  "text": "Your static content here",
-  "id": "optional-identifier"
+  "text": "This text appears exactly as written."
 }</code></pre>
-    </div>
 
-    <div class="instruction-type">
-      <h4>Instruction Placeholder</h4>
-      <p>Placeholder that becomes an AI instruction in the compiled template.</p>
+      <h4>Placeholder Elements (Dynamic Instructions)</h4>
       <pre><code>{
   "type": "placeholder",
-  "id": "unique-identifier",
+  "id": "my_list",
   "instructionType": "list",
   "config": {
-    "description": "Content description for the AI",
-    "displayName": "Human-readable name",
-    // Additional type-specific configuration
+    "description": "list 5 programming languages",
+    "displayName": "Programming Languages",
+    "format": "bullet_points"
   }
 }</code></pre>
-    </div>
 
-    <div class="instruction-type">
-      <h4>Conditional Element</h4>
-      <p>Content that appears based on variable conditions.</p>
+      <h4>Conditional Elements (Variable Content)</h4>
       <pre><code>{
   "type": "conditional",
-  "condition": "variable_name == 'value'",
+  "condition": "audience == 'technical'",
   "content": [
-    // Content if condition is true
+    {"type": "text", "text": "Technical details: "}
   ],
   "else": [
-    // Content if condition is false (optional)
+    {"type": "text", "text": "General overview: "}
   ]
 }</code></pre>
     </div>
 
-    <h2>Standard Instruction Types</h2>
-    <p>Reference: <a href="schema/v1.0/its-standard-types-v1.json">Standard Types Schema</a></p>
+    <div class="step">
+      <h3>Step 4: Your First Template</h3>
+      <p>Let's create a simple template for a product description:</p>
 
-    <div class="instruction-type">
-      <h4>list</h4>
-      <p>Generates formatted lists with customizable styling and item counts.</p>
       <pre><code>{
-  "instructionType": "list",
-  "config": {
-    "description": "list 5 different citrus fruits",
-    "format": "bullet_points",  // bullet_points, numbered, dashes, plain
-    "itemCount": 5              // optional
-  }
-}</code></pre>
-      <p><strong>Compiles to:</strong></p>
-      <pre><code>&lt;&lt;Replace this placeholder with a list using this user prompt: ([{&lt;list 5 different citrus fruits&gt;}]). Format requirements: Use bullet_points formatting with each item on a new line. Create exactly 5 items.&gt;&gt;</code></pre>
-    </div>
-
-    <div class="instruction-type">
-      <h4>paragraph</h4>
-      <p>Generates paragraphs with specified tone and length.</p>
-      <pre><code>{
-  "instructionType": "paragraph",
-  "config": {
-    "description": "Write about sustainable technology",
-    "tone": "professional",     // formal, casual, enthusiastic, professional, friendly
-    "length": "medium"          // short, medium, long
-  }
-}</code></pre>
-      <p><strong>Compiles to:</strong></p>
-      <pre><code>&lt;&lt;Replace this placeholder with text using this user prompt: ([{&lt;Write about sustainable technology&gt;}]). Format requirements: Use professional tone and medium length (2-4 sentences).&gt;&gt;</code></pre>
-    </div>
-
-    <div class="instruction-type">
-      <h4>table</h4>
-      <p>Generates tables with configurable formatting and dimensions.</p>
-      <pre><code>{
-  "instructionType": "table",
-  "config": {
-    "description": "Compare technology features",
-    "format": "markdown",       // markdown, plain_text, csv
-    "columns": 3,               // optional
-    "rows": 4                   // optional
-  }
-}</code></pre>
-      <p><strong>Compiles to:</strong></p>
-      <pre><code>&lt;&lt;Replace this placeholder with a table using this user prompt: ([{&lt;Compare technology features&gt;}]). Format requirements: Use markdown format. Include 3 columns. Include 4 rows.&gt;&gt;</code></pre>
-    </div>
-
-    <div class="instruction-type">
-      <h4>code_block</h4>
-      <p>Generates code snippets with syntax highlighting.</p>
-      <pre><code>{
-  "instructionType": "code_block",
-  "config": {
-    "description": "Create a Python function that sorts a list",
-    "language": "python"        // javascript, python, java, html, css, sql, bash, generic
-  }
-}</code></pre>
-      <p><strong>Compiles to:</strong></p>
-      <pre><code>&lt;&lt;Replace this placeholder with a code block using this user prompt: ([{&lt;Create a Python function that sorts a list&gt;}]). Format requirements: Use python language with proper syntax highlighting formatting.&gt;&gt;</code></pre>
-    </div>
-
-    <div class="instruction-type">
-      <h4>dialogue</h4>
-      <p>Generates conversations between multiple participants.</p>
-      <pre><code>{
-  "instructionType": "dialogue",
-  "config": {
-    "description": "Conversation about project planning",
-    "participantCount": 2,      // 2-6
-    "style": "casual"           // casual, formal, dramatic, humorous
-  }
-}</code></pre>
-      <p><strong>Compiles to:</strong></p>
-      <pre><code>&lt;&lt;Replace this placeholder with a dialogue using this user prompt: ([{&lt;Conversation about project planning&gt;}]). Format requirements: Create a conversation between 2 people using casual style. Format each line as: Person Name: "Dialogue"&gt;&gt;</code></pre>
-    </div>
-
-    <div class="instruction-type">
-      <h4>quote</h4>
-      <p>Generates relevant quotes with optional attribution.</p>
-      <pre><code>{
-  "instructionType": "quote",
-  "config": {
-    "description": "Quote about innovation and creativity",
-    "includeAttribution": true  // include attribution if true
-  }
-}</code></pre>
-      <p><strong>Compiles to:</strong></p>
-      <pre><code>&lt;&lt;Replace this placeholder with a quote using this user prompt: ([{&lt;Quote about innovation and creativity&gt;}]). Format requirements: Include attribution with the quote.&gt;&gt;</code></pre>
-    </div>
-
-    <div class="instruction-type">
-      <h4>summary</h4>
-      <p>Generates summaries of varying lengths and detail.</p>
-      <pre><code>{
-  "instructionType": "summary",
-  "config": {
-    "description": "Summarize the key benefits of renewable energy",
-    "length": "standard"        // brief, standard, detailed
-  }
-}</code></pre>
-      <p><strong>Compiles to:</strong></p>
-      <pre><code>&lt;&lt;Replace this placeholder with a summary using this user prompt: ([{&lt;Summarize the key benefits of renewable energy&gt;}]). Format requirements: Use standard length (3-5 sentences).&gt;&gt;</code></pre>
-    </div>
-
-    <div class="instruction-type">
-      <h4>image_description</h4>
-      <p>Generates descriptive text for images with different styles.</p>
-      <pre><code>{
-  "instructionType": "image_description",
-  "config": {
-    "description": "Describe a futuristic city skyline",
-    "style": "photorealistic"  // photorealistic, artistic, technical
-  }
-}</code></pre>
-      <p><strong>Compiles to:</strong></p>
-      <pre><code>&lt;&lt;Replace this placeholder with an image description using this user prompt: ([{&lt;Describe a futuristic city skyline&gt;}]). Format requirements: Use photorealistic style (detailed realistic description).&gt;&gt;</code></pre>
-    </div>
-
-    <h2>Custom Instruction Types</h2>
-    <p>You can define custom instruction types for specific use cases:</p>
-
-    <pre><code>{
-  "customInstructionTypes": {
-    "my_custom_type": {
-      "template": "<<Custom instruction: {description}. Style: {customParam}>>",
-      "description": "Description of what this type does",
-      "configSchema": {
-        "type": "object",
-        "properties": {
-          "customParam": {
-            "type": "string",
-            "enum": ["option1", "option2"],
-            "default": "option1"
-          }
-        }
-      }
-    }
-  }
-}</code></pre>
-
-    <h2>Compilation Process</h2>
-    <p>Templates compile into AI prompts following this process:</p>
-    <ol>
-      <li><strong>Load schemas</strong>: Base schema + extended type schemas</li>
-      <li><strong>Validate template</strong>: Check structure and type definitions</li>
-      <li><strong>Process content</strong>: Convert elements to text + instructions</li>
-      <li><strong>Apply escaping</strong>: Wrap user content with safe delimiters</li>
-      <li><strong>Generate prompt</strong>: Combine system prompt with processed content</li>
-    </ol>
-
-    <h3>User Content Escaping</h3>
-    <p>To prevent parsing conflicts when user descriptions contain quotes, brackets, or other special characters, ITS uses a robust escaping system:</p>
-
-    <div class="schema-section">
-      <h4>Escaping Format</h4>
-      <p><strong>User content wrapper:</strong> <code>([{&lt;USER_CONTENT&gt;}])</code></p>
-
-      <p><strong>Why this pattern:</strong></p>
-      <ul>
-        <li>Extremely rare for users to type this exact sequence</li>
-        <li>Multiple nested bracket types prevent accidental termination</li>
-        <li>Visually distinct from regular content</li>
-        <li>AI models can easily identify content boundaries</li>
-      </ul>
-
-      <p><strong>Handles edge cases like:</strong></p>
-      <pre><code>"description": "Create code like {\"key\": \"value\"} with \"quotes\" and &lt;&lt;brackets&gt;&gt;"</code></pre>
-
-      <p><strong>Safely compiles to:</strong></p>
-      <pre><code>([{&lt;Create code like {"key": "value"} with "quotes" and &lt;&lt;brackets&gt;&gt;&gt;}])</code></pre>
-    </div>
-
-    <div class="schema-section">
-      <h3>Example Compilation</h3>
-      <p><strong>Input Template:</strong></p>
-      <pre><code>{
+  "$schema": "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-base-schema-v1.json",
+  "version": "1.0.0",
+  "extends": [
+    "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-standard-types-v1.json"
+  ],
+  "metadata": {
+    "name": "Product Description Template",
+    "description": "Basic template for product descriptions",
+    "author": "Your Name"
+  },
   "content": [
-    {"type": "text", "text": "Here are some fruits:\n"},
+    {
+      "type": "text",
+      "text": "# "
+    },
     {
       "type": "placeholder",
+      "id": "product_name",
+      "instructionType": "paragraph",
+      "config": {
+        "description": "Create a catchy product name for a smart water bottle",
+        "displayName": "Product Name",
+        "tone": "enthusiastic",
+        "length": "short"
+      }
+    },
+    {
+      "type": "text",
+      "text": "\n\n"
+    },
+    {
+      "type": "placeholder",
+      "id": "description",
+      "instructionType": "paragraph",
+      "config": {
+        "description": "Write a compelling 2-3 sentence description of a smart water bottle that tracks hydration",
+        "displayName": "Product Description",
+        "tone": "professional",
+        "length": "medium"
+      }
+    },
+    {
+      "type": "text",
+      "text": "\n\n## Key Features\n\n"
+    },
+    {
+      "type": "placeholder",
+      "id": "features",
       "instructionType": "list",
       "config": {
-        "description": "list 5 citrus fruits",
-        "format": "bullet_points"
+        "description": "List 4 innovative features of a smart water bottle",
+        "displayName": "Features List",
+        "format": "bullet_points",
+        "itemCount": 4
+      }
+    }
+  ]
+}</code></pre>
+    </div>
+
+    <div class="step">
+      <h3>Step 5: How It Compiles</h3>
+      <p>Your template compiles into this AI prompt:</p>
+
+      <pre><code>You are an AI designed to convert content templates into actual content.
+
+# &lt;&lt;Replace this placeholder with text using this user prompt: ([{&lt;Create a catchy product name for a smart water bottle&gt;}]). Format requirements: Use enthusiastic tone and short length (1-2 sentences).&gt;&gt;
+
+&lt;&lt;Replace this placeholder with text using this user prompt: ([{&lt;Write a compelling 2-3 sentence description of a smart water bottle that tracks hydration&gt;}]). Format requirements: Use professional tone and medium length (2-4 sentences).&gt;&gt;
+
+## Key Features
+
+&lt;&lt;Replace this placeholder with a list using this user prompt: ([{&lt;List 4 innovative features of a smart water bottle&gt;}]). Format requirements: Use bullet_points formatting with each item on a new line. Create exactly 4 items.&gt;&gt;</code></pre>
+    </div>
+
+    <div class="step">
+      <h3>Step 6: Using Variables</h3>
+      <p>Variables make your templates reusable and dynamic. Define them at the template level and reference them with <code>${variableName}</code>:</p>
+
+      <pre><code>{
+  "variables": {
+    "productType": "smart water bottle",
+    "features": 4,
+    "tone": "professional"
+  },
+  "content": [
+    {
+      "type": "text",
+      "text": "Introducing our new ${productType}!\n\n"
+    },
+    {
+      "type": "placeholder",
+      "id": "feature_list",
+      "instructionType": "list",
+      "config": {
+        "description": "List ${features} innovative features of a ${productType}",
+        "format": "bullet_points",
+        "itemCount": "${features}"
       }
     }
   ]
 }</code></pre>
 
-      <p><strong>Compiled Output:</strong></p>
-      <pre><code>You are an AI designed to convert content templates into actual content.
+      <h4>Variable Types</h4>
+      <ul>
+        <li><strong>Strings:</strong> <code>"productType": "headphones"</code></li>
+        <li><strong>Numbers:</strong> <code>"price": 99.99</code></li>
+        <li><strong>Booleans:</strong> <code>"includeWarranty": true</code></li>
+        <li><strong>Objects:</strong> <code>"brand": {"name": "TechCo", "slogan": "Innovation First"}</code></li>
+        <li><strong>Arrays:</strong> <code>"categories": ["audio", "premium", "wireless"]</code></li>
+      </ul>
 
-Here are some fruits:
-
-&lt;&lt;Replace this placeholder with a list using this user prompt: "list 5 citrus fruits". Format requirements: Use bullet_points formatting with each item on a new line.&gt;&gt;</code></pre>
+      <div class="tip">Access nested values with dot notation: <code>${brand.name}</code> or array indices: <code>${categories[0]}</code></div>
     </div>
 
-    <a href="#" class="back-to-top">↑ Top</a>
+    <div class="step">
+      <h3>Step 7: Conditional Content</h3>
+      <p>Use conditionals to include or exclude content based on variables:</p>
+
+      <pre><code>{
+  "variables": {
+    "audienceLevel": "technical",
+    "includeSpecs": true
+  },
+  "content": [
+    {
+      "type": "conditional",
+      "condition": "audienceLevel == 'technical' && includeSpecs == true",
+      "content": [
+        {
+          "type": "text",
+          "text": "## Technical Specifications\n\n"
+        },
+        {
+          "type": "placeholder",
+          "instructionType": "table",
+          "config": {
+            "description": "Create a technical specs table",
+            "format": "markdown",
+            "columns": 2,
+            "rows": 5
+          }
+        }
+      ],
+      "else": [
+        {
+          "type": "text",
+          "text": "## Why You'll Love It\n\n"
+        },
+        {
+          "type": "placeholder",
+          "instructionType": "list",
+          "config": {
+            "description": "List user benefits in simple terms",
+            "format": "bullet_points"
+          }
+        }
+      ]
+    }
+  ]
+}</code></pre>
+
+      <h4>Supported Operators</h4>
+      <ul>
+        <li><strong>Equality:</strong> <code>==</code>, <code>!=</code></li>
+        <li><strong>Comparison:</strong> <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code></li>
+        <li><strong>Logical:</strong> <code>&amp;&amp;</code> (AND), <code>||</code> (OR), <code>!</code> (NOT)</li>
+        <li><strong>Membership:</strong> <code>in</code> for arrays/strings</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <h3>Step 8: Available Instruction Types</h3>
+      <p>The standard library includes these instruction types:</p>
+
+      <ul>
+        <li><strong>title</strong> - Headlines with style control</li>
+        <li><strong>list</strong> - Formatted lists (bullets, numbers, etc.)</li>
+        <li><strong>paragraph</strong> - Text with tone and length control</li>
+        <li><strong>table</strong> - Structured data tables</li>
+        <li><strong>code_block</strong> - Code snippets with syntax highlighting</li>
+        <li><strong>dialogue</strong> - Conversations between multiple people</li>
+        <li><strong>quote</strong> - Relevant quotes with attribution</li>
+        <li><strong>summary</strong> - Summaries of varying detail</li>
+        <li><strong>image_description</strong> - Descriptive image text</li>
+      </ul>
+
+      <p>Each type has its own configuration options. See the <a href="specification.html">full specification</a> for details.</p>
+    </div>
+
+    <div class="step">
+      <h3>Step 9: Add Metadata (Optional)</h3>
+      <p>Make your templates discoverable and maintainable:</p>
+
+      <pre><code>"metadata": {
+  "name": "Your Template Name",
+  "description": "What this template creates",
+  "author": "Your Name",
+  "tags": ["email", "marketing", "product"],
+  "created": "2025-06-29T00:00:00Z"
+}</code></pre>
+    </div>
+
+    <div class="step">
+      <h3>Step 10: Validation</h3>
+      <p>Validate your template using JSON Schema tools:</p>
+
+      <div class="tip">Many code editors (VS Code, IntelliJ, etc.) automatically validate JSON files when you include the <code>$schema</code> property.</div>
+
+      <p><strong>Online validation:</strong></p>
+      <ul>
+        <li><a href="https://jsonschemavalidator.net/" target="_blank">JSON Schema Validator</a></li>
+        <li><a href="https://www.jsonschemavalidator.net/" target="_blank">Alternative Validator</a></li>
+      </ul>
+
+      <p><strong>Command line validation:</strong></p>
+      <pre><code># Using ajv-cli
+npm install -g ajv-cli
+ajv validate -s schema-url -d your-template.json</code></pre>
+    </div>
+
+    <div class="next-steps">
+      <h3>🎯 What's Next?</h3>
+      <ul>
+        <li>
+          <strong><a href="examples.html">Explore Examples</a></strong> - See real-world templates in action
+        </li>
+        <li>
+          <strong><a href="specification.html">Read the Spec</a></strong> - Learn about advanced features
+        </li>
+        <li><strong>Build a Compiler</strong> - Create tools that convert templates to prompts</li>
+        <li><strong>Create Custom Types</strong> - Define instruction types for your specific use cases</li>
+        <li><strong>Share Templates</strong> - Contribute to the community template library</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <h3>Common Patterns</h3>
+
+      <h4>Email Templates</h4>
+      <p>Structure: Subject → Greeting → Body sections → Call-to-action → Signature</p>
+
+      <h4>Blog Posts</h4>
+      <p>Structure: Title → Introduction → Main sections → Conclusion</p>
+
+      <h4>Documentation</h4>
+      <p>Structure: Overview → Examples → API reference → Troubleshooting</p>
+
+      <h4>Marketing Copy</h4>
+      <p>Structure: Headline → Problem → Solution → Benefits → Call-to-action</p>
+    </div>
+
+    <div class="tip">
+      <strong>Pro tip:</strong> Start with simple templates using only <code>text</code> and <code>list</code> or <code>paragraph</code> placeholders. Add
+      complexity gradually as you become comfortable with the format.
+    </div>
 
     <footer style="text-align: center; padding: 2rem; color: #666; border-top: 1px solid #eee; margin-top: 3rem">
       <p>Instruction Template Specification (ITS) • <a href="https://github.com/alexanderparker/instruction-template-specification">GitHub</a> • MIT License</p>

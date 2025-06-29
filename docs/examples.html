@@ -148,6 +148,14 @@
         font-size: 0.85rem;
       }
 
+      code {
+        background: #f3f4f6;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-family: monospace;
+        font-size: 0.9em;
+      }
+
       @media (max-width: 768px) {
         .comparison {
           grid-template-columns: 1fr;
@@ -174,11 +182,12 @@
     <div class="example-grid">
       <div class="example-card">
         <h3>🍊 Citrus Fruits List</h3>
-        <p>A simple example demonstrating basic list generation with the <code>list</code> instruction type.</p>
+        <p>A simple example demonstrating basic list generation with the <code>list</code> instruction type and the new <code>title</code> type.</p>
 
         <div class="tags">
           <span class="tag">beginner</span>
           <span class="tag">list</span>
+          <span class="tag">title</span>
           <span class="tag">example</span>
         </div>
 
@@ -234,6 +243,28 @@
           <a href="#email-detailed" class="btn btn-secondary">See Details</a>
         </div>
       </div>
+
+      <div class="example-card">
+        <h3>🎯 Marketing Campaign Template</h3>
+        <p>Advanced template showcasing variables, conditionals, and dynamic content generation for multi-channel campaigns.</p>
+
+        <div class="tags">
+          <span class="tag">advanced</span>
+          <span class="tag">variables</span>
+          <span class="tag">conditional</span>
+          <span class="tag">marketing</span>
+        </div>
+
+        <div class="example-preview">
+          <strong>Features:</strong> Variable-driven content, conditional sections based on channels (email/social/blog), dynamic product counts, customizable
+          tone and discount values
+        </div>
+
+        <div class="buttons">
+          <a href="examples/marketing-campaign-template.json" class="btn">View JSON</a>
+          <a href="#campaign-detailed" class="btn btn-secondary">See Details</a>
+        </div>
+      </div>
     </div>
 
     <div class="detailed-example" id="citrus-detailed">
@@ -247,8 +278,19 @@
   "version": "1.0.0",
   "content": [
     {
+      "type": "placeholder",
+      "id": "fruit_title",
+      "instructionType": "title",
+      "config": {
+        "description": "Create a fun title about citrus fruits",
+        "displayName": "Fruit Title",
+        "style": "catchy",
+        "length": "short"
+      }
+    },
+    {
       "type": "text",
-      "text": "Hey there is a list of fruits here:\n"
+      "text": "\n\nHey there is a list of fruits here:\n"
     },
     {
       "type": "placeholder",
@@ -278,9 +320,10 @@ Hey there is a list of fruits here:
 
       <p><strong>Key Learning Points:</strong></p>
       <ul>
+        <li>Demonstrates the <code>title</code> instruction type for generating headlines</li>
         <li>Combines static text with dynamic placeholders</li>
         <li>Uses the standard <code>list</code> instruction type</li>
-        <li>Configures specific formatting and item count</li>
+        <li>Shows proper formatting and item count configuration</li>
         <li>Demonstrates the basic compilation process</li>
       </ul>
     </div>
@@ -337,7 +380,8 @@ Hey there is a list of fruits here:
         <strong>Compiles to:</strong><br />
         <code
           >&lt;&lt;Replace this placeholder with a dialogue using this user prompt: ([{&lt;Create a brief conversation between two beta users discussing how the
-          product improved their workflow&gt;}]). Format requirements: Create a conversation between 2 people using casual style...&gt;&gt;</code
+          product improved their workflow&gt;}]). Format requirements: Create a conversation between 2 people using casual style. Format each line as: Person
+          Name: "Dialogue"&gt;&gt;</code
         >
       </div>
 
@@ -365,6 +409,87 @@ Hey there is a list of fruits here:
         <li>Structured sections with clear headers</li>
         <li>Multiple content types for engagement</li>
         <li>Professional closing with P.S. for additional engagement</li>
+      </ul>
+    </div>
+
+    <div class="detailed-example" id="campaign-detailed">
+      <h3>🎯 Marketing Campaign Template - Variables & Conditionals</h3>
+
+      <p>This template demonstrates the full power of ITS variables and conditional logic:</p>
+
+      <h4>Key Features</h4>
+      <ul>
+        <li><strong>Template Variables:</strong> Define campaign parameters once, use throughout</li>
+        <li><strong>Conditional Sections:</strong> Enable/disable content based on channel selection</li>
+        <li><strong>Dynamic References:</strong> Use <code>${variableName}</code> syntax in descriptions</li>
+        <li><strong>Complex Conditions:</strong> Combine multiple conditions with logical operators</li>
+      </ul>
+
+      <div class="example-preview">
+        <h4>Variable Definition Example:</h4>
+        <pre><code>"variables": {
+  "campaignName": "Summer Tech Sale 2025",
+  "companyName": "TechVault",
+  "discountPercentage": 25,
+  "channels": {
+    "email": true,
+    "social": true,
+    "blog": false
+  }
+}</code></pre>
+      </div>
+
+      <div class="example-preview">
+        <h4>Variable Usage in Placeholders:</h4>
+        <pre><code>{
+  "type": "placeholder",
+  "instructionType": "title",
+  "config": {
+    "description": "Create an email subject line for ${companyName}'s ${campaignName} offering ${discountPercentage}% off"
+  }
+}</code></pre>
+      </div>
+
+      <div class="example-preview">
+        <h4>Conditional Content Example:</h4>
+        <pre><code>{
+  "type": "conditional",
+  "condition": "channels.email == true",
+  "content": [
+    // Email-specific content here
+  ]
+}</code></pre>
+      </div>
+
+      <div class="example-preview">
+        <h4>Variables in Conditionals:</h4>
+        <pre><code>// Direct variable comparison
+"condition": "discountPercentage >= 20"
+
+// Object property access
+"condition": "channels.email == true"
+
+// Complex conditions
+"condition": "includeTestimonials == true && includeSocialProof == true"</code></pre>
+      </div>
+
+      <p><strong>Advanced Patterns Demonstrated:</strong></p>
+      <ul>
+        <li>Multi-channel campaign orchestration</li>
+        <li>Dynamic content based on discount thresholds</li>
+        <li>Nested object access (<code>${channels.email}</code>)</li>
+        <li>Array element access (<code>${products[0]}</code>)</li>
+        <li>Complex conditions with multiple operators</li>
+        <li>Variables used in text elements (<code>"text": "## Why Customers Love ${companyName}\n\n"</code>)</li>
+      </ul>
+
+      <p><strong>This template shows how to:</strong></p>
+      <ul>
+        <li>Build reusable marketing templates with customizable parameters</li>
+        <li>Create different outputs from the same template by changing variables</li>
+        <li>Conditionally include/exclude entire sections</li>
+        <li>Reference variables throughout content and configurations</li>
+        <li>Use variables in conditional expressions for dynamic logic</li>
       </ul>
     </div>
 
@@ -421,6 +546,8 @@ Hey there is a list of fruits here:
       making it much easier for AI models to understand what content to generate vs how to format it.<br /><br />
       <strong>Start Simple:</strong> Begin with basic text + list/paragraph combinations<br />
       <strong>Add Complexity:</strong> Gradually introduce tables, dialogues, and custom types<br />
+      <strong>Use Variables:</strong> Make templates reusable with the <code>${variable}</code> syntax<br />
+      <strong>Add Logic:</strong> Use conditionals to create flexible, multi-purpose templates<br />
       <strong>Test Compilation:</strong> Verify your templates compile to clear AI instructions<br />
       <strong>Use Metadata:</strong> Document your templates for future reference and sharing
     </div>

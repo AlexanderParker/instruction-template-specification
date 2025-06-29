@@ -96,6 +96,27 @@
         color: #155724;
         margin-top: 0;
       }
+
+      code {
+        background: #f3f4f6;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-family: monospace;
+        font-size: 0.9em;
+      }
+
+      .compilation-section {
+        background: #f6f8fa;
+        border: 1px solid #e1e4e8;
+        border-radius: 6px;
+        padding: 1rem;
+        margin: 1rem 0;
+      }
+
+      .compilation-section h4 {
+        margin-top: 0;
+        color: #0366d6;
+      }
     </style>
   </head>
   <body>
@@ -246,24 +267,140 @@
 
     <div class="step">
       <h3>Step 5: How It Compiles</h3>
-      <p>Your template compiles into this AI prompt:</p>
+      <p>Your template compiles into this AI prompt with three sections:</p>
 
-      <pre><code>You are an AI designed to convert content templates into actual content.
+      <div class="compilation-section">
+        <h4>INTRODUCTION</h4>
+        <pre><code>You are an AI designed to convert content templates into actual content. Respond only with the transformed content.</code></pre>
+      </div>
 
-# &lt;&lt;Replace this placeholder with text using this user prompt: ([{&lt;Create a catchy product name for a smart water bottle&gt;}]). Format requirements: Use enthusiastic tone and short length (1-2 sentences).&gt;&gt;
+      <div class="compilation-section">
+        <h4>INSTRUCTIONS</h4>
+        <pre><code>* Instruction Wrapper: &lt;&lt;{instruction}&gt;&gt;
+* User Content Wrapper: ([{&lt;{content}&gt;}])
+* Preserve Formatting: true</code></pre>
+      </div>
+
+      <div class="compilation-section">
+        <h4>TEMPLATE</h4>
+        <pre><code># &lt;&lt;Replace this placeholder with text using this user prompt: ([{&lt;Create a catchy product name for a smart water bottle&gt;}]). Format requirements: Use enthusiastic tone and short length (1-2 sentences).&gt;&gt;
 
 &lt;&lt;Replace this placeholder with text using this user prompt: ([{&lt;Write a compelling 2-3 sentence description of a smart water bottle that tracks hydration&gt;}]). Format requirements: Use professional tone and medium length (2-4 sentences).&gt;&gt;
 
 ## Key Features
 
 &lt;&lt;Replace this placeholder with a list using this user prompt: ([{&lt;List 4 innovative features of a smart water bottle&gt;}]). Format requirements: Use bullet_points formatting with each item on a new line. Create exactly 4 items.&gt;&gt;</code></pre>
+      </div>
+
+      <div class="tip">
+        Notice how the user's content descriptions are wrapped in <code>([{&lt;...&gt;}])</code> to prevent parsing conflicts with special characters.
+      </div>
     </div>
 
     <div class="step">
-      <h3>Step 6: Available Instruction Types</h3>
+      <h3>Step 6: Using Variables</h3>
+      <p>Variables make your templates reusable and dynamic. Define them at the template level and reference them with <code>${variableName}</code>:</p>
+
+      <pre><code>{
+  "variables": {
+    "productType": "smart water bottle",
+    "features": 4,
+    "tone": "professional"
+  },
+  "content": [
+    {
+      "type": "text",
+      "text": "Introducing our new ${productType}!\n\n"
+    },
+    {
+      "type": "placeholder",
+      "id": "feature_list",
+      "instructionType": "list",
+      "config": {
+        "description": "List ${features} innovative features of a ${productType}",
+        "format": "bullet_points",
+        "itemCount": "${features}"
+      }
+    }
+  ]
+}</code></pre>
+
+      <h4>Variable Types</h4>
+      <ul>
+        <li><strong>Strings:</strong> <code>"productType": "headphones"</code></li>
+        <li><strong>Numbers:</strong> <code>"price": 99.99</code></li>
+        <li><strong>Booleans:</strong> <code>"includeWarranty": true</code></li>
+        <li><strong>Objects:</strong> <code>"brand": {"name": "TechCo", "slogan": "Innovation First"}</code></li>
+        <li><strong>Arrays:</strong> <code>"categories": ["audio", "premium", "wireless"]</code></li>
+      </ul>
+
+      <div class="tip">Access nested values with dot notation: <code>${brand.name}</code> or array indices: <code>${categories[0]}</code></div>
+    </div>
+
+    <div class="step">
+      <h3>Step 7: Conditional Content</h3>
+      <p>Use conditionals to include or exclude content based on variables:</p>
+
+      <pre><code>{
+  "variables": {
+    "audienceLevel": "technical",
+    "includeSpecs": true
+  },
+  "content": [
+    {
+      "type": "conditional",
+      "condition": "audienceLevel == 'technical' && includeSpecs == true",
+      "content": [
+        {
+          "type": "text",
+          "text": "## Technical Specifications\n\n"
+        },
+        {
+          "type": "placeholder",
+          "instructionType": "table",
+          "config": {
+            "description": "Create a technical specs table",
+            "format": "markdown",
+            "columns": 2,
+            "rows": 5
+          }
+        }
+      ],
+      "else": [
+        {
+          "type": "text",
+          "text": "## Why You'll Love It\n\n"
+        },
+        {
+          "type": "placeholder",
+          "instructionType": "list",
+          "config": {
+            "description": "List user benefits in simple terms",
+            "format": "bullet_points"
+          }
+        }
+      ]
+    }
+  ]
+}</code></pre>
+
+      <h4>Supported Operators</h4>
+      <ul>
+        <li><strong>Equality:</strong> <code>==</code>, <code>!=</code></li>
+        <li><strong>Comparison:</strong> <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code></li>
+        <li><strong>Logical:</strong> <code>&amp;&amp;</code> (AND), <code>||</code> (OR), <code>!</code> (NOT)</li>
+        <li><strong>Membership:</strong> <code>in</code> for arrays/strings</li>
+      </ul>
+
+      <div class="tip">Variables can be used directly in conditions: <code>"condition": "discountPercentage >= 20"</code></div>
+    </div>
+
+    <div class="step">
+      <h3>Step 8: Available Instruction Types</h3>
       <p>The standard library includes these instruction types:</p>
 
       <ul>
+        <li><strong>title</strong> - Headlines with style control</li>
         <li><strong>list</strong> - Formatted lists (bullets, numbers, etc.)</li>
         <li><strong>paragraph</strong> - Text with tone and length control</li>
         <li><strong>table</strong> - Structured data tables</li>
@@ -278,7 +415,7 @@
     </div>
 
     <div class="step">
-      <h3>Step 7: Add Metadata (Optional)</h3>
+      <h3>Step 9: Add Metadata (Optional)</h3>
       <p>Make your templates discoverable and maintainable:</p>
 
       <pre><code>"metadata": {
@@ -291,7 +428,7 @@
     </div>
 
     <div class="step">
-      <h3>Step 8: Validation</h3>
+      <h3>Step 10: Validation</h3>
       <p>Validate your template using JSON Schema tools:</p>
 
       <div class="tip">Many code editors (VS Code, IntelliJ, etc.) automatically validate JSON files when you include the <code>$schema</code> property.</div>
@@ -309,7 +446,7 @@ ajv validate -s schema-url -d your-template.json</code></pre>
     </div>
 
     <div class="next-steps">
-      <h3>🎉 What's Next?</h3>
+      <h3>🎯 What's Next?</h3>
       <ul>
         <li>
           <strong><a href="examples.html">Explore Examples</a></strong> - See real-world templates in action
