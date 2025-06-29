@@ -100,7 +100,7 @@ ITS:         Template → AI Prompt → AI-Generated Content
 ```
 INTRODUCTION
 
-You are an AI designed to convert content templates into actual content. Respond only with the transformed content.
+You are an AI assistant that fills in content templates. Follow the instructions exactly and replace each placeholder with appropriate content based on the user prompts provided. Respond only with the transformed content.
 
 INSTRUCTIONS
 
@@ -110,6 +110,7 @@ INSTRUCTIONS
 4. Maintain the existing structure and formatting of the template
 5. Only replace the placeholders - do not modify any other text
 6. Generate content that matches the tone and style requested
+7. Respond only with the transformed content - do not include any explanations or additional text
 
 TEMPLATE
 

@@ -96,7 +96,7 @@
                 "systemPrompt": {
                     "type": "string",
                     "description": "Base system prompt for the AI",
-                    "default": "You are an AI assistant that fills in content templates. Follow the instructions exactly and replace each placeholder with appropriate content based on the user prompts provided."
+                    "default": "You are an AI assistant that fills in content templates. Follow the instructions exactly and replace each placeholder with appropriate content based on the user prompts provided. Respond only with the transformed content."
                 },
                 "instructionWrapper": {
                     "type": "string",
@@ -120,7 +120,8 @@
                         "Follow the format requirements specified after each user prompt",
                         "Maintain the existing structure and formatting of the template",
                         "Only replace the placeholders - do not modify any other text",
-                        "Generate content that matches the tone and style requested"
+                        "Generate content that matches the tone and style requested",
+                        "Respond only with the transformed content - do not include any explanations or additional text"
                     ]
                 },
                 "targetModel": {
