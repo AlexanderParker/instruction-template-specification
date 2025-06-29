@@ -6,19 +6,31 @@
     ],
     "metadata": {
         "name": "Citrus Fruit List Example",
-        "description": "Simple example showing list instruction generation using standard types",
+        "description": "Simple example showing title and list instruction generation using standard types",
         "author": "Alexander Parker",
         "tags": [
             "example",
             "list",
+            "title",
             "fruits"
         ],
         "created": "2025-06-29T00:00:00Z"
     },
     "content": [
         {
+            "type": "placeholder",
+            "id": "fruit_title",
+            "instructionType": "title",
+            "config": {
+                "description": "Create a fun title about citrus fruits",
+                "displayName": "Fruit Title",
+                "style": "catchy",
+                "length": "short"
+            }
+        },
+        {
             "type": "text",
-            "text": "Hey there is a list of fruits here:\n"
+            "text": "\n\nHey there is a list of fruits here:\n"
         },
         {
             "type": "placeholder",

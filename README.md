@@ -104,7 +104,7 @@ System Configuration:
 
 You are an AI designed to convert content templates into actual content.
 
-# Product Review: <<Replace this placeholder with text using this user prompt: ([{<Create a catchy product name for a wireless gaming headset>}]). Format requirements: Use enthusiastic tone and short length (1-2 sentences).>>
+# Product Review: Product Review: <<Replace this placeholder with text using this user prompt: ([{<Create a catchy product name for a wireless gaming headset>}]). Format requirements: Use enthusiastic tone and short length (1-2 sentences).>>
 
 ## Key Features
 
