@@ -1,7 +1,7 @@
 # GitHub Pages Jekyll Configuration
 title: "Instruction Template Specification"
 description: "A specification for instruction-generative content templates that compile into AI prompts"
-url: "https://your-username.github.io"
+url: "https://alexanderparker.github.io"
 baseurl: "/instruction-template-specification"
 
 # Build settings
@@ -15,24 +15,46 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
 
+# Include JSON files and prevent Jekyll from processing them
+include:
+  - "_config.yml"
+  - "schema"
+  - "examples"
+
+# Keep JSON files as-is (don't process them with Jekyll)
+keep_files:
+  - "schema"
+  - "examples"
+
+# Don't process JSON files
+defaults:
+  - scope:
+      path: "schema"
+    values:
+      sitemap: false
+  - scope:
+      path: "examples"
+    values:
+      sitemap: false
+
+# Exclude from processing
+exclude:
+  - README.md
+  - LICENSE
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .bundle
+  - .sass-cache
+  - .jekyll-cache
+  - .jekyll-metadata
+
 # Collections for organizing content
 collections:
   examples:
     output: true
     permalink: /:collection/:name/
-
-# Default settings for different content types
-defaults:
-  - scope:
-      path: ""
-      type: "pages"
-    values:
-      layout: "default"
-  - scope:
-      path: "_examples"
-      type: "examples"
-    values:
-      layout: "example"
 
 # Navigation
 navigation:
@@ -55,21 +77,4 @@ schema:
   types_schema: "/schema/v1.0/standard-types.json"
 
 # GitHub repository
-repository: "your-username/instruction-template-specification"
-
-# Exclude from processing
-exclude:
-  - README.md
-  - LICENSE
-  - Gemfile
-  - Gemfile.lock
-  - node_modules
-  - vendor
-  - .bundle
-  - .sass-cache
-  - .jekyll-cache
-  - .jekyll-metadata
-
-# Include files that start with underscore
-include:
-  - _config.yml
+repository: "alexanderparker/instruction-template-specification"
