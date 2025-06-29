@@ -1,0 +1,456 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-standard-types-v1.json",
+  "title": "Instruction Template Specification - Standard Types v1.0",
+  "description": "Standard library of instruction types for content generation",
+  "type": "object",
+  "properties": {
+    "instructionTypes": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "object",
+          "properties": {
+            "template": {
+              "const": "<<Replace this section with a list. {description}. Each list item goes on its own line. Use {format} to separate each item.{itemCount, select, undefined{} other{ Create exactly {itemCount} items.}}>>"
+            },
+            "description": {
+              "const": "Generates formatted lists with customisable formatting and item counts"
+            },
+            "configSchema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "const": "object"
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "format": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "const": "string"
+                        },
+                        "enum": {
+                          "const": [
+                            "bullet_points",
+                            "numbered",
+                            "dashes",
+                            "plain"
+                          ]
+                        },
+                        "default": {
+                          "const": "bullet_points"
+                        }
+                      }
+                    },
+                    "itemCount": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "const": "integer"
+                        },
+                        "minimum": {
+                          "const": 1
+                        },
+                        "maximum": {
+                          "const": 20
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "examples": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "config": {
+                      "type": "object",
+                      "properties": {
+                        "description": {
+                          "const": "list 5 different citrus fruits"
+                        },
+                        "format": {
+                          "const": "bullet_points"
+                        },
+                        "itemCount": {
+                          "const": 5
+                        }
+                      }
+                    },
+                    "output": {
+                      "const": "<<Replace this section with a list. list 5 different citrus fruits. Each list item goes on its own line. Use bullet_points to separate each item. Create exactly 5 items.>>"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "paragraph": {
+          "type": "object",
+          "properties": {
+            "template": {
+              "const": "<<Replace this paragraph with: {description}. Tone: {tone}. Length: {length} (short=1-2 sentences, medium=2-4 sentences, long=4+ sentences).>>"
+            },
+            "description": {
+              "const": "Generates paragraphs of text with customisable tone and length"
+            },
+            "configSchema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "const": "object"
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "tone": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "const": "string"
+                        },
+                        "enum": {
+                          "const": [
+                            "formal",
+                            "casual",
+                            "enthusiastic",
+                            "professional",
+                            "friendly"
+                          ]
+                        },
+                        "default": {
+                          "const": "professional"
+                        }
+                      }
+                    },
+                    "length": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "const": "string"
+                        },
+                        "enum": {
+                          "const": [
+                            "short",
+                            "medium",
+                            "long"
+                          ]
+                        },
+                        "default": {
+                          "const": "medium"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "table": {
+          "type": "object",
+          "properties": {
+            "template": {
+              "const": "<<Replace this section with a table. {description}. Format: {format}.{columns, select, undefined{} other{ Include {columns} columns.}}{rows, select, undefined{} other{ Include {rows} rows.}}>>"
+            },
+            "description": {
+              "const": "Generates tables with customisable formatting, columns, and rows"
+            },
+            "configSchema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "const": "object"
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "format": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "const": "string"
+                        },
+                        "enum": {
+                          "const": [
+                            "markdown",
+                            "plain_text",
+                            "csv"
+                          ]
+                        },
+                        "default": {
+                          "const": "markdown"
+                        }
+                      }
+                    },
+                    "columns": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "const": "integer"
+                        },
+                        "minimum": {
+                          "const": 2
+                        },
+                        "maximum": {
+                          "const": 10
+                        }
+                      }
+                    },
+                    "rows": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "const": "integer"
+                        },
+                        "minimum": {
+                          "const": 1
+                        },
+                        "maximum": {
+                          "const": 50
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "code_block": {
+          "type": "object",
+          "properties": {
+            "template": {
+              "const": "<<Replace this section with a code block. Language: {language}. {description}. Include proper syntax highlighting formatting.>>"
+            },
+            "description": {
+              "const": "Generates code examples and snippets with syntax highlighting"
+            },
+            "configSchema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "const": "object"
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "language": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "const": "string"
+                        },
+                        "enum": {
+                          "const": [
+                            "javascript",
+                            "python",
+                            "java",
+                            "html",
+                            "css",
+                            "sql",
+                            "bash",
+                            "generic"
+                          ]
+                        },
+                        "default": {
+                          "const": "generic"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "image_description": {
+          "type": "object",
+          "properties": {
+            "template": {
+              "const": "<<Replace this line with an image description. {description}. Style: {style} (photorealistic=detailed realistic description, artistic=creative artistic description, technical=precise technical description).>>"
+            },
+            "description": {
+              "const": "Generates descriptive text for images with different stylistic approaches"
+            },
+            "configSchema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "const": "object"
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "style": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "const": "string"
+                        },
+                        "enum": {
+                          "const": [
+                            "photorealistic",
+                            "artistic",
+                            "technical"
+                          ]
+                        },
+                        "default": {
+                          "const": "photorealistic"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "dialogue": {
+          "type": "object",
+          "properties": {
+            "template": {
+              "const": "<<Replace this section with a dialogue between {participantCount} people. {description}. Style: {style}. Format each line as: Person Name: \"Dialogue\">>"
+            },
+            "description": {
+              "const": "Generates conversational dialogue between multiple participants"
+            },
+            "configSchema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "const": "object"
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "participantCount": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "const": "integer"
+                        },
+                        "minimum": {
+                          "const": 2
+                        },
+                        "maximum": {
+                          "const": 6
+                        },
+                        "default": {
+                          "const": 2
+                        }
+                      }
+                    },
+                    "style": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "const": "string"
+                        },
+                        "enum": {
+                          "const": [
+                            "casual",
+                            "formal",
+                            "dramatic",
+                            "humorous"
+                          ]
+                        },
+                        "default": {
+                          "const": "casual"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "quote": {
+          "type": "object",
+          "properties": {
+            "template": {
+              "const": "<<Replace this section with a relevant quote. {description}. Include attribution if {includeAttribution} is true.>>"
+            },
+            "description": {
+              "const": "Generates relevant quotes with optional attribution"
+            },
+            "configSchema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "const": "object"
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "includeAttribution": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "const": "boolean"
+                        },
+                        "default": {
+                          "const": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": {
+          "type": "object",
+          "properties": {
+            "template": {
+              "const": "<<Replace this section with a summary. {description}. Length: {length} (brief=1-2 sentences, standard=3-5 sentences, detailed=6+ sentences).>>"
+            },
+            "description": {
+              "const": "Generates summaries of varying lengths and detail"
+            },
+            "configSchema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "const": "object"
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "length": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "const": "string"
+                        },
+                        "enum": {
+                          "const": [
+                            "brief",
+                            "standard",
+                            "detailed"
+                          ]
+                        },
+                        "default": {
+                          "const": "standard"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

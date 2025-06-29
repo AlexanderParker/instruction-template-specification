@@ -1,95 +1,100 @@
 {
-  "$schema": "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/template.json",
-  "version": "1.0.0",
-  "extends": [
-    "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/standard-types.json"
-  ],
-  "metadata": {
-    "name": "Product Launch Email Template",
-    "description": "Professional email template for announcing new product launches",
-    "author": "Alexander Parker",
-    "tags": ["email", "marketing", "product-launch", "business"],
-    "created": "2025-06-29T00:00:00Z"
-  },
-  "content": [
-    {
-      "type": "text",
-      "text": "Subject: 🚀 Introducing Our Revolutionary New Product!\n\nDear Valued Customer,\n\nWe're thrilled to announce the launch of our latest innovation! "
+    "$schema": "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-base-schema-v1.json",
+    "version": "1.0.0",
+    "extends": [
+        "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-standard-types-v1.json"
+    ],
+    "metadata": {
+        "name": "Product Launch Email Template",
+        "description": "Professional email template for announcing new product launches",
+        "author": "Alexander Parker",
+        "tags": [
+            "email",
+            "marketing",
+            "product-launch",
+            "business"
+        ],
+        "created": "2025-06-29T00:00:00Z"
     },
-    {
-      "type": "placeholder",
-      "id": "product_intro",
-      "instructionType": "paragraph",
-      "config": {
-        "description": "Write an exciting 2-3 sentence introduction about a new AI-powered productivity tool",
-        "displayName": "Product Introduction",
-        "tone": "enthusiastic",
-        "length": "medium"
-      }
-    },
-    {
-      "type": "text",
-      "text": "\n\n## 🌟 Key Features\n\n"
-    },
-    {
-      "type": "placeholder",
-      "id": "feature_list",
-      "instructionType": "list",
-      "config": {
-        "description": "List 5 compelling features of an AI productivity tool, focusing on user benefits",
-        "displayName": "Feature List",
-        "format": "bullet_points",
-        "itemCount": 5
-      }
-    },
-    {
-      "type": "text",
-      "text": "\n\n## 💬 What Our Beta Users Say\n\n"
-    },
-    {
-      "type": "placeholder",
-      "id": "testimonial_dialogue",
-      "instructionType": "dialogue",
-      "config": {
-        "description": "Create a brief conversation between two beta users discussing how the product improved their workflow",
-        "displayName": "User Testimonials",
-        "participantCount": 2,
-        "style": "casual"
-      }
-    },
-    {
-      "type": "text",
-      "text": "\n\n## 🎯 Perfect For\n\n"
-    },
-    {
-      "type": "placeholder",
-      "id": "target_audience",
-      "instructionType": "list",
-      "config": {
-        "description": "List 4 types of professionals who would benefit most from this AI productivity tool",
-        "displayName": "Target Audience",
-        "format": "dashes",
-        "itemCount": 4
-      }
-    },
-    {
-      "type": "text",
-      "text": "\n\n## 🚀 Get Started Today\n\n"
-    },
-    {
-      "type": "placeholder",
-      "id": "cta_paragraph",
-      "instructionType": "paragraph",
-      "config": {
-        "description": "Write a compelling call-to-action encouraging immediate sign-up with a limited-time offer",
-        "displayName": "Call to Action",
-        "tone": "enthusiastic",
-        "length": "short"
-      }
-    },
-    {
-      "type": "text",
-      "text": "\n\nBest regards,\nThe Innovation Team\n\n---\n*P.S. Reply to this email if you have any questions – we'd love to hear from you!*"
-    }
-  ]
+    "content": [
+        {
+            "type": "text",
+            "text": "Subject: 🚀 Introducing Our Revolutionary New Product!\n\nDear Valued Customer,\n\nWe're thrilled to announce the launch of our latest innovation! "
+        },
+        {
+            "type": "placeholder",
+            "id": "product_intro",
+            "instructionType": "paragraph",
+            "config": {
+                "description": "Write an exciting 2-3 sentence introduction about a new AI-powered productivity tool",
+                "displayName": "Product Introduction",
+                "tone": "enthusiastic",
+                "length": "medium"
+            }
+        },
+        {
+            "type": "text",
+            "text": "\n\n## 🌟 Key Features\n\n"
+        },
+        {
+            "type": "placeholder",
+            "id": "feature_list",
+            "instructionType": "list",
+            "config": {
+                "description": "List 5 compelling features of an AI productivity tool, focusing on user benefits",
+                "displayName": "Feature List",
+                "format": "bullet_points",
+                "itemCount": 5
+            }
+        },
+        {
+            "type": "text",
+            "text": "\n\n## 💬 What Our Beta Users Say\n\n"
+        },
+        {
+            "type": "placeholder",
+            "id": "testimonial_dialogue",
+            "instructionType": "dialogue",
+            "config": {
+                "description": "Create a brief conversation between two beta users discussing how the product improved their workflow",
+                "displayName": "User Testimonials",
+                "participantCount": 2,
+                "style": "casual"
+            }
+        },
+        {
+            "type": "text",
+            "text": "\n\n## 🎯 Perfect For\n\n"
+        },
+        {
+            "type": "placeholder",
+            "id": "target_audience",
+            "instructionType": "list",
+            "config": {
+                "description": "List 4 types of professionals who would benefit most from this AI productivity tool",
+                "displayName": "Target Audience",
+                "format": "dashes",
+                "itemCount": 4
+            }
+        },
+        {
+            "type": "text",
+            "text": "\n\n## 🚀 Get Started Today\n\n"
+        },
+        {
+            "type": "placeholder",
+            "id": "cta_paragraph",
+            "instructionType": "paragraph",
+            "config": {
+                "description": "Write a compelling call-to-action encouraging immediate sign-up with a limited-time offer",
+                "displayName": "Call to Action",
+                "tone": "enthusiastic",
+                "length": "short"
+            }
+        },
+        {
+            "type": "text",
+            "text": "\n\nBest regards,\nThe Innovation Team\n\n---\n*P.S. Reply to this email if you have any questions – we'd love to hear from you!*"
+        }
+    ]
 }

@@ -1,31 +1,35 @@
 {
-  "$schema": "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/template.json",
-  "version": "1.0.0",
-  "extends": [
-    "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/standard-types.json"
-  ],
-  "metadata": {
-    "name": "Citrus Fruit List Example",
-    "description": "Simple example showing list instruction generation using standard types",
-    "author": "Alexander Parker",
-    "tags": ["example", "list", "fruits"],
-    "created": "2025-06-29T00:00:00Z"
-  },
-  "content": [
-    {
-      "type": "text",
-      "text": "Hey there is a list of fruits here:\n"
+    "$schema": "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-base-schema-v1.json",
+    "version": "1.0.0",
+    "extends": [
+        "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-standard-types-v1.json"
+    ],
+    "metadata": {
+        "name": "Citrus Fruit List Example",
+        "description": "Simple example showing list instruction generation using standard types",
+        "author": "Alexander Parker",
+        "tags": [
+            "example",
+            "list",
+            "fruits"
+        ],
+        "created": "2025-06-29T00:00:00Z"
     },
-    {
-      "type": "placeholder",
-      "id": "citrus_list",
-      "instructionType": "list",
-      "config": {
-        "description": "list 5 different citrus fruits",
-        "displayName": "Citrus Fruits",
-        "format": "bullet_points",
-        "itemCount": 5
-      }
-    }
-  ]
+    "content": [
+        {
+            "type": "text",
+            "text": "Hey there is a list of fruits here:\n"
+        },
+        {
+            "type": "placeholder",
+            "id": "citrus_list",
+            "instructionType": "list",
+            "config": {
+                "description": "list 5 different citrus fruits",
+                "displayName": "Citrus Fruits",
+                "format": "bullet_points",
+                "itemCount": 5
+            }
+        }
+    ]
 }

@@ -1,105 +1,109 @@
 {
-  "$schema": "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/template.json",
-  "version": "1.0.0",
-  "extends": [
-    "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/standard-types.json"
-  ],
-  "metadata": {
-    "name": "Blog Post Template",
-    "description": "Comprehensive blog post template with introduction, main content, and conclusion",
-    "author": "Alexander Parker",
-    "tags": ["blog", "content", "writing"],
-    "created": "2025-06-29T00:00:00Z"
-  },
-  "content": [
-    {
-      "type": "text",
-      "text": "# "
+    "$schema": "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-base-schema-v1.json",
+    "version": "1.0.0",
+    "extends": [
+        "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-standard-types-v1.json"
+    ],
+    "metadata": {
+        "name": "Blog Post Template",
+        "description": "Comprehensive blog post template with introduction, main content, and conclusion",
+        "author": "Alexander Parker",
+        "tags": [
+            "blog",
+            "content",
+            "writing"
+        ],
+        "created": "2025-06-29T00:00:00Z"
     },
-    {
-      "type": "placeholder",
-      "id": "blog_title",
-      "instructionType": "paragraph",
-      "config": {
-        "description": "Create an engaging blog post title about sustainable technology trends",
-        "displayName": "Blog Title",
-        "tone": "enthusiastic",
-        "length": "short"
-      }
-    },
-    {
-      "type": "text",
-      "text": "\n\n## Introduction\n\n"
-    },
-    {
-      "type": "placeholder",
-      "id": "introduction",
-      "instructionType": "paragraph",
-      "config": {
-        "description": "Write an engaging introduction that hooks the reader and introduces the topic of sustainable technology",
-        "displayName": "Introduction",
-        "tone": "professional",
-        "length": "medium"
-      }
-    },
-    {
-      "type": "text",
-      "text": "\n\n## Key Technologies\n\n"
-    },
-    {
-      "type": "placeholder",
-      "id": "tech_list",
-      "instructionType": "list",
-      "config": {
-        "description": "List 6 emerging sustainable technologies with brief descriptions",
-        "displayName": "Technology List",
-        "format": "numbered",
-        "itemCount": 6
-      }
-    },
-    {
-      "type": "text",
-      "text": "\n\n## Implementation Challenges\n\n"
-    },
-    {
-      "type": "placeholder",
-      "id": "challenges_table",
-      "instructionType": "table",
-      "config": {
-        "description": "Create a table showing challenges and solutions for implementing sustainable technology",
-        "displayName": "Challenges Table",
-        "format": "markdown",
-        "columns": 3,
-        "rows": 4
-      }
-    },
-    {
-      "type": "text",
-      "text": "\n\n## Expert Insights\n\n"
-    },
-    {
-      "type": "placeholder",
-      "id": "expert_quote",
-      "instructionType": "quote",
-      "config": {
-        "description": "Include a relevant quote from a sustainability expert about the future of green technology",
-        "displayName": "Expert Quote",
-        "includeAttribution": true
-      }
-    },
-    {
-      "type": "text",
-      "text": "\n\n## Conclusion\n\n"
-    },
-    {
-      "type": "placeholder",
-      "id": "conclusion",
-      "instructionType": "summary",
-      "config": {
-        "description": "Summarise the key points and provide a call-to-action for readers to adopt sustainable technologies",
-        "displayName": "Conclusion",
-        "length": "standard"
-      }
-    }
-  ]
+    "content": [
+        {
+            "type": "text",
+            "text": "# "
+        },
+        {
+            "type": "placeholder",
+            "id": "blog_title",
+            "instructionType": "paragraph",
+            "config": {
+                "description": "Create an engaging blog post title about sustainable technology trends",
+                "displayName": "Blog Title",
+                "tone": "enthusiastic",
+                "length": "short"
+            }
+        },
+        {
+            "type": "text",
+            "text": "\n\n## Introduction\n\n"
+        },
+        {
+            "type": "placeholder",
+            "id": "introduction",
+            "instructionType": "paragraph",
+            "config": {
+                "description": "Write an engaging introduction that hooks the reader and introduces the topic of sustainable technology",
+                "displayName": "Introduction",
+                "tone": "professional",
+                "length": "medium"
+            }
+        },
+        {
+            "type": "text",
+            "text": "\n\n## Key Technologies\n\n"
+        },
+        {
+            "type": "placeholder",
+            "id": "tech_list",
+            "instructionType": "list",
+            "config": {
+                "description": "List 6 emerging sustainable technologies with brief descriptions",
+                "displayName": "Technology List",
+                "format": "numbered",
+                "itemCount": 6
+            }
+        },
+        {
+            "type": "text",
+            "text": "\n\n## Implementation Challenges\n\n"
+        },
+        {
+            "type": "placeholder",
+            "id": "challenges_table",
+            "instructionType": "table",
+            "config": {
+                "description": "Create a table showing challenges and solutions for implementing sustainable technology",
+                "displayName": "Challenges Table",
+                "format": "markdown",
+                "columns": 3,
+                "rows": 4
+            }
+        },
+        {
+            "type": "text",
+            "text": "\n\n## Expert Insights\n\n"
+        },
+        {
+            "type": "placeholder",
+            "id": "expert_quote",
+            "instructionType": "quote",
+            "config": {
+                "description": "Include a relevant quote from a sustainability expert about the future of green technology",
+                "displayName": "Expert Quote",
+                "includeAttribution": true
+            }
+        },
+        {
+            "type": "text",
+            "text": "\n\n## Conclusion\n\n"
+        },
+        {
+            "type": "placeholder",
+            "id": "conclusion",
+            "instructionType": "summary",
+            "config": {
+                "description": "Summarise the key points and provide a call-to-action for readers to adopt sustainable technologies",
+                "displayName": "Conclusion",
+                "length": "standard"
+            }
+        }
+    ]
 }
