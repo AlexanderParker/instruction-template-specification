@@ -24,87 +24,6 @@ ITS:         Template → AI Prompt → AI-Generated Content
 {
   "$schema": "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-base-schema-v1.json",
   "version": "1.0.0",
-  "content": [
-    {
-      "type": "text",
-      "text": "Here are some popular citrus fruits:\n"
-    },
-    {
-      "type": "placeholder",
-      "instructionType": "list",
-      "config": {
-        "description": "list 5 different citrus fruits",
-        "format": "bullet_points"
-      }
-    }
-  ]
-}
-```
-
-**Compiles to:**
-
-```
-You are an AI designed to convert content templates into actual content.
-
-Here are some popular citrus fruits:
-
-<<Replace this section with a list. list 5 different citrus fruits. Each list item goes on its own line. Use bullet_points to separate each item.>>
-```
-
-## Schema Documentation
-
-- **[Base Schema](https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-base-schema-v1.json)** - Core template structure
-- **[Standard Types](https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-standard-types-v1.json)** - Built-in instruction types
-- **[Full Documentation](https://alexanderparker.github.io/instruction-template-specification/)** - Complete specification guide
-
-## Features
-
-- 🎯 **Instruction-generative** - Placeholders become AI instructions, not data substitutions
-- 📝 **Content-first authoring** - Write natural content with embedded placeholders
-- 🔧 **Extensible type system** - Standard types plus custom instruction types
-- ✅ **JSON Schema validation** - Full validation and tooling support
-- 🌐 **Framework agnostic** - Works with any implementation
-- 📚 **Rich instruction types** - Lists, paragraphs, tables, code blocks, and more
-
-## Built-in Instruction Types
-
-- **`list`** - Generate formatted lists with customizable styling
-- **`paragraph`** - Create paragraphs with specified tone and length
-- **`table`** - Generate tables with configurable format and dimensions
-- **`code_block`** - Create code snippets with syntax highlighting
-- **`dialogue`** - Generate conversations between multiple participants
-- **`quote`** - Create relevant quotes with optional attribution
-- **`summary`** - Generate summaries of varying detail levels
-- **`image_description`** - Create descriptive text for images
-
-## Getting Started
-
-1. **[Read the specification](https://alexanderparker.github.io/instruction-template-specification/)** to understand the schema
-2. **[Try the examples](https://alexanderparker.github.io/instruction-template-specification/examples/)** to see templates in action
-3. **[Build your own templates](https://alexanderparker.github.io/instruction-template-specification/getting-started/)** using the schema
-
-## Use Cases
-
-- **Content Marketing** - Email templates, blog post structures, social media content
-- **Documentation** - Technical writing templates with dynamic sections
-- **Education** - Lesson plan templates, assignment generators
-- **Creative Writing** - Story structures, character development templates
-- **Business** - Report templates, proposal frameworks
-
-## Schema Documentation
-
-- **[Schema v1.0 Overview](https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/)** - Schema files and validation guide
-- **[Complete Specification](https://alexanderparker.github.io/instruction-template-specification/specification.html)** - Technical documentation with all instruction types
-- **[Example Templates](https://alexanderparker.github.io/instruction-template-specification/examples.html)** - Template library with detailed breakdowns
-
-### Quick Template Structure
-
-**Template Example:**
-
-```json
-{
-  "$schema": "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-base-schema-v1.json",
-  "version": "1.0.0",
   "metadata": {
     "name": "Product Review Template",
     "description": "Template for generating product reviews"
@@ -157,16 +76,57 @@ Here are some popular citrus fruits:
 ```
 You are an AI designed to convert content templates into actual content.
 
-# Product Review: <<Replace this paragraph with: Create a catchy product name for a wireless gaming headset. Tone: enthusiastic. Length: short (1-2 sentences).>>
+# Product Review: <<Replace this placeholder with text using this user prompt: "Create a catchy product name for a wireless gaming headset". Format requirements: Use enthusiastic tone and short length (1-2 sentences).>>
 
 ## Key Features
 
-<<Replace this section with a list. List 4 standout features of a premium gaming headset. Each list item goes on its own line. Use bullet_points to separate each item. Create exactly 4 items.>>
+<<Replace this placeholder with a list using this user prompt: "List 4 standout features of a premium gaming headset". Format requirements: Use bullet_points formatting with each item on a new line. Create exactly 4 items.>>
 
 ## Verdict
 
-<<Replace this section with a summary. Summarize why this headset is worth buying. Length: brief (1-2 sentences).>>
+<<Replace this placeholder with a summary using this user prompt: "Summarize why this headset is worth buying". Format requirements: Use brief length (1-2 sentences).>>
 ```
+
+## Getting Started
+
+1. **[Read the specification](https://alexanderparker.github.io/instruction-template-specification/specification.html)** to understand the schema
+2. **[Try the examples](https://alexanderparker.github.io/instruction-template-specification/examples.html)** to see templates in action
+3. **[Build your own templates](https://alexanderparker.github.io/instruction-template-specification/getting-started.html)** using the schema
+
+## Features
+
+- 🎯 **Instruction-generative** - Placeholders become AI instructions, not data substitutions
+- 📝 **Content-first authoring** - Write natural content with embedded placeholders
+- 🔧 **Extensible type system** - Standard types plus custom instruction types
+- ✅ **JSON Schema validation** - Full validation and tooling support
+- 🌐 **Framework agnostic** - Works with any implementation
+- 📚 **Rich instruction types** - Lists, paragraphs, tables, code blocks, and more
+
+## Built-in Instruction Types
+
+- **`list`** - Generate formatted lists with customizable styling
+- **`paragraph`** - Create paragraphs with specified tone and length
+- **`table`** - Generate tables with configurable format and dimensions
+- **`code_block`** - Create code snippets with syntax highlighting
+- **`dialogue`** - Generate conversations between multiple participants
+- **`quote`** - Create relevant quotes with optional attribution
+- **`summary`** - Generate summaries of varying detail levels
+- **`image_description`** - Create descriptive text for images
+
+## Use Cases
+
+- **Content Marketing** - Email templates, blog post structures, social media content
+- **Documentation** - Technical writing templates with dynamic sections
+- **Education** - Lesson plan templates, assignment generators
+- **Creative Writing** - Story structures, character development templates
+- **Business** - Report templates, proposal frameworks
+
+## Documentation
+
+- **[Complete Specification](https://alexanderparker.github.io/instruction-template-specification/specification.html)** - Technical documentation with all instruction types
+- **[Getting Started Guide](https://alexanderparker.github.io/instruction-template-specification/getting-started.html)** - Step-by-step tutorial for beginners
+- **[Example Templates](https://alexanderparker.github.io/instruction-template-specification/examples.html)** - Template library with detailed breakdowns
+- **[Schema Documentation](https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/)** - Schema files and validation guide
 
 ## Community & Ecosystem
 
@@ -201,11 +161,3 @@ Current version: **v1.0**
 ## License
 
 This specification is released under the [MIT License](LICENSE).
-
----
-
-**Schema URLs:**
-
-- Base Schema: `https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-base-schema-v1.json`
-- Standard Types: `https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-standard-types-v1.json`
-- Documentation: `https://alexanderparker.github.io/instruction-template-specification/`

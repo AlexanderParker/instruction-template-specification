@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Getting Started - Instruction Template Specification (ITS)</title>
-    <meta name="description" content="Learn how to create your first instruction template in minutes" />
+    <title>Examples - Instruction Template Specification (ITS)</title>
+    <meta name="description" content="Real-world ITS template examples for different use cases" />
     <style>
       body {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
         line-height: 1.6;
         color: #333;
-        max-width: 1000px;
+        max-width: 1200px;
         margin: 0 auto;
         padding: 0 20px;
       }
@@ -40,26 +40,103 @@
         margin-right: 1rem;
       }
 
-      .step {
+      .example-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+        margin: 2rem 0;
+      }
+
+      .example-card {
         background: white;
         border: 1px solid #e1e4e8;
         border-radius: 6px;
         padding: 1.5rem;
-        margin: 2rem 0;
-        border-left: 4px solid #0366d6;
+        transition: border-color 0.2s;
       }
 
-      .step h3 {
+      .example-card:hover {
+        border-color: #0366d6;
+      }
+
+      .example-card h3 {
         color: #0366d6;
         margin-top: 0;
       }
 
-      .example {
+      .tags {
+        margin: 1rem 0;
+      }
+
+      .tag {
+        display: inline-block;
+        background: #f1f8ff;
+        color: #0366d6;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        margin-right: 0.5rem;
+      }
+
+      .example-preview {
+        background: #f6f8fa;
+        border: 1px solid #e1e4e8;
+        border-radius: 3px;
+        padding: 1rem;
+        margin: 1rem 0;
+        font-size: 0.9rem;
+        overflow-x: auto;
+      }
+
+      .buttons {
+        margin-top: 1rem;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 6px 12px;
+        background: #0366d6;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        margin-right: 0.5rem;
+      }
+
+      .btn-secondary {
+        background: #6c757d;
+      }
+
+      .detailed-example {
+        background: white;
+        border: 1px solid #e1e4e8;
+        border-radius: 6px;
+        padding: 2rem;
+        margin: 3rem 0;
+      }
+
+      .detailed-example h3 {
+        color: #0366d6;
+        margin-top: 0;
+      }
+
+      .comparison {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin: 2rem 0;
+      }
+
+      .comparison-section {
         background: #f6f8fa;
         border: 1px solid #e1e4e8;
         border-radius: 6px;
-        padding: 1.5rem;
-        margin: 1rem 0;
+        padding: 1rem;
+      }
+
+      .comparison-section h4 {
+        margin-top: 0;
+        color: #0366d6;
       }
 
       pre {
@@ -68,280 +145,287 @@
         border-radius: 3px;
         padding: 1rem;
         overflow-x: auto;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
       }
 
-      .tip {
-        background: #fff3cd;
-        border: 1px solid #ffeaa7;
-        border-radius: 6px;
-        padding: 1rem;
-        margin: 1rem 0;
-      }
-
-      .tip::before {
-        content: "💡 ";
-        font-size: 1.2rem;
-      }
-
-      .next-steps {
-        background: #d4edda;
-        border: 1px solid #c3e6cb;
-        border-radius: 6px;
-        padding: 1.5rem;
-        margin: 2rem 0;
-      }
-
-      .next-steps h3 {
-        color: #155724;
-        margin-top: 0;
+      @media (max-width: 768px) {
+        .comparison {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
   <body>
     <div class="header">
-      <h1>Getting Started with ITS</h1>
-      <p>Create your first instruction template in 5 minutes</p>
+      <h1>ITS Examples</h1>
+      <p>Real-world templates for different use cases</p>
     </div>
 
     <div class="nav">
       <a href="index.html">← Back to Home</a>
+      <a href="getting-started.html">Getting Started</a>
       <a href="specification.html">Specification</a>
-      <a href="examples.html">Examples</a>
       <a href="https://github.com/alexanderparker/instruction-template-specification">GitHub</a>
     </div>
 
-    <div class="step">
-      <h3>Step 1: Understand the Basics</h3>
-      <p>
-        ITS templates are JSON files that define content with placeholders. These placeholders become instructions for AI systems to generate specific types of
-        content.
-      </p>
+    <h2>Template Library</h2>
+    <p>Explore these example templates to understand how ITS works in practice. Each example demonstrates different instruction types and use cases.</p>
 
-      <p><strong>Key difference:</strong> Traditional templates substitute data, ITS templates generate instructions.</p>
+    <div class="example-grid">
+      <div class="example-card">
+        <h3>🍊 Citrus Fruits List</h3>
+        <p>A simple example demonstrating basic list generation with the <code>list</code> instruction type.</p>
 
-      <div class="example">
-        <strong>Traditional:</strong> <code>Hello {{name}}</code> + data → <code>Hello John</code><br />
-        <strong>ITS:</strong> <code>Hello [name placeholder]</code> → AI instruction → AI-generated content
+        <div class="tags">
+          <span class="tag">beginner</span>
+          <span class="tag">list</span>
+          <span class="tag">example</span>
+        </div>
+
+        <div class="example-preview">
+          <strong>Template creates:</strong><br />
+          "Hey there is a list of fruits here:" + AI-generated bullet list of 5 citrus fruits
+        </div>
+
+        <div class="buttons">
+          <a href="examples/citrus-fruits.json" class="btn">View JSON</a>
+          <a href="#citrus-detailed" class="btn btn-secondary">See Details</a>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <h3>📝 Blog Post Template</h3>
+        <p>Comprehensive blog post structure with title, introduction, lists, tables, quotes, and conclusion.</p>
+
+        <div class="tags">
+          <span class="tag">intermediate</span>
+          <span class="tag">blog</span>
+          <span class="tag">content</span>
+          <span class="tag">writing</span>
+        </div>
+
+        <div class="example-preview">
+          <strong>Includes:</strong> Dynamic title, intro paragraph, numbered list, markdown table, expert quote, summary conclusion
+        </div>
+
+        <div class="buttons">
+          <a href="examples/blog-post-template.json" class="btn">View JSON</a>
+          <a href="#blog-detailed" class="btn btn-secondary">See Details</a>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <h3>📧 Product Launch Email</h3>
+        <p>Marketing email template with product introduction, features, testimonials, and call-to-action.</p>
+
+        <div class="tags">
+          <span class="tag">advanced</span>
+          <span class="tag">email</span>
+          <span class="tag">marketing</span>
+          <span class="tag">business</span>
+        </div>
+
+        <div class="example-preview">
+          <strong>Demonstrates:</strong> Multiple instruction types, dialogue generation, varied list formats, persuasive content
+        </div>
+
+        <div class="buttons">
+          <a href="examples/product-launch-email.json" class="btn">View JSON</a>
+          <a href="#email-detailed" class="btn btn-secondary">See Details</a>
+        </div>
       </div>
     </div>
 
-    <div class="step">
-      <h3>Step 2: Basic Template Structure</h3>
-      <p>Every ITS template has this basic structure:</p>
+    <div class="detailed-example" id="citrus-detailed">
+      <h3>🍊 Citrus Fruits Example - Detailed Breakdown</h3>
 
-      <pre><code>{
+      <div class="comparison">
+        <div class="comparison-section">
+          <h4>Template JSON</h4>
+          <pre><code>{
   "$schema": "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-base-schema-v1.json",
   "version": "1.0.0",
-  "extends": [
-    "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-standard-types-v1.json"
-  ],
-  "content": [
-    // Your content elements here
-  ]
-}</code></pre>
-
-      <div class="tip">The <code>$schema</code> reference enables validation and autocompletion in many editors!</div>
-    </div>
-
-    <div class="step">
-      <h3>Step 3: Add Content Elements</h3>
-      <p>Content is an array of elements. There are three types:</p>
-
-      <h4>Text Elements (Static Content)</h4>
-      <pre><code>{
-  "type": "text",
-  "text": "This text appears exactly as written."
-}</code></pre>
-
-      <h4>Placeholder Elements (Dynamic Instructions)</h4>
-      <pre><code>{
-  "type": "placeholder",
-  "id": "my_list",
-  "instructionType": "list",
-  "config": {
-    "description": "list 5 programming languages",
-    "displayName": "Programming Languages",
-    "format": "bullet_points"
-  }
-}</code></pre>
-
-      <h4>Conditional Elements (Variable Content)</h4>
-      <pre><code>{
-  "type": "conditional",
-  "condition": "audience == 'technical'",
-  "content": [
-    {"type": "text", "text": "Technical details: "}
-  ],
-  "else": [
-    {"type": "text", "text": "General overview: "}
-  ]
-}</code></pre>
-    </div>
-
-    <div class="step">
-      <h3>Step 4: Your First Template</h3>
-      <p>Let's create a simple template for a product description:</p>
-
-      <pre><code>{
-  "$schema": "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-base-schema-v1.json",
-  "version": "1.0.0",
-  "extends": [
-    "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-standard-types-v1.json"
-  ],
-  "metadata": {
-    "name": "Product Description Template",
-    "description": "Basic template for product descriptions",
-    "author": "Your Name"
-  },
   "content": [
     {
       "type": "text",
-      "text": "# "
+      "text": "Hey there is a list of fruits here:\n"
     },
     {
       "type": "placeholder",
-      "id": "product_name",
-      "instructionType": "paragraph",
-      "config": {
-        "description": "Create a catchy product name for a smart water bottle",
-        "displayName": "Product Name",
-        "tone": "enthusiastic",
-        "length": "short"
-      }
-    },
-    {
-      "type": "text",
-      "text": "\n\n"
-    },
-    {
-      "type": "placeholder",
-      "id": "description",
-      "instructionType": "paragraph",
-      "config": {
-        "description": "Write a compelling 2-3 sentence description of a smart water bottle that tracks hydration",
-        "displayName": "Product Description",
-        "tone": "professional",
-        "length": "medium"
-      }
-    },
-    {
-      "type": "text",
-      "text": "\n\n## Key Features\n\n"
-    },
-    {
-      "type": "placeholder",
-      "id": "features",
+      "id": "citrus_list",
       "instructionType": "list",
       "config": {
-        "description": "List 4 innovative features of a smart water bottle",
-        "displayName": "Features List",
+        "description": "list 5 different citrus fruits",
         "format": "bullet_points",
-        "itemCount": 4
+        "itemCount": 5
       }
     }
   ]
 }</code></pre>
-    </div>
+        </div>
 
-    <div class="step">
-      <h3>Step 5: How It Compiles</h3>
-      <p>Your template compiles into this AI prompt:</p>
+        <div class="comparison-section">
+          <h4>Compiled AI Prompt</h4>
+          <pre><code>You are an AI designed to convert content templates into actual content.
 
-      <pre><code>You are an AI designed to convert content templates into actual content.
+Hey there is a list of fruits here:
 
-# &lt;&lt;Replace this paragraph with: Create a catchy product name for a smart water bottle. Tone: enthusiastic. Length: short (1-2 sentences).&gt;&gt;
+&lt;&lt;Replace this placeholder with a list using this user prompt: "list 5 different citrus fruits". Format requirements: Use bullet_points formatting with each item on a new line. Create exactly 5 items.&gt;&gt;</code></pre>
+        </div>
+      </div>
 
-&lt;&lt;Replace this paragraph with: Write a compelling 2-3 sentence description of a smart water bottle that tracks hydration. Tone: professional. Length: medium (2-4 sentences).&gt;&gt;
-
-## Key Features
-
-&lt;&lt;Replace this section with a list. List 4 innovative features of a smart water bottle. Each list item goes on its own line. Use bullet_points to separate each item. Create exactly 4 items.&gt;&gt;</code></pre>
-    </div>
-
-    <div class="step">
-      <h3>Step 6: Available Instruction Types</h3>
-      <p>The standard library includes these instruction types:</p>
-
+      <p><strong>Key Learning Points:</strong></p>
       <ul>
-        <li><strong>list</strong> - Formatted lists (bullets, numbers, etc.)</li>
-        <li><strong>paragraph</strong> - Text with tone and length control</li>
-        <li><strong>table</strong> - Structured data tables</li>
-        <li><strong>code_block</strong> - Code snippets with syntax highlighting</li>
-        <li><strong>dialogue</strong> - Conversations between multiple people</li>
-        <li><strong>quote</strong> - Relevant quotes with attribution</li>
-        <li><strong>summary</strong> - Summaries of varying detail</li>
-        <li><strong>image_description</strong> - Descriptive image text</li>
+        <li>Combines static text with dynamic placeholders</li>
+        <li>Uses the standard <code>list</code> instruction type</li>
+        <li>Configures specific formatting and item count</li>
+        <li>Demonstrates the basic compilation process</li>
+      </ul>
+    </div>
+
+    <div class="detailed-example" id="blog-detailed">
+      <h3>📝 Blog Post Template - Structure Analysis</h3>
+
+      <p>This template demonstrates a complex content structure using multiple instruction types:</p>
+
+      <h4>Template Structure</h4>
+      <ul>
+        <li><strong>Title:</strong> <code>paragraph</code> type with enthusiastic tone, short length</li>
+        <li><strong>Introduction:</strong> <code>paragraph</code> type with professional tone, medium length</li>
+        <li><strong>Key Technologies:</strong> <code>list</code> type with numbered format, 6 items</li>
+        <li><strong>Challenges Table:</strong> <code>table</code> type with markdown format, 3x4 dimensions</li>
+        <li><strong>Expert Quote:</strong> <code>quote</code> type with attribution enabled</li>
+        <li><strong>Conclusion:</strong> <code>summary</code> type with standard length</li>
       </ul>
 
-      <p>Each type has its own configuration options. See the <a href="specification.html">full specification</a> for details.</p>
+      <div class="example-preview">
+        <strong>Usage Pattern:</strong><br />
+        Text → Placeholder → Text → Placeholder → Text...
+        <br /><br />
+        This pattern creates a natural content flow where AI-generated sections are seamlessly integrated with static structure. Each placeholder clearly
+        separates user content requests from system formatting requirements.
+      </div>
+
+      <p><strong>Best Practices Demonstrated:</strong></p>
+      <ul>
+        <li>Consistent heading structure using static text</li>
+        <li>Varied instruction types for content diversity</li>
+        <li>Appropriate tone selection for different sections</li>
+        <li>Descriptive placeholder IDs and display names</li>
+      </ul>
     </div>
 
-    <div class="step">
-      <h3>Step 7: Add Metadata (Optional)</h3>
-      <p>Make your templates discoverable and maintainable:</p>
+    <div class="detailed-example" id="email-detailed">
+      <h3>📧 Product Launch Email - Advanced Features</h3>
 
-      <pre><code>"metadata": {
-  "name": "Your Template Name",
-  "description": "What this template creates",
-  "author": "Your Name",
-  "tags": ["email", "marketing", "product"],
-  "created": "2025-06-29T00:00:00Z"
+      <p>This template showcases advanced ITS features including dialogue generation and varied formatting:</p>
+
+      <h4>Advanced Instruction Types Used</h4>
+
+      <div class="example-preview">
+        <strong>Dialogue Generation:</strong>
+        <pre><code>{
+  "instructionType": "dialogue",
+  "config": {
+    "description": "Create a brief conversation between two beta users discussing how the product improved their workflow",
+    "participantCount": 2,
+    "style": "casual"
+  }
 }</code></pre>
-    </div>
+        <strong>Compiles to:</strong><br />
+        <code
+          >&lt;&lt;Replace this placeholder with a dialogue using this user prompt: "Create a brief conversation between two beta users discussing how the
+          product improved their workflow". Format requirements: Create a conversation between 2 people using casual style...&gt;&gt;</code
+        >
+      </div>
 
-    <div class="step">
-      <h3>Step 8: Validation</h3>
-      <p>Validate your template using JSON Schema tools:</p>
+      <div class="example-preview">
+        <strong>Varied List Formats:</strong>
+        <pre><code>// Features with bullet points
+"format": "bullet_points"
 
-      <div class="tip">Many code editors (VS Code, IntelliJ, etc.) automatically validate JSON files when you include the <code>$schema</code> property.</div>
+// Target audience with dashes  
+"format": "dashes"</code></pre>
+      </div>
 
-      <p><strong>Online validation:</strong></p>
+      <h4>Marketing Template Patterns</h4>
       <ul>
-        <li><a href="https://jsonschemavalidator.net/" target="_blank">JSON Schema Validator</a></li>
-        <li><a href="https://www.jsonschemavalidator.net/" target="_blank">Alternative Validator</a></li>
+        <li><strong>Hook:</strong> Enthusiastic product introduction</li>
+        <li><strong>Features:</strong> Benefit-focused bullet list</li>
+        <li><strong>Social Proof:</strong> User dialogue testimonials</li>
+        <li><strong>Targeting:</strong> Specific audience identification</li>
+        <li><strong>CTA:</strong> Compelling call-to-action</li>
       </ul>
 
-      <p><strong>Command line validation:</strong></p>
-      <pre><code># Using ajv-cli
-npm install -g ajv-cli
-ajv validate -s schema-url -d your-template.json</code></pre>
-    </div>
-
-    <div class="next-steps">
-      <h3>🎉 What's Next?</h3>
+      <p><strong>Professional Email Elements:</strong></p>
       <ul>
-        <li>
-          <strong><a href="examples.html">Explore Examples</a></strong> - See real-world templates in action
-        </li>
-        <li>
-          <strong><a href="specification.html">Read the Spec</a></strong> - Learn about advanced features
-        </li>
-        <li><strong>Build a Compiler</strong> - Create tools that convert templates to prompts</li>
-        <li><strong>Create Custom Types</strong> - Define instruction types for your specific use cases</li>
-        <li><strong>Share Templates</strong> - Contribute to the community template library</li>
+        <li>Subject line with emoji for attention</li>
+        <li>Structured sections with clear headers</li>
+        <li>Multiple content types for engagement</li>
+        <li>Professional closing with P.S. for additional engagement</li>
       </ul>
     </div>
 
-    <div class="step">
-      <h3>Common Patterns</h3>
+    <h2>Use Case Categories</h2>
 
-      <h4>Email Templates</h4>
-      <p>Structure: Subject → Greeting → Body sections → Call-to-action → Signature</p>
+    <div class="example-grid">
+      <div class="example-card">
+        <h3>📄 Documentation</h3>
+        <ul>
+          <li>API documentation templates</li>
+          <li>User guides with dynamic examples</li>
+          <li>FAQ sections with generated content</li>
+          <li>Troubleshooting guides</li>
+        </ul>
+      </div>
 
-      <h4>Blog Posts</h4>
-      <p>Structure: Title → Introduction → Main sections → Conclusion</p>
+      <div class="example-card">
+        <h3>📧 Marketing</h3>
+        <ul>
+          <li>Email campaigns with personalization</li>
+          <li>Social media content templates</li>
+          <li>Product descriptions</li>
+          <li>Landing page copy</li>
+        </ul>
+      </div>
 
-      <h4>Documentation</h4>
-      <p>Structure: Overview → Examples → API reference → Troubleshooting</p>
+      <div class="example-card">
+        <h3>📚 Education</h3>
+        <ul>
+          <li>Lesson plan templates</li>
+          <li>Assignment generators</li>
+          <li>Course outline structures</li>
+          <li>Educational content frameworks</li>
+        </ul>
+      </div>
 
-      <h4>Marketing Copy</h4>
-      <p>Structure: Headline → Problem → Solution → Benefits → Call-to-action</p>
+      <div class="example-card">
+        <h3>💼 Business</h3>
+        <ul>
+          <li>Report templates with dynamic sections</li>
+          <li>Proposal frameworks</li>
+          <li>Meeting agenda generators</li>
+          <li>Business plan outlines</li>
+        </ul>
+      </div>
     </div>
 
-    <div class="tip">
-      <strong>Pro tip:</strong> Start with simple templates using only <code>text</code> and <code>list</code> or <code>paragraph</code> placeholders. Add
-      complexity gradually as you become comfortable with the format.
+    <h2>Creating Your Own Templates</h2>
+
+    <p>Ready to create your own templates? Here are some tips:</p>
+
+    <div class="example-preview">
+      <strong>Key Improvement:</strong> The new instruction format clearly separates user content requests (in quotes) from system formatting requirements,
+      making it much easier for AI models to understand what content to generate vs how to format it.<br /><br />
+      <strong>Start Simple:</strong> Begin with basic text + list/paragraph combinations<br />
+      <strong>Add Complexity:</strong> Gradually introduce tables, dialogues, and custom types<br />
+      <strong>Test Compilation:</strong> Verify your templates compile to clear AI instructions<br />
+      <strong>Use Metadata:</strong> Document your templates for future reference and sharing
+    </div>
+
+    <div class="buttons" style="text-align: center; margin: 3rem 0">
+      <a href="getting-started.html" class="btn">Learn to Build Templates</a>
+      <a href="specification.html" class="btn btn-secondary">Read Full Specification</a>
     </div>
 
     <footer style="text-align: center; padding: 2rem; color: #666; border-top: 1px solid #eee; margin-top: 3rem">
