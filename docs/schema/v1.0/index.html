@@ -107,7 +107,7 @@
     </div>
 
     <div class="schema-file">
-      <h3>📋 Base Schema</h3>
+      <h3>Base Schema</h3>
       <p>Core template structure defining the fundamental elements of ITS templates.</p>
 
       <div class="url-box">https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-base-schema-v1.json</div>
@@ -125,25 +125,27 @@
     </div>
 
     <div class="schema-file">
-      <h3>📦 Standard Types</h3>
+      <h3>Standard Types</h3>
       <p>Library of built-in instruction types for common content generation needs.</p>
 
       <div class="url-box">https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-standard-types-v1.json</div>
 
-      <p><strong>Includes:</strong></p>
-      <ul>
-        <li><code>list</code> - Formatted lists with customizable styling</li>
-        <li><code>paragraph</code> - Text with tone and length control</li>
-        <li><code>table</code> - Structured data tables</li>
-        <li><code>code_block</code> - Code snippets with syntax highlighting</li>
-        <li><code>dialogue</code> - Multi-participant conversations</li>
-        <li><code>quote</code> - Quotes with optional attribution</li>
-        <li><code>summary</code> - Summaries of varying detail</li>
-        <li><code>image_description</code> - Descriptive image text</li>
-      </ul>
+      <p><strong>Includes 9 instruction types:</strong> <code>title</code>, <code>list</code>, <code>paragraph</code>, <code>table</code>, <code>code_block</code>, <code>dialogue</code>, <code>quote</code>, <code>summary</code>, <code>image_description</code></p>
 
       <a href="its-standard-types-v1.json" class="btn">View Schema</a>
       <a href="../../specification.html#standard-instruction-types" class="btn btn-secondary">Documentation</a>
+    </div>
+
+    <div class="schema-file">
+      <h3>Type Extension Schema</h3>
+      <p>Validation schema for custom instruction type definition files.</p>
+
+      <div class="url-box">https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-type-extension-schema-v1.json</div>
+
+      <p><strong>Use for:</strong> Validating custom instruction type schemas that extend the standard library</p>
+
+      <a href="its-type-extension-schema-v1.json" class="btn">View Schema</a>
+      <a href="../../specification.html#schema-extension-mechanism" class="btn btn-secondary">Documentation</a>
     </div>
 
     <h2>Usage</h2>
@@ -163,19 +165,14 @@
 }</code></pre>
 
     <h3>Validation</h3>
-    <p>Use these URLs with JSON Schema validators:</p>
-    <ul>
-      <li><strong>Online:</strong> <a href="https://jsonschemavalidator.net/" target="_blank">JSON Schema Validator</a></li>
-      <li><strong>CLI:</strong> <code>ajv validate -s &lt;schema-url&gt; -d &lt;template.json&gt;</code></li>
-      <li><strong>Editors:</strong> Most modern code editors support JSON Schema validation automatically</li>
-    </ul>
+    <p>Use these URLs with JSON Schema validators or in editors that support JSON Schema validation.</p>
 
     <h2>Version History</h2>
 
     <h3>v1.0 (Current)</h3>
     <ul>
       <li>Initial stable release</li>
-      <li>8 standard instruction types</li>
+      <li>9 standard instruction types</li>
       <li>Complete base schema with validation</li>
       <li>Extensible type system</li>
     </ul>

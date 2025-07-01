@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Examples - Instruction Template Specification (ITS)</title>
-    <meta name="description" content="Real-world ITS template examples for different use cases" />
+    <meta name="description" content="ITS template examples and implementation patterns" />
     <style>
       body {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
@@ -166,7 +166,7 @@
   <body>
     <div class="header">
       <h1>ITS Examples</h1>
-      <p>Real-world templates for different use cases</p>
+      <p>Template examples and implementation patterns</p>
     </div>
 
     <div class="nav">
@@ -176,24 +176,23 @@
       <a href="https://github.com/alexanderparker/instruction-template-specification">GitHub</a>
     </div>
 
-    <h2>Template Library</h2>
-    <p>Explore these example templates to understand how ITS works in practice. Each example demonstrates different instruction types and use cases.</p>
+    <h2>Template Examples</h2>
+    <p>These examples demonstrate different instruction types and template patterns. Each example shows how ITS templates compile into AI instructions.</p>
 
     <div class="example-grid">
       <div class="example-card">
-        <h3>🍊 Citrus Fruits List</h3>
-        <p>A simple example demonstrating basic list generation with the <code>list</code> instruction type and the new <code>title</code> type.</p>
+        <h3>Citrus Fruits List</h3>
+        <p>Basic example demonstrating list generation with the <code>list</code> instruction type and <code>title</code> type.</p>
 
         <div class="tags">
           <span class="tag">beginner</span>
           <span class="tag">list</span>
           <span class="tag">title</span>
-          <span class="tag">example</span>
         </div>
 
         <div class="example-preview">
           <strong>Template creates:</strong><br />
-          Fun title about citrus fruits + "Hey there is a list of fruits here:" + AI-generated bullet list of 5 citrus fruits
+          Title about citrus fruits + static text + AI-generated bullet list of 5 citrus fruits
         </div>
 
         <div class="buttons">
@@ -203,14 +202,13 @@
       </div>
 
       <div class="example-card">
-        <h3>📝 Blog Post Template</h3>
+        <h3>Blog Post Template</h3>
         <p>Comprehensive blog post structure with title, introduction, lists, tables, quotes, and conclusion.</p>
 
         <div class="tags">
           <span class="tag">intermediate</span>
           <span class="tag">blog</span>
           <span class="tag">content</span>
-          <span class="tag">writing</span>
         </div>
 
         <div class="example-preview">
@@ -224,18 +222,17 @@
       </div>
 
       <div class="example-card">
-        <h3>📧 Product Launch Email</h3>
-        <p>Marketing email template with product introduction, features, testimonials, and call-to-action.</p>
+        <h3>Product Launch Email</h3>
+        <p>Email template with product introduction, features, testimonials, and call-to-action.</p>
 
         <div class="tags">
           <span class="tag">advanced</span>
           <span class="tag">email</span>
-          <span class="tag">marketing</span>
           <span class="tag">business</span>
         </div>
 
         <div class="example-preview">
-          <strong>Demonstrates:</strong> Multiple instruction types, dialogue generation, varied list formats, persuasive content
+          <strong>Demonstrates:</strong> Multiple instruction types, dialogue generation, varied list formats, structured email content
         </div>
 
         <div class="buttons">
@@ -245,19 +242,18 @@
       </div>
 
       <div class="example-card">
-        <h3>🎯 Marketing Campaign Template</h3>
+        <h3>Marketing Campaign Template</h3>
         <p>Advanced template showcasing variables, conditionals, and dynamic content generation for multi-channel campaigns.</p>
 
         <div class="tags">
           <span class="tag">advanced</span>
           <span class="tag">variables</span>
           <span class="tag">conditional</span>
-          <span class="tag">marketing</span>
         </div>
 
         <div class="example-preview">
-          <strong>Features:</strong> Variable-driven content, conditional sections based on channels (email/social/blog), dynamic product counts, customizable
-          tone and discount values
+          <strong>Features:</strong> Variable-driven content, conditional sections based on channels, dynamic product counts, customizable tone and discount
+          values
         </div>
 
         <div class="buttons">
@@ -267,14 +263,13 @@
       </div>
 
       <div class="example-card">
-        <h3>🔄 Schema Extension Example</h3>
+        <h3>Schema Extension Example</h3>
         <p>Complete demonstration of the schema extension mechanism, showing how instruction types are overridden through multiple schema files.</p>
 
         <div class="tags">
           <span class="tag">advanced</span>
           <span class="tag">extends</span>
           <span class="tag">overrides</span>
-          <span class="tag">schemas</span>
         </div>
 
         <div class="example-preview">
@@ -289,13 +284,13 @@
     </div>
 
     <div class="detailed-example" id="citrus-detailed">
-      <h3>🍊 Citrus Fruits Example - Detailed Breakdown</h3>
+      <h3>Citrus Fruits Example - Basic Template Structure</h3>
 
       <div class="comparison">
         <div class="comparison-section">
           <h4>Template JSON</h4>
           <pre><code>{
-  "$schema": "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-base-schema-v1.json",
+  "$schema": "https://alexanderparker.github.io/.../its-base-schema-v1.json",
   "version": "1.0.0",
   "content": [
     {
@@ -350,7 +345,7 @@ Hey there is a list of fruits here:
     </div>
 
     <div class="detailed-example" id="blog-detailed">
-      <h3>📝 Blog Post Template - Structure Analysis</h3>
+      <h3>Blog Post Template - Structure Analysis</h3>
 
       <p>This template demonstrates a complex content structure using multiple instruction types:</p>
 
@@ -368,8 +363,8 @@ Hey there is a list of fruits here:
         <strong>Usage Pattern:</strong><br />
         Text → Placeholder → Text → Placeholder → Text...
         <br /><br />
-        This pattern creates a natural content flow where AI-generated sections are seamlessly integrated with static structure. Each placeholder clearly
-        separates user content requests from system formatting requirements.
+        This pattern creates a natural content flow where AI-generated sections are integrated with static structure. Each placeholder clearly separates user
+        content requests from system formatting requirements.
       </div>
 
       <p><strong>Best Practices Demonstrated:</strong></p>
@@ -382,7 +377,7 @@ Hey there is a list of fruits here:
     </div>
 
     <div class="detailed-example" id="email-detailed">
-      <h3>📧 Product Launch Email - Advanced Features</h3>
+      <h3>Product Launch Email - Advanced Features</h3>
 
       <p>This template showcases advanced ITS features including dialogue generation and varied formatting:</p>
 
@@ -415,26 +410,18 @@ Hey there is a list of fruits here:
 "format": "dashes"</code></pre>
       </div>
 
-      <h4>Marketing Template Patterns</h4>
+      <h4>Email Template Patterns</h4>
       <ul>
-        <li><strong>Hook:</strong> Enthusiastic product introduction</li>
+        <li><strong>Hook:</strong> Product introduction</li>
         <li><strong>Features:</strong> Benefit-focused bullet list</li>
         <li><strong>Social Proof:</strong> User dialogue testimonials</li>
         <li><strong>Targeting:</strong> Specific audience identification</li>
-        <li><strong>CTA:</strong> Compelling call-to-action</li>
-      </ul>
-
-      <p><strong>Professional Email Elements:</strong></p>
-      <ul>
-        <li>Subject line with emoji for attention</li>
-        <li>Structured sections with clear headers</li>
-        <li>Multiple content types for engagement</li>
-        <li>Professional closing with P.S. for additional engagement</li>
+        <li><strong>CTA:</strong> Call-to-action</li>
       </ul>
     </div>
 
     <div class="detailed-example" id="campaign-detailed">
-      <h3>🎯 Marketing Campaign Template - Variables & Conditionals</h3>
+      <h3>Marketing Campaign Template - Variables & Conditionals</h3>
 
       <p>This template demonstrates the full power of ITS variables and conditional logic:</p>
 
@@ -482,18 +469,6 @@ Hey there is a list of fruits here:
 }</code></pre>
       </div>
 
-      <div class="example-preview">
-        <h4>Variables in Conditionals:</h4>
-        <pre><code>// Direct variable comparison
-"condition": "discountPercentage >= 20"
-
-// Object property access
-"condition": "channels.email == true"
-
-// Complex conditions
-"condition": "includeTestimonials == true && includeSocialProof == true"</code></pre>
-      </div>
-
       <p><strong>Advanced Patterns Demonstrated:</strong></p>
       <ul>
         <li>Multi-channel campaign orchestration</li>
@@ -503,22 +478,13 @@ Hey there is a list of fruits here:
         <li>Complex conditions with multiple operators</li>
         <li>Variables used in text elements (<code>"text": "## Why Customers Love ${companyName}\n\n"</code>)</li>
       </ul>
-
-      <p><strong>This template shows how to:</strong></p>
-      <ul>
-        <li>Build reusable marketing templates with customizable parameters</li>
-        <li>Create different outputs from the same template by changing variables</li>
-        <li>Conditionally include/exclude entire sections</li>
-        <li>Reference variables throughout content and configurations</li>
-        <li>Use variables in conditional expressions for dynamic logic</li>
-      </ul>
     </div>
 
     <h2>Use Case Categories</h2>
 
     <div class="example-grid">
       <div class="example-card">
-        <h3>📄 Documentation</h3>
+        <h3>Documentation</h3>
         <ul>
           <li>API documentation templates</li>
           <li>User guides with dynamic examples</li>
@@ -528,9 +494,9 @@ Hey there is a list of fruits here:
       </div>
 
       <div class="example-card">
-        <h3>📧 Marketing</h3>
+        <h3>Marketing</h3>
         <ul>
-          <li>Email campaigns with personalization</li>
+          <li>Email campaigns with personalisation</li>
           <li>Social media content templates</li>
           <li>Product descriptions</li>
           <li>Landing page copy</li>
@@ -538,7 +504,7 @@ Hey there is a list of fruits here:
       </div>
 
       <div class="example-card">
-        <h3>📚 Education</h3>
+        <h3>Education</h3>
         <ul>
           <li>Lesson plan templates</li>
           <li>Assignment generators</li>
@@ -548,7 +514,7 @@ Hey there is a list of fruits here:
       </div>
 
       <div class="example-card">
-        <h3>💼 Business</h3>
+        <h3>Business</h3>
         <ul>
           <li>Report templates with dynamic sections</li>
           <li>Proposal frameworks</li>
@@ -560,11 +526,9 @@ Hey there is a list of fruits here:
 
     <h2>Creating Your Own Templates</h2>
 
-    <p>Ready to create your own templates? Here are some tips:</p>
+    <p>Ready to create your own templates? Here are some guidelines:</p>
 
     <div class="example-preview">
-      <strong>Key Improvement:</strong> The new instruction format clearly separates user content requests (in quotes) from system formatting requirements,
-      making it much easier for AI models to understand what content to generate vs how to format it.<br /><br />
       <strong>Start Simple:</strong> Begin with basic text + list/paragraph combinations<br />
       <strong>Add Complexity:</strong> Gradually introduce tables, dialogues, and custom types<br />
       <strong>Use Variables:</strong> Make templates reusable with the <code>${variable}</code> syntax<br />

@@ -93,17 +93,6 @@
         font-weight: bold;
       }
 
-      .back-to-top {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background: #0366d6;
-        color: white;
-        padding: 10px 15px;
-        border-radius: 50px;
-        text-decoration: none;
-      }
-
       .example-box {
         background: #f6f8fa;
         border: 1px solid #e1e4e8;
@@ -262,8 +251,6 @@
     // Content if condition is false (optional)
   ]
 }</code></pre>
-      <p><strong>Variables in conditions:</strong> <code>"condition": "discountPercentage >= 20"</code></p>
-      <p><strong>Complex conditions:</strong> <code>"condition": "includeSpecs == true && productCount > 3"</code></p>
     </div>
 
     <h2>Variables and Expressions</h2>
@@ -383,65 +370,6 @@
 "condition": "!includeSpecs"</code></pre>
     </div>
 
-    <div class="schema-section">
-      <h3>Complete Variable Example</h3>
-      <pre><code>{
-  "$schema": "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-base-schema-v1.json",
-  "version": "1.0.0",
-  "variables": {
-    "productName": "CloudSound Pro",
-    "productCategory": "gaming headset",
-    "targetAudience": "competitive gamers",
-    "includeTechnical": true,
-    "sections": {
-      "intro": true,
-      "features": true,
-      "specs": true
-    }
-  },
-  "content": [
-    {
-      "type": "conditional",
-      "condition": "sections.intro == true",
-      "content": [
-        {
-          "type": "text",
-          "text": "# ${productName} Review\n\n"
-        },
-        {
-          "type": "placeholder",
-          "instructionType": "paragraph",
-          "config": {
-            "description": "Write an engaging introduction for the ${productName} ${productCategory} targeted at ${targetAudience}",
-            "tone": "enthusiastic",
-            "length": "medium"
-          }
-        }
-      ]
-    },
-    {
-      "type": "conditional",
-      "condition": "sections.features == true && includeTechnical == true",
-      "content": [
-        {
-          "type": "text",
-          "text": "\n## Technical Features\n\n"
-        },
-        {
-          "type": "placeholder",
-          "instructionType": "list",
-          "config": {
-            "description": "List technical specifications and features of the ${productName}",
-            "format": "bullet_points",
-            "itemCount": 6
-          }
-        }
-      ]
-    }
-  ]
-}</code></pre>
-    </div>
-
     <h2>Standard Instruction Types</h2>
     <p>Reference: <a href="schema/v1.0/its-standard-types-v1.json">Standard Types Schema</a></p>
 
@@ -456,8 +384,6 @@
     "length": "short"       // short, medium, long
   }
 }</code></pre>
-      <p><strong>Compiles to:</strong></p>
-      <pre><code>&lt;&lt;Replace this placeholder with a title using this user prompt: ([{&lt;Create a catchy product headline&gt;}]). Format requirements: Create a headline title that is short in length.&gt;&gt;</code></pre>
     </div>
 
     <div class="instruction-type">
@@ -471,8 +397,6 @@
     "itemCount": 5              // optional
   }
 }</code></pre>
-      <p><strong>Compiles to:</strong></p>
-      <pre><code>&lt;&lt;Replace this placeholder with a list using this user prompt: ([{&lt;list 5 different citrus fruits&gt;}]). Format requirements: Use bullet_points formatting with each item on a new line. Create exactly 5 items.&gt;&gt;</code></pre>
     </div>
 
     <div class="instruction-type">
@@ -486,8 +410,6 @@
     "length": "medium"          // short, medium, long
   }
 }</code></pre>
-      <p><strong>Compiles to:</strong></p>
-      <pre><code>&lt;&lt;Replace this placeholder with text using this user prompt: ([{&lt;Write about sustainable technology&gt;}]). Format requirements: Use professional tone and medium length (2-4 sentences).&gt;&gt;</code></pre>
     </div>
 
     <div class="instruction-type">
@@ -502,8 +424,6 @@
     "rows": 4                   // optional
   }
 }</code></pre>
-      <p><strong>Compiles to:</strong></p>
-      <pre><code>&lt;&lt;Replace this placeholder with a table using this user prompt: ([{&lt;Compare technology features&gt;}]). Format requirements: Use markdown format. Include 3 columns. Include 4 rows.&gt;&gt;</code></pre>
     </div>
 
     <div class="instruction-type">
@@ -516,8 +436,6 @@
     "language": "python"        // javascript, python, java, html, css, sql, bash, generic
   }
 }</code></pre>
-      <p><strong>Compiles to:</strong></p>
-      <pre><code>&lt;&lt;Replace this placeholder with a code block using this user prompt: ([{&lt;Create a Python function that sorts a list&gt;}]). Format requirements: Use python language with proper syntax highlighting formatting.&gt;&gt;</code></pre>
     </div>
 
     <div class="instruction-type">
@@ -531,8 +449,6 @@
     "style": "casual"           // casual, formal, dramatic, humorous
   }
 }</code></pre>
-      <p><strong>Compiles to:</strong></p>
-      <pre><code>&lt;&lt;Replace this placeholder with a dialogue using this user prompt: ([{&lt;Conversation about project planning&gt;}]). Format requirements: Create a conversation between 2 people using casual style. Format each line as: Person Name: "Dialogue"&gt;&gt;</code></pre>
     </div>
 
     <div class="instruction-type">
@@ -545,8 +461,6 @@
     "includeAttribution": true  // include attribution if true
   }
 }</code></pre>
-      <p><strong>Compiles to:</strong></p>
-      <pre><code>&lt;&lt;Replace this placeholder with a quote using this user prompt: ([{&lt;Quote about innovation and creativity&gt;}]). Format requirements: Include attribution with the quote.&gt;&gt;</code></pre>
     </div>
 
     <div class="instruction-type">
@@ -559,8 +473,6 @@
     "length": "standard"        // brief, standard, detailed
   }
 }</code></pre>
-      <p><strong>Compiles to:</strong></p>
-      <pre><code>&lt;&lt;Replace this placeholder with a summary using this user prompt: ([{&lt;Summarize the key benefits of renewable energy&gt;}]). Format requirements: Use standard length (3-5 sentences).&gt;&gt;</code></pre>
     </div>
 
     <div class="instruction-type">
@@ -573,8 +485,6 @@
     "style": "photorealistic"  // photorealistic, artistic, technical
   }
 }</code></pre>
-      <p><strong>Compiles to:</strong></p>
-      <pre><code>&lt;&lt;Replace this placeholder with an image description using this user prompt: ([{&lt;Describe a futuristic city skyline&gt;}]). Format requirements: Use photorealistic style (detailed realistic description).&gt;&gt;</code></pre>
     </div>
 
     <h2>Schema Extension Mechanism</h2>
@@ -584,12 +494,12 @@
       <p>Templates can import instruction type definitions from external schemas using the <code>extends</code> property. This enables sharing and reusing instruction types across templates.</p>
 
       <pre><code>{
-  "$schema": "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-base-schema-v1.json",
+  "$schema": "https://alexanderparker.github.io/.../its-base-schema-v1.json",
   "version": "1.0.0",
   "extends": [
-    "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-standard-types-v1.json",
+    "https://alexanderparker.github.io/.../its-standard-types-v1.json",
     "./my-local-types.json",
-    "https://example.com/domain-specific-types.json"
+    "https://example.com/custom-types.json"
   ],
   "content": [...]
 }</code></pre>
@@ -629,7 +539,7 @@
       <h3>Extended Schema Format</h3>
       <p>Extended schemas must follow this structure and be validated against the <a href="schema/v1.0/its-type-extension-schema-v1.json">Type Extension Schema</a>:</p>
       <pre><code>{
-  "$schema": "https://alexanderparker.github.io/instruction-template-specification/schema/v1.0/its-type-extension-schema-v1.json",
+  "$schema": "https://alexanderparker.github.io/.../its-type-extension-schema-v1.json",
   "title": "My Custom Types",
   "description": "Description of these types",
   "version": "1.0.0",
@@ -648,7 +558,7 @@
 }</code></pre>
       
       <div class="example-box">
-        <strong>📁 Complete Example:</strong> See the <a href="examples/schema-extension/">Schema Extension Example</a> for a full demonstration of how types are overridden through multiple schema files.
+        <strong>Complete Example:</strong> See the <a href="examples/schema-extension/">Schema Extension Example</a> for a full demonstration of how types are overridden through multiple schema files.
       </div>
     </div>
 
@@ -734,9 +644,13 @@ You are an AI designed to convert content templates into actual content. Respond
 
 INSTRUCTIONS
 
-* Instruction Wrapper: &lt;&lt;{instruction}&gt;&gt;
-* User Content Wrapper: ([{&lt;{content}&gt;}])
-* Preserve Formatting: true
+1. Replace each placeholder marked with << >> with generated content
+2. The user's content request is wrapped in ([{< >}]) to distinguish it from instructions
+3. Follow the format requirements specified after each user prompt
+4. Maintain the existing structure and formatting of the template
+5. Only replace the placeholders - do not modify any other text
+6. Generate content that matches the tone and style requested
+7. Respond only with the transformed content - do not include any explanations or additional text
 
 TEMPLATE
 
@@ -744,8 +658,6 @@ Here are some fruits:
 
 &lt;&lt;Replace this placeholder with a list using this user prompt: ([{&lt;list 5 citrus fruits&gt;}]). Format requirements: Use bullet_points formatting with each item on a new line.&gt;&gt;</code></pre>
     </div>
-
-    <a href="#" class="back-to-top">↑ Top</a>
 
     <footer style="text-align: center; padding: 2rem; color: #666; border-top: 1px solid #eee; margin-top: 3rem">
       <p>Instruction Template Specification (ITS) • <a href="https://github.com/alexanderparker/instruction-template-specification">GitHub</a> • MIT License</p>
