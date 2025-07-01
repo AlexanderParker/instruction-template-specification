@@ -539,6 +539,32 @@ TEMPLATE
     <h2>Reference Implementation</h2>
 
     <div class="example-box">
+      <h3>ITS Compiler Python</h3>
+      <p>
+        The <a href="https://github.com/alexanderparker/its-compiler-python">ITS Compiler Python</a> provides a complete reference implementation of this
+        specification. Use it to:
+      </p>
+      <ul>
+        <li><strong>Test compliance</strong> - Verify your templates work correctly</li>
+        <li><strong>Study implementation</strong> - See how the specification is implemented in practice</li>
+        <li><strong>Compare behavior</strong> - Ensure your compiler produces consistent results</li>
+      </ul>
+
+      <p><strong>Installation:</strong></p>
+      <pre><code>pip install its-compiler-python</code></pre>
+
+      <p><strong>Usage:</strong></p>
+      <pre><code># Compile a template
+its-compile template.json --output prompt.txt
+
+# Validate without compiling
+its-compile template.json --validate-only
+
+# Watch mode for development
+its-compile template.json --watch</code></pre>
+    </div>
+
+    <div class="example-box">
       <h3>Pseudo-code Compilation Flow</h3>
       <pre><code>function compileTemplate(templatePath) {
   // 1. Load and validate template
@@ -571,16 +597,6 @@ TEMPLATE
   return assembleOutput(template.compilerConfig, compiledTemplate)
 }</code></pre>
     </div>
-
-    <h2>Testing Compliance</h2>
-
-    <p>A compliant compiler should:</p>
-    <ul>
-      <li>Pass all test cases in the ITS test suite</li>
-      <li>Handle all example templates correctly</li>
-      <li>Produce consistent output across runs</li>
-      <li>Provide clear error messages for invalid inputs</li>
-    </ul>
 
     <footer style="text-align: center; padding: 2rem; color: #666; border-top: 1px solid #eee; margin-top: 3rem">
       <p>Instruction Template Specification (ITS) • <a href="https://github.com/alexanderparker/instruction-template-specification">GitHub</a> • MIT License</p>

@@ -58,6 +58,22 @@ ITS:         Template → AI Prompt → AI-Generated Content
 **Compiles to:**
 
 ```
+INTRODUCTION
+
+You are an AI assistant that fills in content templates. Follow the instructions exactly and replace each placeholder with appropriate content based on the user prompts provided. Respond only with the transformed content.
+
+INSTRUCTIONS
+
+1. Replace each placeholder marked with << >> with generated content
+2. The user's content request is wrapped in ([{< >}]) to distinguish it from instructions
+3. Follow the format requirements specified after each user prompt
+4. Maintain the existing structure and formatting of the template
+5. Only replace the placeholders - do not modify any other text
+6. Generate content that matches the tone and style requested
+7. Respond only with the transformed content - do not include any explanations or additional text
+
+TEMPLATE
+
 # Product Review
 
 <<Replace this placeholder with text using this user prompt: ([{<Write an introduction for a wireless gaming headset review>}]). Format requirements: Use professional tone and medium length (2-4 sentences).>>
@@ -79,6 +95,7 @@ ITS:         Template → AI Prompt → AI-Generated Content
 1. **[Read the specification](https://alexanderparker.github.io/instruction-template-specification/specification.html)** for complete technical documentation
 2. **[Follow the tutorial](https://alexanderparker.github.io/instruction-template-specification/getting-started.html)** to create your first template
 3. **[Explore examples](https://alexanderparker.github.io/instruction-template-specification/examples.html)** to see templates in practice
+4. **[Try the compiler](https://github.com/alexanderparker/its-compiler-python)** to compile your templates into AI prompts
 
 ## Documentation
 

@@ -146,6 +146,8 @@
         padding: 1rem;
         overflow-x: auto;
         font-size: 0.85rem;
+        white-space: pre-wrap;
+        word-wrap: break-word;
       }
 
       code {
@@ -324,7 +326,21 @@
 
         <div class="comparison-section">
           <h4>Compiled AI Prompt</h4>
-          <pre><code>You are an AI designed to convert content templates into actual content.
+          <pre><code>INTRODUCTION
+
+You are an AI assistant that fills in content templates. Follow the instructions exactly and replace each placeholder with appropriate content based on the user prompts provided. Respond only with the transformed content.
+
+INSTRUCTIONS
+
+1. Replace each placeholder marked with &lt;&lt; &gt;&gt; with generated content
+2. The user's content request is wrapped in ([{&lt; &gt;}]) to distinguish it from instructions
+3. Follow the format requirements specified after each user prompt
+4. Maintain the existing structure and formatting of the template
+5. Only replace the placeholders - do not modify any other text
+6. Generate content that matches the tone and style requested
+7. Respond only with the transformed content - do not include any explanations or additional text
+
+TEMPLATE
 
 &lt;&lt;Replace this placeholder with a title using this user prompt: ([{&lt;Create a fun title about citrus fruits&gt;}]). Format requirements: Create a catchy title that is short in length.&gt;&gt;
 
@@ -537,9 +553,17 @@ Hey there is a list of fruits here:
       <strong>Use Metadata:</strong> Document your templates for future reference and sharing
     </div>
 
+    <div class="example-preview">
+      <strong>Compile Your Templates:</strong><br />
+      Use the <a href="https://github.com/alexanderparker/its-compiler-python">ITS Python Compiler</a> to test and compile your templates:<br />
+      <code>pip install its-compiler-python</code><br />
+      <code>its-compile your-template.json --output prompt.txt</code>
+    </div>
+
     <div class="buttons" style="text-align: center; margin: 3rem 0">
       <a href="getting-started.html" class="btn">Learn to Build Templates</a>
       <a href="specification.html" class="btn btn-secondary">Read Full Specification</a>
+      <a href="https://github.com/alexanderparker/its-compiler-python" class="btn btn-secondary">Try the Compiler</a>
     </div>
 
     <footer style="text-align: center; padding: 2rem; color: #666; border-top: 1px solid #eee; margin-top: 3rem">

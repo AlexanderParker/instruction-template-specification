@@ -558,7 +558,7 @@
 }</code></pre>
       
       <div class="example-box">
-        <strong>Complete Example:</strong> See the <a href="examples/schema-extension/">Schema Extension Example</a> for a full demonstration of how types are overridden through multiple schema files.
+        <strong>Complete Example:</strong> See the <a href="examples/schema-extension/schema-extension-example.html">Schema Extension Example</a> for a full demonstration of how types are overridden through multiple schema files.
       </div>
     </div>
 
@@ -597,6 +597,11 @@
       <li><strong>Apply escaping</strong>: Wrap user content with safe delimiters</li>
       <li><strong>Generate prompt</strong>: Combine system prompt with processed content</li>
     </ol>
+
+    <div class="schema-section">
+      <h3>Reference Implementation</h3>
+      <p>The <a href="https://github.com/alexanderparker/its-compiler-python">ITS Compiler Python</a> provides a complete reference implementation of the compilation process. See the <a href="compiler-guide.html">Compiler Implementation Guide</a> for detailed requirements when building your own compiler.</p>
+    </div>
 
     <h3>User Content Escaping</h3>
     <p>To prevent parsing conflicts when user descriptions contain quotes, brackets, or other special characters, ITS uses a robust escaping system:</p>
@@ -660,7 +665,7 @@ Here are some fruits:
     </div>
 
     <footer style="text-align: center; padding: 2rem; color: #666; border-top: 1px solid #eee; margin-top: 3rem">
-      <p>Instruction Template Specification (ITS) • <a href="https://github.com/alexanderparker/instruction-template-specification">GitHub</a> • MIT License</p>
+      <p>Instruction Template Specification (ITS) • <a href="https://github.com/alexanderparker/instruction-template-specification">GitHub</a> • <a href="https://github.com/alexanderparker/its-compiler-python">Python Compiler</a> • MIT License</p>
     </footer>
   </body>
 </html>
