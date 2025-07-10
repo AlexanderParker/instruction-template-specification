@@ -272,6 +272,7 @@
       <div class="note">
         Notice how user content descriptions are wrapped in <code>([{<...>}])</code> to prevent parsing conflicts with special characters.
       </div>
+      
     </div>
 
     <div class="step">
@@ -405,7 +406,42 @@
 npm install -g ajv-cli
 ajv validate -s schema-url -d your-template.json</code></pre>
     </div>
+<div class="step">
+<div class="example-box">
+      <h3>ITS Compilers</h3>
+      <p>
+        Compile your templates using either compiler implementation:
+      </p>
+      
+      <h4>Python Compiler (Reference Implementation)</h4>
+      <p>The <a href="https://github.com/alexanderparker/its-compiler-python">ITS Compiler Python</a> provides the complete reference implementation.</p>
+      <p><strong>Installation:</strong></p>
+      <pre><code>pip install its-compiler-python</code></pre>
+      <p><strong>Usage:</strong></p>
+      <pre><code># Compile a template
+its-compile template.json --output prompt.txt
 
+# Validate without compiling
+its-compile template.json --validate-only
+
+# Watch mode for development
+its-compile template.json --watch</code></pre>
+
+      <h4>JavaScript/TypeScript Compiler</h4>
+      <p>The <a href="https://github.com/alexanderparker/its-compiler-js">ITS Compiler JavaScript</a> provides a modern TypeScript implementation with enhanced security.</p>
+      <p><strong>Installation:</strong></p>
+      <pre><code>npm install its-compiler-js</code></pre>
+      <p><strong>Usage:</strong></p>
+      <pre><code># Compile a template
+npx its-compile template.json --output prompt.txt
+
+# Use with variables
+npx its-compile template.json --variables vars.json
+
+# Watch mode with verbose output
+npx its-compile template.json --watch --verbose</code></pre>
+    </div>
+  </div>
     <div class="next-steps">
       <h3>What's Next?</h3>
       <ul>
@@ -417,9 +453,6 @@ ajv validate -s schema-url -d your-template.json</code></pre>
         </li>
         <li>
           <strong><a href="examples/schema-extension/">Schema Extension Example</a></strong> - Learn about extending and overriding instruction types
-        </li>
-        <li>
-          <strong><a href="https://github.com/alexanderparker/its-compiler-python">Try the Python Compiler</a></strong> - Compile templates with the reference implementation
         </li>
       </ul>
     </div>

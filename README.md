@@ -95,7 +95,21 @@ TEMPLATE
 1. **[Read the specification](https://alexanderparker.github.io/instruction-template-specification/specification.html)** for complete technical documentation
 2. **[Follow the tutorial](https://alexanderparker.github.io/instruction-template-specification/getting-started.html)** to create your first template
 3. **[Explore examples](https://alexanderparker.github.io/instruction-template-specification/examples.html)** to see templates in practice
-4. **[Try the compiler](https://github.com/alexanderparker/its-compiler-python)** to compile your templates into AI prompts
+4. **[Try a compiler](#compilers)** to compile your templates into AI prompts
+
+## Compilers
+
+### Python Compiler (Reference Implementation)
+
+- **[its-compiler-python](https://github.com/alexanderparker/its-compiler-python)** - Complete reference implementation
+- Install: `pip install its-compiler-python`
+- Usage: `its-compile template.json --output prompt.txt`
+
+### JavaScript/TypeScript Compiler
+
+- **[its-compiler-js](https://github.com/alexanderparker/its-compiler-js)** - Modern TypeScript implementation with enhanced security
+- Install: `npm install its-compiler-js`
+- Usage: `npx its-compile template.json --output prompt.txt`
 
 ## Documentation
 

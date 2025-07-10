@@ -14,6 +14,7 @@
 - Switch/case conditionals
 - Template inheritance (extend other templates)
 - Template includes (`include` content element)
+- Context References - Allow templates to refer to other generated content
 
 ### Multi-Modal
 

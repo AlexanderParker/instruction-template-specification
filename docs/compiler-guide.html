@@ -535,13 +535,12 @@ TEMPLATE
         <p>Language server protocol support for real-time validation.</p>
       </div>
     </div>
-
-    <h2>Reference Implementation</h2>
+    <h2>Reference Implementations</h2>
 
     <div class="example-box">
       <h3>ITS Compiler Python</h3>
       <p>
-        The <a href="https://github.com/alexanderparker/its-compiler-python">ITS Compiler Python</a> provides a complete reference implementation of this
+        The <a href="https://github.com/alexanderparker/its-compiler-python">ITS Compiler Python</a> provides the complete reference implementation of this
         specification. Use it to:
       </p>
       <ul>
@@ -562,6 +561,33 @@ its-compile template.json --validate-only
 
 # Watch mode for development
 its-compile template.json --watch</code></pre>
+    </div>
+
+    <div class="example-box">
+      <h3>ITS Compiler JavaScript</h3>
+      <p>
+        The <a href="https://github.com/alexanderparker/its-compiler-js">ITS Compiler JavaScript</a> provides a modern TypeScript implementation with enhanced
+        security features:
+      </p>
+      <ul>
+        <li><strong>Safe expression evaluation</strong> - Uses jsep AST parsing instead of Function constructor</li>
+        <li><strong>Security hardening</strong> - Protection against prototype pollution and malicious content</li>
+        <li><strong>Modern tooling</strong> - Full TypeScript support with comprehensive error handling</li>
+        <li><strong>CLI and library</strong> - Use as command-line tool or import as ES module</li>
+      </ul>
+
+      <p><strong>Installation:</strong></p>
+      <pre><code>npm install its-compiler-js</code></pre>
+
+      <p><strong>Usage:</strong></p>
+      <pre><code># Compile a template
+npx its-compile template.json --output prompt.txt
+
+# Use variables and watch mode
+npx its-compile template.json --variables vars.json --watch
+
+# Strict security mode
+npx its-compile template.json --strict --verbose</code></pre>
     </div>
 
     <div class="example-box">
